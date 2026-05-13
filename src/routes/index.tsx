@@ -378,16 +378,16 @@ function Room() {
               Lantern light, smoked oak, and a copper hood that has done this before.
             </h2>
             <p className="mt-8 text-base leading-relaxed text-cream/70">
-              Sixty-four seats arranged around an open robata, a twelve-seat sushi counter, and a
-              private tatami room for eight. Designed by Atelier Ito (Kyoto) with reclaimed Douglas
-              fir from the Vancouver original.
+              Sixty-four seats arranged around an open robata, a twelve-seat counter overlooking
+              the straw flame, and a private tatami room for eight. Designed by Atelier Ito (Kyoto)
+              with reclaimed Douglas fir from the Vancouver original.
             </p>
 
             <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-10">
               {[
                 ["64", "Seats"],
                 ["12", "Counter"],
-                ["48", "Sake labels"],
+                ["24", "Sake labels"],
               ].map(([n, l]) => (
                 <div key={l}>
                   <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
