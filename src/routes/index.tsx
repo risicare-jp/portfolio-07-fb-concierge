@@ -1,8 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { Star } from "lucide-react";
 import heroImg from "@/assets/hero-izakaya.jpg";
-import yakitoriImg from "@/assets/dish-yakitori.jpg";
-import sushiImg from "@/assets/dish-sushi.jpg";
-import sakeImg from "@/assets/sake-pour.jpg";
 import robataImg from "@/assets/robata.jpg";
 
 export const Route = createFileRoute("/")({
@@ -22,7 +21,11 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-function Nav() {
+type Lang = "EN" | "JA" | "CN";
+
+function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+  const langs: Lang[] = ["EN", "JA", "CN"];
+  const labels: Record<Lang, string> = { EN: "EN", JA: "日本語", CN: "中文" };
   return (
     <nav className="fixed top-0 z-50 w-full">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-6 md:px-12 md:py-8">
@@ -38,12 +41,29 @@ function Nav() {
           <a href="#room" className="transition hover:text-amber-glow">The Room</a>
           <a href="#visit" className="transition hover:text-amber-glow">Visit</a>
         </div>
-        <a
-          href="#reserve"
-          className="rounded-none border border-amber-glow/60 px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-6 md:text-xs"
-        >
-          Reserve
-        </a>
+        <div className="flex items-center gap-3 md:gap-5">
+          <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 md:text-xs">
+            {langs.map((l, i) => (
+              <span key={l} className="flex items-center gap-2">
+                <button
+                  onClick={() => setLang(l)}
+                  className={`transition hover:text-amber-glow ${
+                    lang === l ? "font-semibold text-amber-glow underline underline-offset-4" : ""
+                  }`}
+                >
+                  {labels[l]}
+                </button>
+                {i < langs.length - 1 && <span className="text-cream/30">·</span>}
+              </span>
+            ))}
+          </div>
+          <a
+            href="#reserve"
+            className="rounded-none border border-amber-glow/60 px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-6 md:text-xs"
+          >
+            Reserve
+          </a>
+        </div>
       </div>
     </nav>
   );
@@ -132,32 +152,127 @@ function Story() {
   );
 }
 
-const dishes = [
+type Dish = {
+  star?: boolean;
+  name: { EN: string; JA: string; CN?: string };
+  ja: string;
+  price: string;
+  desc: { EN: string; JA: string; CN?: string };
+};
+
+type Counter = {
+  num: string;
+  en: string;
+  ja: string;
+  tagline: { EN: string; JA: string; CN?: string };
+  dishes: Dish[];
+};
+
+const counters: Counter[] = [
   {
-    img: yakitoriImg,
-    kanji: "焼鳥",
-    name: "Binchotan Yakitori",
-    desc: "Heritage chicken and A5 wagyu over white-oak charcoal, finished with Okinawan salt.",
+    num: "i",
+    en: "The Robata",
+    ja: "焚き火",
+    tagline: {
+      EN: "The grill is the conversation. Straw flame, white-oak charcoal, theater of fire.",
+      JA: "炭火が会話。藁の炎、白樫の炭、火の劇場。",
+    },
+    dishes: [
+      {
+        star: true,
+        name: { EN: "Straw-Flame Bonito Tataki", JA: "わら焼き 戻り鰹のたたき" },
+        ja: "わら焼き 戻り鰹のたたき",
+        price: "$26",
+        desc: {
+          EN: "Pacific bonito seared over a pillar of burning rice straw at the counter — smoke-perfumed exterior, ruby-rare interior. Tosa-style ponzu.",
+          JA: "目の前で藁火に炙る戻り鰹。香ばしい表面とルビーのような中。土佐風ポン酢で。",
+        },
+      },
+      {
+        name: { EN: "Straw-Flame Sablefish Saikyo-yaki", JA: "わら焼き 銀ダラ西京焼き" },
+        ja: "わら焼き 銀ダラ西京焼き",
+        price: "$32",
+        desc: {
+          EN: "Black cod marinated 72 hours in Kyoto white miso, finished over straw flame. Buttery, sweet-savory, deeply Kyoto.",
+          JA: "京都白味噌に72時間漬け込んだ銀ダラを藁火で仕上げる。バターのように甘く、京の味。",
+        },
+      },
+    ],
   },
   {
-    img: sushiImg,
-    kanji: "鮨",
-    name: "Counter Nigiri",
-    desc: "Edomae-style nigiri shaped to order. Bluefin chū-toro, Hokkaido uni, aged kinmedai.",
+    num: "ii",
+    en: "The Counter",
+    ja: "季節の刺身",
+    tagline: {
+      EN: "Sashimi cut to order. Today's catch from Pacific suppliers, finished by knife.",
+      JA: "注文ごとに引く刺身。今朝の太平洋の魚を、包丁で仕上げる。",
+    },
+    dishes: [
+      {
+        star: true,
+        name: { EN: "Today's Sashimi Trio", JA: "本日の刺身 三点盛り" },
+        ja: "本日の刺身 三点盛り",
+        price: "$28",
+        desc: {
+          EN: "Three fish chosen at this morning's market, cut to order. Today: bluefin chū-toro, king salmon, hirame.",
+          JA: "今朝の市場で選んだ三種を注文ごとに引く。本日：本鮪中トロ、キングサーモン、平目。",
+        },
+      },
+      {
+        star: true,
+        name: { EN: "Aburi Saba-zushi", JA: "炙り 鯖寿司" },
+        ja: "炙り 鯖寿司",
+        price: "$22",
+        desc: {
+          EN: "Kyoto-style pressed mackerel sushi, kelp-cured and torch-seared at the counter.",
+          JA: "京都風の押し鯖寿司。昆布締めにし、目の前で炙る。",
+        },
+      },
+    ],
   },
   {
-    img: sakeImg,
-    kanji: "酒",
-    name: "Sake Cellar",
-    desc: "Forty-eight bottles from small-production breweries — Yamagata, Niigata, Kōchi.",
+    num: "iii",
+    en: "Donabe & Sake",
+    ja: "土鍋と酒",
+    tagline: {
+      EN: "Clay pot rice, served one portion at a time. Twenty-four bottles, breweries we know.",
+      JA: "土鍋ご飯、一人前ずつ。蔵元を知る二十四本の酒。",
+    },
+    dishes: [
+      {
+        star: true,
+        name: { EN: "Donabe Silver Rice", JA: "土鍋 銀シャリ" },
+        ja: "土鍋 銀シャリ",
+        price: "$9",
+        desc: {
+          EN: "Single bowl cooked at the table in an Iga-ware donabe. Niigata Koshihikari. Order at the start — it takes 25 minutes.",
+          JA: "伊賀焼きの土鍋でテーブルにて炊く一人前。新潟コシヒカリ。最初にご注文を、25分かかります。",
+        },
+      },
+      {
+        star: true,
+        name: { EN: "Takibiya Potato Salad", JA: "名物 ポテトサラダ" },
+        ja: "名物 ポテトサラダ",
+        price: "$10",
+        desc: {
+          EN: "Yukon gold potatoes, cured egg yolk, smoked sausage, fried potato strings on top. Our most-ordered side.",
+          JA: "ユーコンゴールド、漬け卵黄、燻製ソーセージ、揚げポテトを散らして。一番人気の一品。",
+        },
+      },
+    ],
   },
 ];
 
-function Menu() {
+function pick<T extends { EN: string; JA: string; CN?: string }>(field: T, lang: Lang): string {
+  if (lang === "CN") return field.CN ?? field.EN;
+  return field[lang];
+}
+
+function Menu({ lang }: { lang: Lang }) {
   return (
     <section id="menu" className="bg-charcoal px-6 py-32 md:px-12 md:py-48">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-20 flex flex-col items-start justify-between gap-6 md:mb-28 md:flex-row md:items-end">
+        <div className="mb-20 flex flex-col items-start justify-between gap-6 md:mb-24 md:flex-row md:items-end">
           <div>
             <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
               02 — The Menu
@@ -167,39 +282,72 @@ function Menu() {
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
-            Choose a stool at the robata, the sushi bar, or the sake counter. The menu unfolds
+            Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds
             differently from each.
           </p>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
-          {dishes.map((d, i) => (
-            <article
-              key={d.name}
-              className="group relative overflow-hidden border border-border/60 bg-card transition duration-700 hover:border-amber-glow/50"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img
-                  src={d.img}
-                  alt={d.name}
-                  loading="lazy"
-                  width={1024}
-                  height={1280}
-                  className="h-full w-full object-cover transition duration-[1500ms] group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
-                <span className="absolute right-6 top-6 font-display text-3xl text-amber-glow/80">
-                  {d.kanji}
-                </span>
-                <span className="absolute left-6 top-6 text-[0.6rem] uppercase tracking-[0.4em] text-cream/50">
-                  0{i + 1}
-                </span>
+        <div className="space-y-24 md:space-y-32">
+          {counters.map((c) => (
+            <div key={c.en}>
+              <div className="mb-10 flex flex-col gap-4 md:mb-12">
+                <div className="flex items-baseline gap-5">
+                  <span className="font-display text-sm uppercase tracking-[0.4em] text-amber-glow/70">
+                    {c.num}
+                  </span>
+                  <h3 className="font-display text-3xl font-light text-cream md:text-5xl">
+                    {c.en}
+                  </h3>
+                  <span className="font-display text-xl text-amber-glow/80 md:text-2xl">
+                    {c.ja}
+                  </span>
+                </div>
+                <p className="max-w-2xl text-sm leading-relaxed text-cream/65 md:text-base">
+                  {pick(c.tagline, lang)}
+                </p>
               </div>
-              <div className="p-8">
-                <h3 className="font-display text-2xl text-cream md:text-3xl">{d.name}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-cream/65">{d.desc}</p>
+
+              <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+                {c.dishes.map((d) => (
+                  <article
+                    key={d.ja}
+                    className="group border border-border/60 bg-card/40 p-8 transition duration-500 hover:border-amber-glow/50 md:p-10"
+                  >
+                    <div className="flex items-start justify-between gap-6">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          {d.star && (
+                            <Star
+                              className="h-4 w-4 fill-amber-glow text-amber-glow"
+                              aria-label="Signature"
+                            />
+                          )}
+                          <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
+                            {pick(d.name, lang)}
+                          </h4>
+                        </div>
+                        <p className="mt-1 text-xs tracking-wide text-cream/45">{d.ja}</p>
+                      </div>
+                      <span className="font-display text-xl text-amber-glow md:text-2xl">
+                        {d.price}
+                      </span>
+                    </div>
+                    <p className="mt-5 text-sm leading-relaxed text-cream/70">
+                      {pick(d.desc, lang)}
+                    </p>
+                  </article>
+                ))}
               </div>
-            </article>
+
+              <div className="mt-8 md:mt-10">
+                <Link
+                  to="/menu"
+                  className="text-[0.7rem] uppercase tracking-[0.35em] text-amber-glow transition hover:text-cream"
+                >
+                  View Full Menu →
+                </Link>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -337,12 +485,13 @@ function Footer() {
 }
 
 function Index() {
+  const [lang, setLang] = useState<Lang>("EN");
   return (
     <main className="min-h-screen bg-background">
-      <Nav />
+      <Nav lang={lang} setLang={setLang} />
       <Hero />
       <Story />
-      <Menu />
+      <Menu lang={lang} />
       <Room />
       <Visit />
       <Footer />
