@@ -103,8 +103,8 @@ function Hero() {
           className="animate-fade-up mt-10 max-w-md px-6 text-balance text-base font-light leading-relaxed text-cream/80 md:text-lg"
           style={{ animationDelay: "0.45s" }}
         >
-          A modern izakaya rooted in robata fire, the sushi counter, and the quiet ritual of pouring
-          sake for a friend.
+          A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of
+          pouring sake for a friend.
         </p>
       </div>
 
