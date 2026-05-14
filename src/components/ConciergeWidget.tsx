@@ -3,13 +3,23 @@ import { MessageCircle, X, Send } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { askConcierge } from "@/lib/concierge.functions";
 import { OrderAssistant } from "@/components/OrderAssistant";
+import { SakePairing } from "@/components/SakePairing";
+import { ChefsRecommendation } from "@/components/ChefsRecommendation";
 
-const ORDER_INTENT = "[INTENT: ORDER_ASSISTANT]";
+const ORDER_INTENT = /\[INTENT:\s*ORDER_ASSISTANT\]/;
+const SAKE_INTENT = /\[INTENT:\s*SAKE_PAIRING:([a-z0-9-]+)\]/i;
+const CHEF_INTENT = /\[INTENT:\s*CHEFS_REC\]/;
+
+type Intent =
+  | { kind: "none" }
+  | { kind: "order" }
+  | { kind: "sake"; dishId: string }
+  | { kind: "chef" };
 
 type Msg = {
   role: "user" | "assistant";
   content: string;
-  hasOrderIntent?: boolean;
+  intent?: Intent;
 };
 
 const WELCOME: Msg = {
@@ -18,12 +28,15 @@ const WELCOME: Msg = {
     "Hi — I'm the Concierge for Tomoko's Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
 };
 
+type Mode = "chat" | "order" | "sake" | "chef";
+
 export function ConciergeWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
-  const [showOrderAssistant, setShowOrderAssistant] = useState(false);
+  const [mode, setMode] = useState<Mode>("chat");
+  const [sakeDishId, setSakeDishId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const ask = useServerFn(askConcierge);
 
@@ -33,6 +46,23 @@ export function ConciergeWidget() {
     }
   }, [messages, pending, open]);
 
+  const parseIntent = (raw: string): { text: string; intent: Intent } => {
+    let text = raw;
+    let intent: Intent = { kind: "none" };
+    const sake = raw.match(SAKE_INTENT);
+    if (sake) {
+      intent = { kind: "sake", dishId: sake[1] };
+      text = text.replace(SAKE_INTENT, "").trim();
+    } else if (CHEF_INTENT.test(raw)) {
+      intent = { kind: "chef" };
+      text = text.replace(CHEF_INTENT, "").trim();
+    } else if (ORDER_INTENT.test(raw)) {
+      intent = { kind: "order" };
+      text = text.replace(ORDER_INTENT, "").trim();
+    }
+    return { text, intent };
+  };
+
   const send = async () => {
     const text = input.trim();
     if (!text || pending) return;
@@ -41,15 +71,15 @@ export function ConciergeWidget() {
     setInput("");
     setPending(true);
     try {
-      // Send only real conversation (skip the local welcome message)
-      const apiMessages = next.filter((m) => m !== WELCOME);
+      const apiMessages = next
+        .filter((m) => m !== WELCOME)
+        .map((m) => ({ role: m.role, content: m.content }));
       const result = await ask({ data: { messages: apiMessages } });
       if (result.ok) {
-        const hasOrderIntent = result.reply.includes(ORDER_INTENT);
-        const cleaned = result.reply.replace(ORDER_INTENT, "").trim();
+        const { text: cleaned, intent } = parseIntent(result.reply);
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: cleaned, hasOrderIntent },
+          { role: "assistant", content: cleaned, intent },
         ]);
       } else if (result.error === "unauthorized") {
         setMessages((prev) => [
@@ -85,9 +115,26 @@ export function ConciergeWidget() {
     }
   };
 
+  const launchIntent = (intent: Intent) => {
+    if (intent.kind === "order") setMode("order");
+    else if (intent.kind === "chef") setMode("chef");
+    else if (intent.kind === "sake") {
+      setSakeDishId(intent.dishId);
+      setMode("sake");
+    }
+  };
+
+  const returnToChat = () => {
+    setMode("chat");
+    setSakeDishId(null);
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: "Anything else I can help with?" },
+    ]);
+  };
+
   return (
     <>
-      {/* Floating button */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -103,7 +150,6 @@ export function ConciergeWidget() {
         )}
       </button>
 
-      {/* Panel */}
       <div
         className={`fixed z-[99] transition-all duration-300 ${
           open
@@ -112,7 +158,6 @@ export function ConciergeWidget() {
         } inset-0 md:inset-auto md:bottom-24 md:right-6 md:h-[560px] md:w-[380px]`}
       >
         <div className="flex h-full w-full flex-col overflow-hidden border border-cream/10 bg-background shadow-2xl shadow-black/60 md:rounded-2xl">
-          {/* Header */}
           <div className="flex items-start justify-between border-b border-cream/10 bg-background/80 px-5 py-4 backdrop-blur">
             <div>
               <div className="font-display text-lg tracking-wide text-cream">
@@ -131,19 +176,14 @@ export function ConciergeWidget() {
             </button>
           </div>
 
-          {showOrderAssistant ? (
-            <OrderAssistant
-              onClose={() => {
-                setShowOrderAssistant(false);
-                setMessages((prev) => [
-                  ...prev,
-                  { role: "assistant", content: "Anything else I can help with?" },
-                ]);
-              }}
-            />
-          ) : (
+          {mode === "order" && <OrderAssistant onClose={returnToChat} />}
+          {mode === "sake" && sakeDishId && (
+            <SakePairing dishId={sakeDishId} onBack={returnToChat} />
+          )}
+          {mode === "chef" && <ChefsRecommendation onClose={returnToChat} />}
+
+          {mode === "chat" && (
             <>
-              {/* Messages */}
               <div
                 ref={scrollRef}
                 className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
@@ -152,7 +192,7 @@ export function ConciergeWidget() {
                   <Bubble
                     key={i}
                     msg={m}
-                    onLaunchOrderAssistant={() => setShowOrderAssistant(true)}
+                    onLaunchIntent={launchIntent}
                   />
                 ))}
                 {pending && (
@@ -167,7 +207,6 @@ export function ConciergeWidget() {
                 )}
               </div>
 
-              {/* Input */}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -200,14 +239,23 @@ export function ConciergeWidget() {
   );
 }
 
+function intentLabel(intent?: Intent): string | null {
+  if (!intent || intent.kind === "none") return null;
+  if (intent.kind === "order") return "Continue to Order Assistant →";
+  if (intent.kind === "sake") return "View Sake Pairing →";
+  if (intent.kind === "chef") return "Continue to Chef's Recommendation →";
+  return null;
+}
+
 function Bubble({
   msg,
-  onLaunchOrderAssistant,
+  onLaunchIntent,
 }: {
   msg: Msg;
-  onLaunchOrderAssistant?: () => void;
+  onLaunchIntent: (intent: Intent) => void;
 }) {
   const isUser = msg.role === "user";
+  const label = intentLabel(msg.intent);
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}>
       {!isUser && (
@@ -223,12 +271,12 @@ function Bubble({
         >
           {msg.content}
         </div>
-        {msg.hasOrderIntent && onLaunchOrderAssistant && (
+        {label && msg.intent && (
           <button
-            onClick={onLaunchOrderAssistant}
+            onClick={() => onLaunchIntent(msg.intent!)}
             className="rounded-full bg-amber-glow px-3.5 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
           >
-            Continue to Order Assistant →
+            {label}
           </button>
         )}
       </div>
