@@ -101,7 +101,18 @@ Rules:
 - Keep responses to 1-3 sentences unless explicitly asked for more detail.
 - Stay in character as the Concierge — never reveal you are an AI model, but if asked directly, say "I'm Tomoko's AI Concierge, built to answer your questions in real time."
 - Always respond in the visitor's input language. If a visitor mixes languages, mirror the dominant one.
-- The site supports CAD / USD / JPY / CNY / EUR price display. If a user asks "How much is X in [currency]?", state the CAD price and mention they can switch currency via the selector in the top navigation. Do not compute conversions yourself — direct them to the UI selector.`;
+- The site supports CAD / USD / JPY / CNY / EUR price display. When a visitor asks "How much is X in [currency]?", compute the conversion directly using the FX rates injected at the top of this prompt and reply in chat. Always show CAD first, then the requested currency. Format USD and EUR with two decimals (e.g., "$20.72 USD"); format JPY and CNY with no decimals and a thousands separator (e.g., "¥3,536 JPY", "¥150 CNY"). Mirror the visitor's language. Examples: EN — "The Sablefish Saikyo-yaki is $32 CAD — about ¥3,536 JPY at today's rate."; JA — "銀ダラ西京焼きは $32 CAD、本日のレートで約 ¥3,536 JPY です。"; CN — "银鳕鱼西京烧 $32 CAD，按今日汇率约 ¥150 CNY。". For currencies outside the supported five, state the CAD price and add: "We support USD, JPY, CNY, and EUR conversions in chat. For others, please use a converter." When a single dish is asked about, you may add a brief follow-up: "You can also switch the whole menu display from the top-right selector." If asked when rates were last updated, answer with the date provided in the FX line above.`;
+
+const fxSchema = z
+  .object({
+    USD: z.number().positive(),
+    JPY: z.number().positive(),
+    CNY: z.number().positive(),
+    EUR: z.number().positive(),
+    fetched_at: z.string().optional(),
+  })
+  .partial({ USD: true, JPY: true, CNY: true, EUR: true })
+  .optional();
 
 const messageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -110,7 +121,22 @@ const messageSchema = z.object({
 
 const inputSchema = z.object({
   messages: z.array(messageSchema).min(1).max(40),
+  fx: fxSchema,
 });
+
+function buildSystem(fx?: z.infer<typeof fxSchema>) {
+  const r = {
+    USD: fx?.USD ?? FALLBACK_FX.USD,
+    JPY: fx?.JPY ?? FALLBACK_FX.JPY,
+    CNY: fx?.CNY ?? FALLBACK_FX.CNY,
+    EUR: fx?.EUR ?? FALLBACK_FX.EUR,
+  };
+  const updated = fx?.fetched_at
+    ? new Date(fx.fetched_at).toISOString().slice(0, 10)
+    : "bundled fallback";
+  const fxLine = `Current FX rates (per 1 CAD): USD ${r.USD.toFixed(4)}, JPY ${r.JPY.toFixed(2)}, CNY ${r.CNY.toFixed(4)}, EUR ${r.EUR.toFixed(4)}. Last updated: ${updated}.\n\n`;
+  return fxLine + SYSTEM_PROMPT;
+}
 
 export const askConcierge = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => inputSchema.parse(input))
@@ -131,7 +157,7 @@ export const askConcierge = createServerFn({ method: "POST" })
         body: JSON.stringify({
           model: "claude-haiku-4-5-20251001",
           max_tokens: 1024,
-          system: SYSTEM_PROMPT,
+          system: buildSystem(data.fx),
           messages: data.messages,
         }),
       });
@@ -164,3 +190,4 @@ export const askConcierge = createServerFn({ method: "POST" })
       return { ok: false as const, error: "network" };
     }
   });
+
