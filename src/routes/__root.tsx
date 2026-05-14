@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { ConciergeWidget } from "@/components/ConciergeWidget";
 import { Toaster } from "@/components/ui/sonner";
 import { CurrencyProvider } from "@/lib/currency";
+import { I18nProvider } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
