@@ -175,14 +175,14 @@ export function OrderAssistant({ onClose }: Props) {
           onClick={onClose}
           className="text-[0.65rem] uppercase tracking-[0.18em] text-cream/40 hover:text-cream/80"
         >
-          Exit
+          {t("oa.exit")}
         </button>
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4">
         {step === 1 && (
           <div className="space-y-4">
-            <AssistantBubble>How many people will be dining? (1–8)</AssistantBubble>
+            <AssistantBubble>{t("oa.step1.prompt")}</AssistantBubble>
             <div className="flex flex-wrap gap-2 pl-9">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <button
@@ -200,7 +200,7 @@ export function OrderAssistant({ onClose }: Props) {
         {step === 2 && (
           <div className="space-y-4">
             <AssistantBubble>
-              Person {currentPerson + 1}: Any allergies or dietary restrictions?
+              {t("oa.step2.prompt", { n: currentPerson + 1 })}
             </AssistantBubble>
             <div className="flex flex-wrap gap-2 pl-9">
               {ALLERGEN_KEYS.map((a) => {
@@ -215,23 +215,33 @@ export function OrderAssistant({ onClose }: Props) {
                         : "border-amber-glow/40 bg-transparent text-cream/80 hover:border-amber-glow"
                     }`}
                   >
-                    {ALLERGEN_LABELS[a]}
+                    {allergenLabels[a]}
                   </button>
                 );
               })}
             </div>
-            <div className="flex items-center justify-between gap-2 pl-9 pt-2">
-              <button
-                onClick={clearCurrent}
-                className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
-              >
-                None
-              </button>
+            <div className="flex flex-wrap items-center justify-between gap-2 pl-9 pt-2">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={goBackPerson}
+                  className="rounded-full border border-amber-glow/50 px-3 py-1.5 text-xs text-amber-glow transition hover:bg-amber-glow/10"
+                >
+                  {t("oa.step2.back")}
+                </button>
+                <button
+                  onClick={clearCurrent}
+                  className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
+                >
+                  {t("oa.step2.none")}
+                </button>
+              </div>
               <button
                 onClick={advancePerson}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
               >
-                {currentPerson + 1 < partySize ? "Next person →" : "See dishes →"}
+                {currentPerson + 1 < partySize
+                  ? t("oa.step2.next_person")
+                  : t("oa.step2.see_dishes")}
               </button>
             </div>
           </div>
