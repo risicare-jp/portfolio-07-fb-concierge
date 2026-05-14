@@ -121,12 +121,21 @@ const messageSchema = z.object({
   content: z.string().min(1).max(4000),
 });
 
+const localeSchema = z.enum(["en", "ja", "cn"]).optional();
+
 const inputSchema = z.object({
   messages: z.array(messageSchema).min(1).max(40),
   fx: fxSchema,
+  locale: localeSchema,
 });
 
-function buildSystem(fx?: z.infer<typeof fxSchema>) {
+const LOCALE_DEFAULT_LINE: Record<"en" | "ja" | "cn", string> = {
+  en: "Default response language: English. Mirror the user's input language if different.",
+  ja: "Default response language: 日本語. Mirror the user's input language if different.",
+  cn: "Default response language: 简体中文. Mirror the user's input language if different.",
+};
+
+function buildSystem(fx?: z.infer<typeof fxSchema>, locale?: "en" | "ja" | "cn") {
   const r = {
     USD: fx?.USD ?? FALLBACK_FX.USD,
     JPY: fx?.JPY ?? FALLBACK_FX.JPY,
@@ -137,7 +146,8 @@ function buildSystem(fx?: z.infer<typeof fxSchema>) {
     ? new Date(fx.fetched_at).toISOString().slice(0, 10)
     : "bundled fallback";
   const fxLine = `Current FX rates (per 1 CAD): USD ${r.USD.toFixed(4)}, JPY ${r.JPY.toFixed(2)}, CNY ${r.CNY.toFixed(4)}, EUR ${r.EUR.toFixed(4)}. Last updated: ${updated}.\n\n`;
-  return fxLine + SYSTEM_PROMPT;
+  const langLine = (LOCALE_DEFAULT_LINE[locale ?? "en"]) + "\n\n";
+  return langLine + fxLine + SYSTEM_PROMPT;
 }
 
 export const askConcierge = createServerFn({ method: "POST" })
