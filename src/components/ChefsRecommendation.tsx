@@ -9,6 +9,7 @@ import {
 } from "@/data/menu";
 import { pairForDish } from "@/lib/sake-pairing";
 import type { Sake } from "@/data/sake";
+import { useCurrency } from "@/lib/currency";
 
 type Vibe = "casual" | "sake" | "occasion" | "vegan";
 type Budget = "open" | "60" | "90" | "120" | "any";
@@ -144,6 +145,7 @@ type Props = { onClose: () => void };
 type Step = 1 | 2 | 3 | 4;
 
 export function ChefsRecommendation({ onClose }: Props) {
+  const { format } = useCurrency();
   const [step, setStep] = useState<Step>(1);
   const [partySize, setPartySize] = useState(2);
   const [vibe, setVibe] = useState<Vibe>("casual");
@@ -338,7 +340,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                         {dish.names.ja}
                       </div>
                     </div>
-                    <div className="text-sm text-cream/70">${dish.price_cad}</div>
+                    <div className="text-sm text-cream/70">{format(dish.price_cad)}</div>
                   </div>
                   <div className="mt-1.5 text-[0.72rem] leading-relaxed text-cream/70">
                     {reason}
@@ -346,14 +348,14 @@ export function ChefsRecommendation({ onClose }: Props) {
                   {sake && (
                     <div className="mt-2 border-t border-cream/10 pt-2 text-[0.7rem] text-cream/65">
                       Paired with{" "}
-                      <span className="text-amber-glow">{sake.names.en}</span> · glass ${sake.price_glass_cad}
+                      <span className="text-amber-glow">{sake.names.en}</span> · glass {format(sake.price_glass_cad)}
                     </div>
                   )}
                 </div>
               ))}
             </div>
             <div className="ml-9 mt-2 rounded-lg border border-cream/10 bg-background/40 px-3 py-2 text-[0.72rem] text-cream/75">
-              Estimated total: ${result.total} · ~${result.perPerson} per person
+              Estimated total: {format(result.total)} · ~{format(result.perPerson)} per person
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2 pl-9 pt-2">
               <button

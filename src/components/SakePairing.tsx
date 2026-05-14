@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { toast } from "sonner";
 import { dishById } from "@/data/menu";
 import { pairForDish } from "@/lib/sake-pairing";
+import { useCurrency } from "@/lib/currency";
 
 type Props = {
   dishId: string;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export function SakePairing({ dishId, onBack }: Props) {
+  const { format } = useCurrency();
   const dish = dishById(dishId);
   const result = useMemo(() => (dish ? pairForDish(dish) : null), [dish]);
 
@@ -54,8 +56,8 @@ export function SakePairing({ dishId, onBack }: Props) {
                     <div>SMV: {sake.smv > 0 ? `+${sake.smv}` : sake.smv}</div>
                     <div>ABV: {sake.abv}%</div>
                     <div className="col-span-2">Flavor: {sake.flavor}</div>
-                    <div>Glass ${sake.price_glass_cad}</div>
-                    <div>Bottle ${sake.price_bottle_cad}</div>
+                    <div>Glass {format(sake.price_glass_cad)}</div>
+                    <div>Bottle {format(sake.price_bottle_cad)}</div>
                   </div>
                   <div className="mt-2 border-t border-cream/10 pt-2 text-[0.72rem] leading-relaxed text-cream/80">
                     {rationale}
