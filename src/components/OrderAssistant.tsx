@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import {
   ALLERGEN_KEYS,
-  ALLERGEN_LABELS,
   COUNTERS,
   MENU,
   dishById,
@@ -10,6 +9,7 @@ import {
   type Verdict,
 } from "@/data/menu";
 import { useCurrency } from "@/lib/currency";
+import { useI18n, pickLocalized, ALLERGEN_LABELS_I18N } from "@/lib/i18n";
 
 type Step = 1 | 2 | 3 | 4;
 
