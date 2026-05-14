@@ -74,7 +74,23 @@ export function ConciergeWidget() {
       const apiMessages = next
         .filter((m) => m !== WELCOME)
         .map((m) => ({ role: m.role, content: m.content }));
-      const result = await ask({ data: { messages: apiMessages } });
+      let fx: { USD?: number; JPY?: number; CNY?: number; EUR?: number; fetched_at?: string } | undefined;
+      try {
+        const raw = localStorage.getItem("tomokos_fx_cache_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw) as { rates?: Record<string, number>; fetched_at?: string };
+          if (parsed?.rates) {
+            fx = {
+              USD: parsed.rates.USD,
+              JPY: parsed.rates.JPY,
+              CNY: parsed.rates.CNY,
+              EUR: parsed.rates.EUR,
+              fetched_at: parsed.fetched_at,
+            };
+          }
+        }
+      } catch { /* noop */ }
+      const result = await ask({ data: { messages: apiMessages, fx } });
       if (result.ok) {
         const { text: cleaned, intent } = parseIntent(result.reply);
         setMessages((prev) => [
