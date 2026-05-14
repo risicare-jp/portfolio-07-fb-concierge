@@ -273,6 +273,7 @@ function pick<T extends { EN: string; JA: string; CN?: string }>(field: T, lang:
 }
 
 function Menu({ lang }: { lang: Lang }) {
+  const { format } = useCurrency();
   return (
     <section id="menu" className="bg-charcoal px-6 py-32 md:px-12 md:py-48">
       <div className="mx-auto max-w-7xl">
@@ -332,8 +333,8 @@ function Menu({ lang }: { lang: Lang }) {
                         </div>
                         <p className="mt-1 text-xs tracking-wide text-cream/45">{d.ja}</p>
                       </div>
-                      <span className="font-display text-xl text-amber-glow md:text-2xl">
-                        {d.price}
+                      <span className="font-display text-base text-amber-glow md:text-lg">
+                        {format(d.price_cad)}
                       </span>
                     </div>
                     <p className="mt-5 text-sm leading-relaxed text-cream/70">
