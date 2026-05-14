@@ -121,11 +121,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CurrencyProvider>
-        <Outlet />
-        <ConciergeWidget />
-        <Toaster />
-      </CurrencyProvider>
+      <I18nProvider>
+        <CurrencyProvider>
+          <Outlet />
+          <ConciergeWidget />
+          <Toaster />
+        </CurrencyProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }
