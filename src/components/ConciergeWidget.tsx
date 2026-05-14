@@ -45,7 +45,12 @@ export function ConciergeWidget() {
       const apiMessages = next.filter((m) => m !== WELCOME);
       const result = await ask({ data: { messages: apiMessages } });
       if (result.ok) {
-        setMessages((prev) => [...prev, { role: "assistant", content: result.reply }]);
+        const hasOrderIntent = result.reply.includes(ORDER_INTENT);
+        const cleaned = result.reply.replace(ORDER_INTENT, "").trim();
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: cleaned, hasOrderIntent },
+        ]);
       } else if (result.error === "unauthorized") {
         setMessages((prev) => [
           ...prev,
