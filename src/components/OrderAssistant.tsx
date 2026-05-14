@@ -9,6 +9,7 @@ import {
   type Dish,
   type Verdict,
 } from "@/data/menu";
+import { useCurrency } from "@/lib/currency";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -84,6 +85,7 @@ function computeVerdict(dish: Dish, perPerson: AllergenKey[][]): DishVerdict {
 }
 
 export function OrderAssistant({ onClose }: Props) {
+  const { format } = useCurrency();
   const [step, setStep] = useState<Step>(1);
   const [partySize, setPartySize] = useState(0);
   const [currentPerson, setCurrentPerson] = useState(0); // 0-indexed
@@ -279,7 +281,7 @@ export function OrderAssistant({ onClose }: Props) {
                       </div>
                       <div className="text-[0.7rem] text-cream/40">{d.names.ja}</div>
                     </div>
-                    <div className="text-sm text-cream/70">${d.price_cad}</div>
+                    <div className="text-sm text-cream/70">{format(d.price_cad)}</div>
                   </label>
                 );
               })}
@@ -347,7 +349,7 @@ export function OrderAssistant({ onClose }: Props) {
                           {dish.names.en}
                         </div>
                       </div>
-                      <div className="text-sm text-cream/60">${dish.price_cad}</div>
+                      <div className="text-sm text-cream/60">{format(dish.price_cad)}</div>
                     </div>
                     <div className={`mt-1.5 flex items-center gap-2 text-xs ${cfg.text}`}>
                       <span className={`inline-block h-1.5 w-1.5 rounded-full ${cfg.dot}`} />
@@ -373,7 +375,7 @@ export function OrderAssistant({ onClose }: Props) {
                         {alternatives.map((alt) => (
                           <div key={alt.id}>
                             Consider <span className="text-cream">{alt.names.en}</span>{" "}
-                            (${alt.price_cad}) — safe for your party.
+                            ({format(alt.price_cad)}) — safe for your party.
                           </div>
                         ))}
                       </div>
