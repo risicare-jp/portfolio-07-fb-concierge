@@ -86,6 +86,8 @@ function computeVerdict(dish: Dish, perPerson: AllergenKey[][]): DishVerdict {
 
 export function OrderAssistant({ onClose }: Props) {
   const { format } = useCurrency();
+  const { t, locale } = useI18n();
+  const allergenLabels = ALLERGEN_LABELS_I18N[locale];
   const [step, setStep] = useState<Step>(1);
   const [partySize, setPartySize] = useState(0);
   const [currentPerson, setCurrentPerson] = useState(0); // 0-indexed
@@ -95,12 +97,16 @@ export function OrderAssistant({ onClose }: Props) {
   const [forwarded, setForwarded] = useState(false);
 
   const stepLabel = useMemo(() => {
-    if (step === 1) return "Step 1 of 4 — Party size";
-    if (step === 2)
-      return `Step 2 of 4 — Person ${currentPerson + 1} of ${partySize} allergies`;
-    if (step === 3) return "Step 3 of 4 — Choose dishes";
-    return "Step 4 of 4 — Allergen check";
-  }, [step, currentPerson, partySize]);
+    const stepName =
+      step === 1
+        ? t("oa.step1.name")
+        : step === 2
+          ? t("oa.step2.name")
+          : step === 3
+            ? t("oa.step3.name")
+            : t("oa.step4.name");
+    return t("oa.step_label", { n: step, step_name: stepName });
+  }, [step, t]);
 
   const choosePartySize = (n: number) => {
     setPartySize(n);
