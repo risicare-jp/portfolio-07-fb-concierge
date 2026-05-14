@@ -186,7 +186,7 @@ const counters: Counter[] = [
         star: true,
         name: { EN: "Straw-Flame Bonito Tataki", JA: "わら焼き 戻り鰹のたたき" },
         ja: "わら焼き 戻り鰹のたたき",
-        price: "$26",
+        price_cad: 26,
         desc: {
           EN: "Pacific bonito seared over a pillar of burning rice straw at the counter — smoke-perfumed exterior, ruby-rare interior. Tosa-style ponzu.",
           JA: "目の前で藁火に炙る戻り鰹。香ばしい表面とルビーのような中。土佐風ポン酢で。",
@@ -195,7 +195,7 @@ const counters: Counter[] = [
       {
         name: { EN: "Straw-Flame Sablefish Saikyo-yaki", JA: "わら焼き 銀ダラ西京焼き" },
         ja: "わら焼き 銀ダラ西京焼き",
-        price: "$32",
+        price_cad: 32,
         desc: {
           EN: "Black cod marinated 72 hours in Kyoto white miso, finished over straw flame. Buttery, sweet-savory, deeply Kyoto.",
           JA: "京都白味噌に72時間漬け込んだ銀ダラを藁火で仕上げる。バターのように甘く、京の味。",
@@ -216,7 +216,7 @@ const counters: Counter[] = [
         star: true,
         name: { EN: "Today's Sashimi Trio", JA: "本日の刺身 三点盛り" },
         ja: "本日の刺身 三点盛り",
-        price: "$28",
+        price_cad: 28,
         desc: {
           EN: "Three fish chosen at this morning's market, cut to order. Today: bluefin chū-toro, king salmon, hirame.",
           JA: "今朝の市場で選んだ三種を注文ごとに引く。本日：本鮪中トロ、キングサーモン、平目。",
@@ -226,7 +226,7 @@ const counters: Counter[] = [
         star: true,
         name: { EN: "Aburi Saba-zushi", JA: "炙り 鯖寿司" },
         ja: "炙り 鯖寿司",
-        price: "$22",
+        price_cad: 22,
         desc: {
           EN: "Kyoto-style pressed mackerel sushi, kelp-cured and torch-seared at the counter.",
           JA: "京都風の押し鯖寿司。昆布締めにし、目の前で炙る。",
@@ -247,7 +247,7 @@ const counters: Counter[] = [
         star: true,
         name: { EN: "Donabe Silver Rice", JA: "土鍋 銀シャリ" },
         ja: "土鍋 銀シャリ",
-        price: "$9",
+        price_cad: 9,
         desc: {
           EN: "Single bowl cooked at the table in an Iga-ware donabe. Niigata Koshihikari. Order at the start — it takes 25 minutes.",
           JA: "伊賀焼きの土鍋でテーブルにて炊く一人前。新潟コシヒカリ。最初にご注文を、25分かかります。",
@@ -257,7 +257,7 @@ const counters: Counter[] = [
         star: true,
         name: { EN: "Takibiya Potato Salad", JA: "名物 ポテトサラダ" },
         ja: "名物 ポテトサラダ",
-        price: "$10",
+        price_cad: 10,
         desc: {
           EN: "Yukon gold potatoes, cured egg yolk, smoked sausage, fried potato strings on top. Our most-ordered side.",
           JA: "ユーコンゴールド、漬け卵黄、燻製ソーセージ、揚げポテトを散らして。一番人気の一品。",
