@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+const FALLBACK_FX = { USD: 0.74, JPY: 110.5, CNY: 5.32, EUR: 0.68 };
+
 const SYSTEM_PROMPT = `You are the AI Concierge for Tomoko's Toronto, a Japanese izakaya opening Spring 2026 at 482 King Street West, Toronto, Canada. Tomoko Watanabe — chef-owner — opened the original Tomoko's in Vancouver in 2009; this Toronto location is the chain's fourth.
 
 Voice: warm, concise, izakaya-appropriate. Speak like a good host — calm, gracious, never effusive. Most answers fit in 1-3 sentences.
