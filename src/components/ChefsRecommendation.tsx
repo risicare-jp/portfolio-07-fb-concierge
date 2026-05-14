@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import {
   ALLERGEN_KEYS,
-  ALLERGEN_LABELS,
   MENU,
   type AllergenKey,
   type Dish,
@@ -10,45 +9,40 @@ import {
 import { pairForDish } from "@/lib/sake-pairing";
 import type { Sake } from "@/data/sake";
 import { useCurrency } from "@/lib/currency";
+import { useI18n, pickLocalized, ALLERGEN_LABELS_I18N } from "@/lib/i18n";
 
 type Vibe = "casual" | "sake" | "occasion" | "vegan";
 type Budget = "open" | "60" | "90" | "120" | "any";
 
-const VIBES: { id: Vibe; label: string; sub: string }[] = [
-  { id: "casual", label: "Casual evening", sub: "3–4 dishes, signature + comfort" },
-  { id: "sake", label: "Sake-focused", sub: "4–5 dishes, sake-forward pairings" },
-  { id: "occasion", label: "Special occasion", sub: "5–6 dishes, full signature spread" },
-  { id: "vegan", label: "Vegan / vegetarian-friendly", sub: "3–4 plant-forward dishes" },
+const VIBE_KEYS: { id: Vibe; labelKey: string; subKey: string }[] = [
+  { id: "casual", labelKey: "cr.step2.casual", subKey: "cr.step2.casual_sub" },
+  { id: "sake", labelKey: "cr.step2.sake_focused", subKey: "cr.step2.sake_focused_sub" },
+  { id: "occasion", labelKey: "cr.step2.special", subKey: "cr.step2.special_sub" },
+  { id: "vegan", labelKey: "cr.step2.vegan", subKey: "cr.step2.vegan_sub" },
 ];
 
-const BUDGETS: { id: Budget; label: string; cap: number | null }[] = [
-  { id: "open", label: "Open", cap: null },
-  { id: "60", label: "Under $60", cap: 60 },
-  { id: "90", label: "Under $90", cap: 90 },
-  { id: "120", label: "Under $120", cap: 120 },
-  { id: "any", label: "Any", cap: null },
+const BUDGETS: { id: Budget; labelKey: string; cap: number | null }[] = [
+  { id: "open", labelKey: "cr.step3.budget_open", cap: null },
+  { id: "60", labelKey: "cr.step3.budget_60", cap: 60 },
+  { id: "90", labelKey: "cr.step3.budget_90", cap: 90 },
+  { id: "120", labelKey: "cr.step3.budget_120", cap: 120 },
+  { id: "any", labelKey: "cr.step3.budget_any", cap: null },
 ];
 
-type Course = {
-  dish: Dish;
-  reason: string;
-  sake?: Sake;
-};
+type Course = { dish: Dish; reasonKey: string; reasonVars?: Record<string, string>; sake?: Sake };
 
 function dishSafe(d: Dish, allergens: Set<AllergenKey>): boolean {
-  for (const a of allergens) {
-    if (d.allergens[a] === "contains") return false;
-  }
+  for (const a of allergens) if (d.allergens[a] === "contains") return false;
   return true;
 }
 
-function reasonFor(d: Dish): string {
-  if (d.is_signature) return "Signature — the kitchen's most-told story.";
-  if (d.is_seasonal) return `Seasonal (${d.is_seasonal}) — fleeting and worth catching.`;
-  if (d.is_dessert) return "A quiet, sweet finish.";
-  if (d.counter === "donabe_sake") return "Anchors the meal — order early, it cooks slow.";
-  if (d.counter === "robata") return "From the straw flame and white-oak charcoal.";
-  return "Cut to order at the sashimi counter.";
+function reasonForDish(d: Dish): { key: string; vars?: Record<string, string> } {
+  if (d.is_signature) return { key: "cr.reason.signature" };
+  if (d.is_seasonal) return { key: "cr.reason.seasonal", vars: { s: d.is_seasonal } };
+  if (d.is_dessert) return { key: "cr.reason.dessert" };
+  if (d.counter === "donabe_sake") return { key: "cr.reason.donabe" };
+  if (d.counter === "robata") return { key: "cr.reason.robata" };
+  return { key: "cr.reason.sashimi" };
 }
 
 function buildCourse(
@@ -58,7 +52,8 @@ function buildCourse(
   partySize: number,
 ): { courses: Course[]; perPerson: number; total: number } {
   const safe = MENU.filter((d) => dishSafe(d, allergens));
-  const within = (d: Dish) => budgetCap == null || d.price_cad / Math.max(1, partySize === 1 ? 1 : 2) <= budgetCap;
+  const within = (d: Dish) =>
+    budgetCap == null || d.price_cad / Math.max(1, partySize === 1 ? 1 : 2) <= budgetCap;
 
   const pickFrom = (pool: Dish[], n: number, requireCounters?: Dish["counter"][]): Dish[] => {
     const chosen: Dish[] = [];
@@ -68,20 +63,14 @@ function buildCourse(
       chosen.push(d);
       seen.add(d.id);
     };
-
-    pool
-      .filter((d) => d.is_signature && within(d))
-      .forEach((d) => push(d));
-
+    pool.filter((d) => d.is_signature && within(d)).forEach((d) => push(d));
     for (const c of [...chosen]) {
       for (const id of c.balance_partners.mode_balance) {
         const d = pool.find((x) => x.id === id);
         if (d && within(d)) push(d);
       }
     }
-
     pool.filter((d) => within(d)).forEach((d) => push(d));
-
     if (requireCounters) {
       for (const ctr of requireCounters) {
         if (!chosen.some((d) => d.counter === ctr)) {
@@ -97,10 +86,8 @@ function buildCourse(
   };
 
   let dishes: Dish[] = [];
-
   if (vibe === "vegan") {
-    const pool = safe.filter((d) => d.is_vegan_capable);
-    dishes = pickFrom(pool, 4);
+    dishes = pickFrom(safe.filter((d) => d.is_vegan_capable), 4);
   } else if (vibe === "casual") {
     dishes = pickFrom(safe, 4);
     if (!dishes.some((d) => d.id === "dish-012" || d.id === "dish-016")) {
@@ -124,10 +111,11 @@ function buildCourse(
   }
 
   const courses: Course[] = dishes.map((d) => {
-    const c: Course = { dish: d, reason: reasonFor(d) };
+    const r = reasonForDish(d);
+    const c: Course = { dish: d, reasonKey: r.key, reasonVars: r.vars };
     if (vibe === "sake" && !d.is_dessert) {
-      const r = pairForDish(d);
-      if (r.pairings.length > 0) c.sake = r.pairings[0].sake;
+      const p = pairForDish(d);
+      if (p.pairings.length > 0) c.sake = p.pairings[0].sake;
     }
     return c;
   });
@@ -137,7 +125,6 @@ function buildCourse(
     0,
   );
   const perPerson = Math.round(total / Math.max(1, partySize));
-
   return { courses, perPerson, total };
 }
 
@@ -146,6 +133,8 @@ type Step = 1 | 2 | 3 | 4;
 
 export function ChefsRecommendation({ onClose }: Props) {
   const { format } = useCurrency();
+  const { t, locale } = useI18n();
+  const allergenLabels = ALLERGEN_LABELS_I18N[locale];
   const [step, setStep] = useState<Step>(1);
   const [partySize, setPartySize] = useState(2);
   const [vibe, setVibe] = useState<Vibe>("casual");
@@ -153,11 +142,16 @@ export function ChefsRecommendation({ onClose }: Props) {
   const [budget, setBudget] = useState<Budget>("open");
 
   const stepLabel = useMemo(() => {
-    if (step === 1) return "Step 1 of 4 — Party size";
-    if (step === 2) return "Step 2 of 4 — Vibe";
-    if (step === 3) return "Step 3 of 4 — Constraints";
-    return "Step 4 of 4 — Course proposal";
-  }, [step]);
+    const stepName =
+      step === 1
+        ? t("cr.step1.name")
+        : step === 2
+          ? t("cr.step2.name")
+          : step === 3
+            ? t("cr.step3.name")
+            : t("cr.step4.name");
+    return t("oa.step_label", { n: step, step_name: stepName });
+  }, [step, t]);
 
   const budgetCap = BUDGETS.find((b) => b.id === budget)?.cap ?? null;
 
@@ -166,32 +160,28 @@ export function ChefsRecommendation({ onClose }: Props) {
     return buildCourse(vibe, new Set(allergens), budgetCap, partySize);
   }, [step, vibe, allergens, budgetCap, partySize]);
 
-  const vibeLabel = VIBES.find((v) => v.id === vibe)?.label ?? "";
+  const vibeLabel = t(VIBE_KEYS.find((v) => v.id === vibe)?.labelKey ?? "");
 
   const toggleAllergen = (a: AllergenKey) => {
-    setAllergens((prev) =>
-      prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a],
-    );
+    setAllergens((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]));
   };
 
   return (
     <div className="flex h-full w-full flex-col">
       <div className="flex items-center justify-between border-b border-cream/10 bg-background/80 px-4 py-2 backdrop-blur">
-        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-cream/50">
-          {stepLabel}
-        </div>
+        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-cream/50">{stepLabel}</div>
         <button
           onClick={onClose}
           className="text-[0.65rem] uppercase tracking-[0.18em] text-cream/40 hover:text-cream/80"
         >
-          Exit
+          {t("oa.exit")}
         </button>
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4">
         {step === 1 && (
           <div className="space-y-4">
-            <Bubble>How many people?</Bubble>
+            <Bubble>{t("cr.step1.prompt")}</Bubble>
             <div className="flex flex-wrap gap-2 pl-9">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <button
@@ -215,9 +205,9 @@ export function ChefsRecommendation({ onClose }: Props) {
 
         {step === 2 && (
           <div className="space-y-4">
-            <Bubble>What's the vibe tonight?</Bubble>
+            <Bubble>{t("cr.step2.prompt")}</Bubble>
             <div className="space-y-2 pl-9">
-              {VIBES.map((v) => (
+              {VIBE_KEYS.map((v) => (
                 <button
                   key={v.id}
                   onClick={() => {
@@ -230,8 +220,8 @@ export function ChefsRecommendation({ onClose }: Props) {
                       : "border-cream/15 hover:border-amber-glow/60"
                   }`}
                 >
-                  <div className="text-sm text-cream">{v.label}</div>
-                  <div className="text-[0.7rem] text-cream/50">{v.sub}</div>
+                  <div className="text-sm text-cream">{t(v.labelKey)}</div>
+                  <div className="text-[0.7rem] text-cream/50">{t(v.subKey)}</div>
                 </button>
               ))}
             </div>
@@ -240,7 +230,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                 onClick={() => setStep(1)}
                 className="text-[0.7rem] uppercase tracking-wider text-cream/50 hover:text-cream"
               >
-                ← Back
+                {t("cr.back")}
               </button>
             </div>
           </div>
@@ -248,11 +238,11 @@ export function ChefsRecommendation({ onClose }: Props) {
 
         {step === 3 && (
           <div className="space-y-4">
-            <Bubble>Any allergies, budget, or constraints?</Bubble>
+            <Bubble>{t("cr.step3.prompt")}</Bubble>
             <div className="space-y-3 pl-9">
               <div>
                 <div className="mb-1.5 text-[0.7rem] uppercase tracking-wider text-cream/50">
-                  Allergens
+                  {t("cr.step3.allergens_label")}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -263,7 +253,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                         : "border-cream/20 text-cream/70 hover:border-amber-glow/60"
                     }`}
                   >
-                    None
+                    {t("oa.step2.none")}
                   </button>
                   {ALLERGEN_KEYS.map((a) => {
                     const active = allergens.includes(a);
@@ -277,7 +267,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                             : "border-amber-glow/40 bg-transparent text-cream/80 hover:border-amber-glow"
                         }`}
                       >
-                        {ALLERGEN_LABELS[a]}
+                        {allergenLabels[a]}
                       </button>
                     );
                   })}
@@ -285,7 +275,7 @@ export function ChefsRecommendation({ onClose }: Props) {
               </div>
               <div>
                 <div className="mb-1.5 text-[0.7rem] uppercase tracking-wider text-cream/50">
-                  Budget per person
+                  {t("cr.step3.budget_label")}
                 </div>
                 <select
                   value={budget}
@@ -294,7 +284,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                 >
                   {BUDGETS.map((b) => (
                     <option key={b.id} value={b.id}>
-                      {b.label}
+                      {t(b.labelKey)}
                     </option>
                   ))}
                 </select>
@@ -305,13 +295,13 @@ export function ChefsRecommendation({ onClose }: Props) {
                 onClick={() => setStep(2)}
                 className="text-[0.7rem] uppercase tracking-wider text-cream/50 hover:text-cream"
               >
-                ← Back
+                {t("cr.back")}
               </button>
               <button
                 onClick={() => setStep(4)}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
               >
-                See course →
+                {t("cr.step3.see_course")}
               </button>
             </div>
           </div>
@@ -319,11 +309,9 @@ export function ChefsRecommendation({ onClose }: Props) {
 
         {step === 4 && result && (
           <div className="space-y-3">
-            <Bubble>
-              Course for {partySize} {partySize === 1 ? "person" : "people"} — {vibeLabel}
-            </Bubble>
+            <Bubble>{t("cr.step4.heading", { n: partySize, vibe: vibeLabel })}</Bubble>
             <div className="space-y-2.5 pl-9">
-              {result.courses.map(({ dish, reason, sake }) => (
+              {result.courses.map(({ dish, reasonKey, reasonVars, sake }) => (
                 <div
                   key={dish.id}
                   className="rounded-lg border border-amber-glow/30 bg-background/60 p-3"
@@ -331,54 +319,50 @@ export function ChefsRecommendation({ onClose }: Props) {
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1">
                       <div className="flex items-center gap-1.5 text-sm text-cream">
-                        {dish.is_signature && (
-                          <span className="text-amber-glow">★</span>
-                        )}
-                        {dish.names.en}
+                        {dish.is_signature && <span className="text-amber-glow">★</span>}
+                        {pickLocalized(dish.names, locale)}
                       </div>
-                      <div className="text-[0.7rem] text-cream/40">
-                        {dish.names.ja}
-                      </div>
+                      {locale !== "ja" && (
+                        <div className="text-[0.7rem] text-cream/40">{dish.names.ja}</div>
+                      )}
                     </div>
                     <div className="text-sm text-cream/70">{format(dish.price_cad)}</div>
                   </div>
                   <div className="mt-1.5 text-[0.72rem] leading-relaxed text-cream/70">
-                    {reason}
+                    {t(reasonKey, reasonVars)}
                   </div>
                   {sake && (
                     <div className="mt-2 border-t border-cream/10 pt-2 text-[0.7rem] text-cream/65">
-                      Paired with{" "}
-                      <span className="text-amber-glow">{sake.names.en}</span> · glass {format(sake.price_glass_cad)}
+                      {t("cr.paired_with", {
+                        sake: sake.names.en,
+                        price: format(sake.price_glass_cad),
+                      })}
                     </div>
                   )}
                 </div>
               ))}
             </div>
             <div className="ml-9 mt-2 rounded-lg border border-cream/10 bg-background/40 px-3 py-2 text-[0.72rem] text-cream/75">
-              Estimated total: {format(result.total)} · ~{format(result.perPerson)} per person
+              {t("cr.estimate", { total: format(result.total), per: format(result.perPerson) })}
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2 pl-9 pt-2">
               <button
-                onClick={() =>
-                  toast(
-                    "Your suggested course is noted — please confirm with your server.",
-                  )
-                }
+                onClick={() => toast(t("cr.forward_toast"))}
                 className="rounded-full border border-amber-glow/60 px-3 py-1.5 text-xs text-amber-glow transition hover:bg-amber-glow/10"
               >
-                Forward to kitchen
+                {t("cr.action.forward_kitchen")}
               </button>
               <button
                 onClick={() => setStep(2)}
                 className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
               >
-                Adjust
+                {t("cr.action.adjust")}
               </button>
               <button
                 onClick={onClose}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
               >
-                Done
+                {t("cr.action.done")}
               </button>
             </div>
           </div>
