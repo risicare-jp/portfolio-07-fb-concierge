@@ -2,8 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { askConcierge } from "@/lib/concierge.functions";
+import { OrderAssistant } from "@/components/OrderAssistant";
 
-type Msg = { role: "user" | "assistant"; content: string };
+const ORDER_INTENT = "[INTENT: ORDER_ASSISTANT]";
+
+type Msg = {
+  role: "user" | "assistant";
+  content: string;
+  hasOrderIntent?: boolean;
+};
 
 const WELCOME: Msg = {
   role: "assistant",
