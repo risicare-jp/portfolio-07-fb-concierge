@@ -23,6 +23,7 @@ export function ConciergeWidget() {
   const [messages, setMessages] = useState<Msg[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
+  const [showOrderAssistant, setShowOrderAssistant] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const ask = useServerFn(askConcierge);
 
