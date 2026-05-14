@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { askConcierge } from "@/lib/concierge.functions";
 import { OrderAssistant } from "@/components/OrderAssistant";
 import { SakePairing } from "@/components/SakePairing";
 import { ChefsRecommendation } from "@/components/ChefsRecommendation";
+import { useI18n } from "@/lib/i18n";
 
 const ORDER_INTENT = /\[INTENT:\s*ORDER_ASSISTANT\]/;
 const SAKE_INTENT = /\[INTENT:\s*SAKE_PAIRING:([a-z0-9-]+)\]/i;
@@ -20,25 +21,37 @@ type Msg = {
   role: "user" | "assistant";
   content: string;
   intent?: Intent;
-};
-
-const WELCOME: Msg = {
-  role: "assistant",
-  content:
-    "Hi — I'm the Concierge for Tomoko's Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
+  isWelcome?: boolean;
+  isFollowup?: boolean;
 };
 
 type Mode = "chat" | "order" | "sake" | "chef";
 
 export function ConciergeWidget() {
+  const { t, locale } = useI18n();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([WELCOME]);
+  const welcomeMsg = useMemo<Msg>(
+    () => ({ role: "assistant", content: t("concierge.welcome"), isWelcome: true }),
+    [t],
+  );
+  const [messages, setMessages] = useState<Msg[]>([welcomeMsg]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
   const [mode, setMode] = useState<Mode>("chat");
   const [sakeDishId, setSakeDishId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const ask = useServerFn(askConcierge);
+
+  // Refresh welcome and follow-up bubbles when locale changes
+  useEffect(() => {
+    setMessages((prev) =>
+      prev.map((m) => {
+        if (m.isWelcome) return { ...m, content: t("concierge.welcome") };
+        if (m.isFollowup) return { ...m, content: t("concierge.followup") };
+        return m;
+      }),
+    );
+  }, [t]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -72,7 +85,7 @@ export function ConciergeWidget() {
     setPending(true);
     try {
       const apiMessages = next
-        .filter((m) => m !== WELCOME)
+        .filter((m) => !m.isWelcome && !m.isFollowup)
         .map((m) => ({ role: m.role, content: m.content }));
       let fx: { USD?: number; JPY?: number; CNY?: number; EUR?: number; fetched_at?: string } | undefined;
       try {
@@ -90,7 +103,7 @@ export function ConciergeWidget() {
           }
         }
       } catch { /* noop */ }
-      const result = await ask({ data: { messages: apiMessages, fx } });
+      const result = await ask({ data: { messages: apiMessages, fx, locale } });
       if (result.ok) {
         const { text: cleaned, intent } = parseIntent(result.reply);
         setMessages((prev) => [
@@ -100,31 +113,19 @@ export function ConciergeWidget() {
       } else if (result.error === "unauthorized") {
         setMessages((prev) => [
           ...prev,
-          {
-            role: "assistant",
-            content:
-              "Concierge is offline for maintenance — please contact reserve@tomokos.to directly.",
-          },
+          { role: "assistant", content: t("concierge.error_unauthorized") },
         ]);
       } else {
         setMessages((prev) => [
           ...prev,
-          {
-            role: "assistant",
-            content:
-              "I'm having trouble reaching my notes right now — please email us at reserve@tomokos.to and we'll get back to you within a few hours.",
-          },
+          { role: "assistant", content: t("concierge.error_network") },
         ]);
       }
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content:
-            "I'm having trouble reaching my notes right now — please email us at reserve@tomokos.to and we'll get back to you within a few hours.",
-        },
+        { role: "assistant", content: t("concierge.error_network") },
       ]);
     } finally {
       setPending(false);
@@ -145,8 +146,16 @@ export function ConciergeWidget() {
     setSakeDishId(null);
     setMessages((prev) => [
       ...prev,
-      { role: "assistant", content: "Anything else I can help with?" },
+      { role: "assistant", content: t("concierge.followup"), isFollowup: true },
     ]);
+  };
+
+  const intentLabel = (intent?: Intent): string | null => {
+    if (!intent || intent.kind === "none") return null;
+    if (intent.kind === "order") return t("concierge.continue_order_assistant");
+    if (intent.kind === "sake") return t("concierge.continue_sake_pairing");
+    if (intent.kind === "chef") return t("concierge.continue_chefs_rec");
+    return null;
   };
 
   return (
@@ -154,8 +163,8 @@ export function ConciergeWidget() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label="Ask the Concierge"
-        title="Ask the Concierge"
+        aria-label={t("concierge.button_tooltip")}
+        title={t("concierge.button_tooltip")}
         className="group fixed bottom-5 right-5 z-[100] flex h-12 w-12 items-center justify-center rounded-full bg-accent text-cream shadow-lg shadow-black/40 ring-1 ring-amber-glow/40 transition-all hover:scale-110 hover:shadow-xl hover:shadow-amber-glow/30 md:bottom-6 md:right-6 md:h-14 md:w-14"
         style={{ backgroundColor: "hsl(var(--accent, 25 50% 40%))" }}
       >
@@ -177,10 +186,10 @@ export function ConciergeWidget() {
           <div className="flex items-start justify-between border-b border-cream/10 bg-background/80 px-5 py-4 backdrop-blur">
             <div>
               <div className="font-display text-lg tracking-wide text-cream">
-                AI Concierge
+                {t("concierge.header_title")}
               </div>
               <div className="text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
-                Hours · Menu · Allergens · Pairings
+                {t("concierge.header_subtitle")}
               </div>
             </div>
             <button
@@ -204,13 +213,36 @@ export function ConciergeWidget() {
                 ref={scrollRef}
                 className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
               >
-                {messages.map((m, i) => (
-                  <Bubble
-                    key={i}
-                    msg={m}
-                    onLaunchIntent={launchIntent}
-                  />
-                ))}
+                {messages.map((m, i) => {
+                  const isUser = m.role === "user";
+                  const label = intentLabel(m.intent);
+                  return (
+                    <div key={i} className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}>
+                      {!isUser && (
+                        <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-amber-glow/40 bg-background font-display text-xs text-amber-glow">
+                          知
+                        </div>
+                      )}
+                      <div className="flex max-w-[78%] flex-col items-start gap-2">
+                        <div
+                          className={`whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
+                            isUser ? "bg-cream/10 text-cream" : "bg-amber-glow/10 text-cream/90"
+                          }`}
+                        >
+                          {m.content}
+                        </div>
+                        {label && m.intent && (
+                          <button
+                            onClick={() => launchIntent(m.intent!)}
+                            className="rounded-full bg-amber-glow px-3.5 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
+                          >
+                            {label}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
                 {pending && (
                   <div className="flex items-center gap-2 px-2 text-xs text-cream/50">
                     <span className="inline-flex gap-1">
@@ -218,7 +250,7 @@ export function ConciergeWidget() {
                       <Dot delay="150ms" />
                       <Dot delay="300ms" />
                     </span>
-                    Concierge is typing…
+                    {t("concierge.typing")}
                   </div>
                 )}
               </div>
@@ -234,7 +266,7 @@ export function ConciergeWidget() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask the Concierge…"
+                  placeholder={t("concierge.input_placeholder")}
                   disabled={pending}
                   className="flex-1 rounded-full border border-cream/15 bg-transparent px-4 py-2 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow/60 focus:outline-none"
                 />
@@ -252,51 +284,6 @@ export function ConciergeWidget() {
         </div>
       </div>
     </>
-  );
-}
-
-function intentLabel(intent?: Intent): string | null {
-  if (!intent || intent.kind === "none") return null;
-  if (intent.kind === "order") return "Continue to Order Assistant →";
-  if (intent.kind === "sake") return "View Sake Pairing →";
-  if (intent.kind === "chef") return "Continue to Chef's Recommendation →";
-  return null;
-}
-
-function Bubble({
-  msg,
-  onLaunchIntent,
-}: {
-  msg: Msg;
-  onLaunchIntent: (intent: Intent) => void;
-}) {
-  const isUser = msg.role === "user";
-  const label = intentLabel(msg.intent);
-  return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}>
-      {!isUser && (
-        <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-amber-glow/40 bg-background font-display text-xs text-amber-glow">
-          知
-        </div>
-      )}
-      <div className="flex max-w-[78%] flex-col items-start gap-2">
-        <div
-          className={`whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
-            isUser ? "bg-cream/10 text-cream" : "bg-amber-glow/10 text-cream/90"
-          }`}
-        >
-          {msg.content}
-        </div>
-        {label && msg.intent && (
-          <button
-            onClick={() => onLaunchIntent(msg.intent!)}
-            className="rounded-full bg-amber-glow px-3.5 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
-          >
-            {label}
-          </button>
-        )}
-      </div>
-    </div>
   );
 }
 
