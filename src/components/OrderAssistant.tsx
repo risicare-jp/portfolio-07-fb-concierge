@@ -143,6 +143,14 @@ export function OrderAssistant({ onClose }: Props) {
     }
   };
 
+  const goBackPerson = () => {
+    if (currentPerson === 0) {
+      setStep(1);
+    } else {
+      setCurrentPerson(currentPerson - 1);
+    }
+  };
+
   const filteredMenu = useMemo(
     () => (counterTab === "all" ? MENU : MENU.filter((d) => d.counter === counterTab)),
     [counterTab],
