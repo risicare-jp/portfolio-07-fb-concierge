@@ -131,58 +131,82 @@ export function ConciergeWidget() {
             </button>
           </div>
 
-          {/* Messages */}
-          <div
-            ref={scrollRef}
-            className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
-          >
-            {messages.map((m, i) => (
-              <Bubble key={i} msg={m} />
-            ))}
-            {pending && (
-              <div className="flex items-center gap-2 px-2 text-xs text-cream/50">
-                <span className="inline-flex gap-1">
-                  <Dot delay="0ms" />
-                  <Dot delay="150ms" />
-                  <Dot delay="300ms" />
-                </span>
-                Concierge is typing…
-              </div>
-            )}
-          </div>
-
-          {/* Input */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              void send();
-            }}
-            className="flex items-center gap-2 border-t border-cream/10 bg-background px-3 py-3"
-          >
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask the Concierge…"
-              disabled={pending}
-              className="flex-1 rounded-full border border-cream/15 bg-transparent px-4 py-2 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow/60 focus:outline-none"
+          {showOrderAssistant ? (
+            <OrderAssistant
+              onClose={() => {
+                setShowOrderAssistant(false);
+                setMessages((prev) => [
+                  ...prev,
+                  { role: "assistant", content: "Anything else I can help with?" },
+                ]);
+              }}
             />
-            <button
-              type="submit"
-              disabled={!input.trim() || pending}
-              aria-label="Send"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-glow text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              <Send className="h-4 w-4" />
-            </button>
-          </form>
+          ) : (
+            <>
+              {/* Messages */}
+              <div
+                ref={scrollRef}
+                className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
+              >
+                {messages.map((m, i) => (
+                  <Bubble
+                    key={i}
+                    msg={m}
+                    onLaunchOrderAssistant={() => setShowOrderAssistant(true)}
+                  />
+                ))}
+                {pending && (
+                  <div className="flex items-center gap-2 px-2 text-xs text-cream/50">
+                    <span className="inline-flex gap-1">
+                      <Dot delay="0ms" />
+                      <Dot delay="150ms" />
+                      <Dot delay="300ms" />
+                    </span>
+                    Concierge is typing…
+                  </div>
+                )}
+              </div>
+
+              {/* Input */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  void send();
+                }}
+                className="flex items-center gap-2 border-t border-cream/10 bg-background px-3 py-3"
+              >
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask the Concierge…"
+                  disabled={pending}
+                  className="flex-1 rounded-full border border-cream/15 bg-transparent px-4 py-2 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow/60 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || pending}
+                  aria-label="Send"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-glow text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <Send className="h-4 w-4" />
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </>
   );
 }
 
-function Bubble({ msg }: { msg: Msg }) {
+function Bubble({
+  msg,
+  onLaunchOrderAssistant,
+}: {
+  msg: Msg;
+  onLaunchOrderAssistant?: () => void;
+}) {
   const isUser = msg.role === "user";
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}>
@@ -191,14 +215,22 @@ function Bubble({ msg }: { msg: Msg }) {
           知
         </div>
       )}
-      <div
-        className={`max-w-[78%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
-          isUser
-            ? "bg-cream/10 text-cream"
-            : "bg-amber-glow/10 text-cream/90"
-        }`}
-      >
-        {msg.content}
+      <div className="flex max-w-[78%] flex-col items-start gap-2">
+        <div
+          className={`whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
+            isUser ? "bg-cream/10 text-cream" : "bg-amber-glow/10 text-cream/90"
+          }`}
+        >
+          {msg.content}
+        </div>
+        {msg.hasOrderIntent && onLaunchOrderAssistant && (
+          <button
+            onClick={onLaunchOrderAssistant}
+            className="rounded-full bg-amber-glow px-3.5 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
+          >
+            Continue to Order Assistant →
+          </button>
+        )}
       </div>
     </div>
   );
