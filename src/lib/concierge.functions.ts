@@ -169,7 +169,7 @@ export const askConcierge = createServerFn({ method: "POST" })
         body: JSON.stringify({
           model: "claude-haiku-4-5-20251001",
           max_tokens: 1024,
-          system: buildSystem(data.fx),
+          system: buildSystem(data.fx, data.locale),
           messages: data.messages,
         }),
       });
