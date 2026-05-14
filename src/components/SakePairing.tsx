@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { dishById } from "@/data/menu";
 import { pairForDish } from "@/lib/sake-pairing";
 import { useCurrency } from "@/lib/currency";
+import { useI18n, pickLocalized } from "@/lib/i18n";
 
 type Props = {
   dishId: string;
@@ -11,29 +12,31 @@ type Props = {
 
 export function SakePairing({ dishId, onBack }: Props) {
   const { format } = useCurrency();
+  const { t, locale } = useI18n();
   const dish = dishById(dishId);
   const result = useMemo(() => (dish ? pairForDish(dish) : null), [dish]);
+  const dishName = dish ? pickLocalized(dish.names, locale) : "";
 
   return (
     <div className="flex h-full w-full flex-col">
       <div className="flex items-center justify-between border-b border-cream/10 bg-background/80 px-4 py-2 backdrop-blur">
         <div className="text-[0.65rem] uppercase tracking-[0.2em] text-cream/50">
-          Sake Pairing
+          {t("sp.label")}
         </div>
         <button
           onClick={onBack}
           className="text-[0.65rem] uppercase tracking-[0.18em] text-cream/40 hover:text-cream/80"
         >
-          Back to chat
+          {t("sp.action.back_chat")}
         </button>
       </div>
 
       <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
         {!dish ? (
-          <Bubble>I couldn't find that dish — please ask the Concierge again.</Bubble>
+          <Bubble>{t("sp.not_found")}</Bubble>
         ) : (
           <>
-            <Bubble>Sake pairings for {dish.names.en}:</Bubble>
+            <Bubble>{t("sp.heading", { dish: dishName })}</Bubble>
             {result?.message && <Bubble>{result.message}</Bubble>}
             <div className="space-y-2.5 pl-9">
               {result?.pairings.map(({ sake, rationale }) => (
@@ -56,8 +59,8 @@ export function SakePairing({ dishId, onBack }: Props) {
                     <div>SMV: {sake.smv > 0 ? `+${sake.smv}` : sake.smv}</div>
                     <div>ABV: {sake.abv}%</div>
                     <div className="col-span-2">Flavor: {sake.flavor}</div>
-                    <div>Glass {format(sake.price_glass_cad)}</div>
-                    <div>Bottle {format(sake.price_bottle_cad)}</div>
+                    <div>{t("sp.glass_label")} {format(sake.price_glass_cad)}</div>
+                    <div>{t("sp.bottle_label")} {format(sake.price_bottle_cad)}</div>
                   </div>
                   <div className="mt-2 border-t border-cream/10 pt-2 text-[0.72rem] leading-relaxed text-cream/80">
                     {rationale}
@@ -68,20 +71,16 @@ export function SakePairing({ dishId, onBack }: Props) {
             {result && result.pairings.length > 0 && (
               <div className="flex flex-wrap items-center justify-end gap-2 pl-9 pt-2">
                 <button
-                  onClick={() =>
-                    toast(
-                      "We've noted your sake preference — let your server know when you arrive.",
-                    )
-                  }
+                  onClick={() => toast(t("sp.add_toast"))}
                   className="rounded-full border border-amber-glow/60 px-3 py-1.5 text-xs text-amber-glow transition hover:bg-amber-glow/10"
                 >
-                  Add a glass to my order
+                  {t("sp.action.add_glass")}
                 </button>
                 <button
                   onClick={onBack}
                   className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
                 >
-                  Back to chat
+                  {t("sp.action.back_chat")}
                 </button>
               </div>
             )}
