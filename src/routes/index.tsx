@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
+import { CurrencySelector } from "@/components/CurrencySelector";
+import { useCurrency } from "@/lib/currency";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -42,6 +44,8 @@ function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
           <a href="#visit" className="transition hover:text-amber-glow">Visit</a>
         </div>
         <div className="flex items-center gap-3 md:gap-5">
+          <CurrencySelector />
+          <span className="hidden text-cream/30 md:inline">·</span>
           <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 md:text-xs">
             {langs.map((l, i) => (
               <span key={l} className="flex items-center gap-2">
@@ -156,7 +160,7 @@ type Dish = {
   star?: boolean;
   name: { EN: string; JA: string; CN?: string };
   ja: string;
-  price: string;
+  price_cad: number;
   desc: { EN: string; JA: string; CN?: string };
 };
 
