@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import {
   ALLERGEN_KEYS,
-  ALLERGEN_LABELS,
   COUNTERS,
   MENU,
   dishById,
@@ -10,6 +9,7 @@ import {
   type Verdict,
 } from "@/data/menu";
 import { useCurrency } from "@/lib/currency";
+import { useI18n, pickLocalized, ALLERGEN_LABELS_I18N } from "@/lib/i18n";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -86,6 +86,8 @@ function computeVerdict(dish: Dish, perPerson: AllergenKey[][]): DishVerdict {
 
 export function OrderAssistant({ onClose }: Props) {
   const { format } = useCurrency();
+  const { t, locale } = useI18n();
+  const allergenLabels = ALLERGEN_LABELS_I18N[locale];
   const [step, setStep] = useState<Step>(1);
   const [partySize, setPartySize] = useState(0);
   const [currentPerson, setCurrentPerson] = useState(0); // 0-indexed
@@ -95,12 +97,16 @@ export function OrderAssistant({ onClose }: Props) {
   const [forwarded, setForwarded] = useState(false);
 
   const stepLabel = useMemo(() => {
-    if (step === 1) return "Step 1 of 4 — Party size";
-    if (step === 2)
-      return `Step 2 of 4 — Person ${currentPerson + 1} of ${partySize} allergies`;
-    if (step === 3) return "Step 3 of 4 — Choose dishes";
-    return "Step 4 of 4 — Allergen check";
-  }, [step, currentPerson, partySize]);
+    const stepName =
+      step === 1
+        ? t("oa.step1.name")
+        : step === 2
+          ? t("oa.step2.name")
+          : step === 3
+            ? t("oa.step3.name")
+            : t("oa.step4.name");
+    return t("oa.step_label", { n: step, step_name: stepName });
+  }, [step, t]);
 
   const choosePartySize = (n: number) => {
     setPartySize(n);
@@ -137,6 +143,14 @@ export function OrderAssistant({ onClose }: Props) {
     }
   };
 
+  const goBackPerson = () => {
+    if (currentPerson === 0) {
+      setStep(1);
+    } else {
+      setCurrentPerson(currentPerson - 1);
+    }
+  };
+
   const filteredMenu = useMemo(
     () => (counterTab === "all" ? MENU : MENU.filter((d) => d.counter === counterTab)),
     [counterTab],
@@ -161,14 +175,14 @@ export function OrderAssistant({ onClose }: Props) {
           onClick={onClose}
           className="text-[0.65rem] uppercase tracking-[0.18em] text-cream/40 hover:text-cream/80"
         >
-          Exit
+          {t("oa.exit")}
         </button>
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4">
         {step === 1 && (
           <div className="space-y-4">
-            <AssistantBubble>How many people will be dining? (1–8)</AssistantBubble>
+            <AssistantBubble>{t("oa.step1.prompt")}</AssistantBubble>
             <div className="flex flex-wrap gap-2 pl-9">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <button
@@ -186,7 +200,7 @@ export function OrderAssistant({ onClose }: Props) {
         {step === 2 && (
           <div className="space-y-4">
             <AssistantBubble>
-              Person {currentPerson + 1}: Any allergies or dietary restrictions?
+              {t("oa.step2.prompt", { n: currentPerson + 1 })}
             </AssistantBubble>
             <div className="flex flex-wrap gap-2 pl-9">
               {ALLERGEN_KEYS.map((a) => {
@@ -201,23 +215,33 @@ export function OrderAssistant({ onClose }: Props) {
                         : "border-amber-glow/40 bg-transparent text-cream/80 hover:border-amber-glow"
                     }`}
                   >
-                    {ALLERGEN_LABELS[a]}
+                    {allergenLabels[a]}
                   </button>
                 );
               })}
             </div>
-            <div className="flex items-center justify-between gap-2 pl-9 pt-2">
-              <button
-                onClick={clearCurrent}
-                className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
-              >
-                None
-              </button>
+            <div className="flex flex-wrap items-center justify-between gap-2 pl-9 pt-2">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={goBackPerson}
+                  className="rounded-full border border-amber-glow/50 px-3 py-1.5 text-xs text-amber-glow transition hover:bg-amber-glow/10"
+                >
+                  {t("oa.step2.back")}
+                </button>
+                <button
+                  onClick={clearCurrent}
+                  className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
+                >
+                  {t("oa.step2.none")}
+                </button>
+              </div>
               <button
                 onClick={advancePerson}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
               >
-                {currentPerson + 1 < partySize ? "Next person →" : "See dishes →"}
+                {currentPerson + 1 < partySize
+                  ? t("oa.step2.next_person")
+                  : t("oa.step2.see_dishes")}
               </button>
             </div>
           </div>
@@ -225,24 +249,27 @@ export function OrderAssistant({ onClose }: Props) {
 
         {step === 3 && (
           <div className="space-y-3">
-            <AssistantBubble>Which dishes are you considering?</AssistantBubble>
+            <AssistantBubble>{t("oa.step3.prompt")}</AssistantBubble>
             <div className="flex flex-wrap gap-1.5 pl-9">
               {(
                 [
-                  { id: "all", label: "All" },
-                  ...COUNTERS.map((c) => ({ id: c.id, label: c.name_en })),
+                  { id: "all", label: t("oa.step3.tab_all") },
+                  ...COUNTERS.map((c) => ({
+                    id: c.id,
+                    label: t(`counter.${c.id}.name`),
+                  })),
                 ] as { id: typeof counterTab; label: string }[]
-              ).map((t) => (
+              ).map((tab) => (
                 <button
-                  key={t.id}
-                  onClick={() => setCounterTab(t.id)}
+                  key={tab.id}
+                  onClick={() => setCounterTab(tab.id)}
                   className={`rounded-full border px-3 py-1 text-[0.7rem] uppercase tracking-wider transition ${
-                    counterTab === t.id
+                    counterTab === tab.id
                       ? "border-amber-glow bg-amber-glow text-background"
                       : "border-cream/20 text-cream/70 hover:border-amber-glow/60"
                   }`}
                 >
-                  {t.label}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -277,9 +304,13 @@ export function OrderAssistant({ onClose }: Props) {
                             ★
                           </span>
                         )}
-                        <span className="text-sm text-cream">{d.names.en}</span>
+                        <span className="text-sm text-cream">
+                          {pickLocalized(d.names, locale)}
+                        </span>
                       </div>
-                      <div className="text-[0.7rem] text-cream/40">{d.names.ja}</div>
+                      {locale !== "ja" && (
+                        <div className="text-[0.7rem] text-cream/40">{d.names.ja}</div>
+                      )}
                     </div>
                     <div className="text-sm text-cream/70">{format(d.price_cad)}</div>
                   </label>
@@ -292,7 +323,7 @@ export function OrderAssistant({ onClose }: Props) {
                 onClick={() => setStep(4)}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-30"
               >
-                Check allergens →
+                {t("oa.step3.check_allergens")}
               </button>
             </div>
           </div>
@@ -300,7 +331,7 @@ export function OrderAssistant({ onClose }: Props) {
 
         {step === 4 && (
           <div className="space-y-3">
-            <AssistantBubble>Here's the allergen check for your party:</AssistantBubble>
+            <AssistantBubble>{t("oa.step4.intro")}</AssistantBubble>
             <div className="space-y-2.5 pl-9">
               {verdicts.map(({ dish, verdict, details, alternatives }) => {
                 const cfg =
@@ -308,24 +339,23 @@ export function OrderAssistant({ onClose }: Props) {
                     ? {
                         dot: "bg-emerald-400",
                         border: "border-emerald-400/40",
-                        label: "✓ Safe for your party",
+                        label: t("oa.verdict.safe"),
                         text: "text-emerald-300",
                       }
                     : verdict === "trace"
                       ? {
                           dot: "bg-amber-glow",
                           border: "border-amber-glow/50",
-                          label: "⚠ Trace risk",
+                          label: t("oa.verdict.trace"),
                           text: "text-amber-glow",
                         }
                       : {
                           dot: "bg-red-400",
                           border: "border-red-400/50",
-                          label: "✗ Contains allergens",
+                          label: t("oa.verdict.contains"),
                           text: "text-red-300",
                         };
 
-                // group details by person
                 const byPerson = new Map<
                   number,
                   { allergen: AllergenKey; level: "contains" | "trace" }[]
@@ -346,7 +376,7 @@ export function OrderAssistant({ onClose }: Props) {
                           {dish.is_signature && (
                             <span className="mr-1 text-amber-glow">★</span>
                           )}
-                          {dish.names.en}
+                          {pickLocalized(dish.names, locale)}
                         </div>
                       </div>
                       <div className="text-sm text-cream/60">{format(dish.price_cad)}</div>
@@ -359,11 +389,10 @@ export function OrderAssistant({ onClose }: Props) {
                       <ul className="mt-2 space-y-0.5 text-[0.7rem] text-cream/60">
                         {[...byPerson.entries()].map(([p, items]) => (
                           <li key={p}>
-                            Person {p}:{" "}
+                            {t("oa.person_label", { n: p })}:{" "}
                             {items
                               .map(
-                                (i) =>
-                                  `${ALLERGEN_LABELS[i.allergen].toLowerCase()} (${i.level})`,
+                                (i) => `${allergenLabels[i.allergen]} (${i.level})`,
                               )
                               .join(", ")}
                           </li>
@@ -374,8 +403,10 @@ export function OrderAssistant({ onClose }: Props) {
                       <div className="mt-2 border-t border-cream/10 pt-2 text-[0.7rem] text-cream/70">
                         {alternatives.map((alt) => (
                           <div key={alt.id}>
-                            Consider <span className="text-cream">{alt.names.en}</span>{" "}
-                            ({format(alt.price_cad)}) — safe for your party.
+                            {t("oa.verdict.consider", {
+                              dish: pickLocalized(alt.names, locale),
+                              price: format(alt.price_cad),
+                            })}
                           </div>
                         ))}
                       </div>
@@ -389,7 +420,7 @@ export function OrderAssistant({ onClose }: Props) {
                 onClick={() => setStep(3)}
                 className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
               >
-                Adjust selections
+                {t("oa.action.adjust")}
               </button>
               <button
                 onClick={() => {
@@ -398,19 +429,18 @@ export function OrderAssistant({ onClose }: Props) {
                 }}
                 className="rounded-full border border-amber-glow/60 px-3 py-1.5 text-xs text-amber-glow transition hover:bg-amber-glow/10"
               >
-                Forward to kitchen
+                {t("oa.action.forward")}
               </button>
               <button
                 onClick={onClose}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
               >
-                Done
+                {t("oa.action.done")}
               </button>
             </div>
             {forwarded && (
               <div className="ml-9 mt-2 rounded-lg border border-amber-glow/40 bg-amber-glow/10 px-3 py-2 text-[0.72rem] text-cream/85">
-                We've noted your allergens — please mention them again to your server when
-                you arrive.
+                {t("oa.forward_toast")}
               </div>
             )}
           </div>

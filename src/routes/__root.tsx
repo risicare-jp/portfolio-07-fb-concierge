@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { ConciergeWidget } from "@/components/ConciergeWidget";
 import { Toaster } from "@/components/ui/sonner";
 import { CurrencyProvider } from "@/lib/currency";
+import { I18nProvider } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -120,11 +121,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CurrencyProvider>
-        <Outlet />
-        <ConciergeWidget />
-        <Toaster />
-      </CurrencyProvider>
+      <I18nProvider>
+        <CurrencyProvider>
+          <Outlet />
+          <ConciergeWidget />
+          <Toaster />
+        </CurrencyProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

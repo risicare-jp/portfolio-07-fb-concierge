@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { Star } from "lucide-react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import { CurrencySelector } from "@/components/CurrencySelector";
 import { useCurrency } from "@/lib/currency";
+import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
+import { dishById, type Dish } from "@/data/menu";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -23,11 +24,10 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-type Lang = "EN" | "JA" | "CN";
+const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ja: "日本語", cn: "中文" };
 
-function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
-  const langs: Lang[] = ["EN", "JA", "CN"];
-  const labels: Record<Lang, string> = { EN: "EN", JA: "日本語", CN: "中文" };
+function Nav() {
+  const { locale, setLocale, t } = useI18n();
   return (
     <nav className="fixed top-0 z-50 w-full">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-6 md:px-12 md:py-8">
@@ -38,26 +38,26 @@ function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
           </span>
         </a>
         <div className="hidden items-center gap-10 text-xs uppercase tracking-[0.25em] text-cream/80 md:flex">
-          <a href="#story" className="transition hover:text-amber-glow">Story</a>
-          <a href="#menu" className="transition hover:text-amber-glow">Menu</a>
-          <a href="#room" className="transition hover:text-amber-glow">The Room</a>
-          <a href="#visit" className="transition hover:text-amber-glow">Visit</a>
+          <a href="#story" className="transition hover:text-amber-glow">{t("nav.story")}</a>
+          <a href="#menu" className="transition hover:text-amber-glow">{t("nav.menu")}</a>
+          <a href="#room" className="transition hover:text-amber-glow">{t("nav.room")}</a>
+          <a href="#visit" className="transition hover:text-amber-glow">{t("nav.visit")}</a>
         </div>
         <div className="flex items-center gap-3 md:gap-5">
           <CurrencySelector />
           <span className="hidden text-cream/30 md:inline">·</span>
           <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 md:text-xs">
-            {langs.map((l, i) => (
+            {LOCALES.map((l, i) => (
               <span key={l} className="flex items-center gap-2">
                 <button
-                  onClick={() => setLang(l)}
+                  onClick={() => setLocale(l)}
                   className={`transition hover:text-amber-glow ${
-                    lang === l ? "font-semibold text-amber-glow underline underline-offset-4" : ""
+                    locale === l ? "font-semibold text-amber-glow underline underline-offset-4" : ""
                   }`}
                 >
-                  {labels[l]}
+                  {LOCALE_LABELS[l]}
                 </button>
-                {i < langs.length - 1 && <span className="text-cream/30">·</span>}
+                {i < LOCALES.length - 1 && <span className="text-cream/30">·</span>}
               </span>
             ))}
           </div>
@@ -65,7 +65,7 @@ function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
             href="#reserve"
             className="rounded-none border border-amber-glow/60 px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-6 md:text-xs"
           >
-            Reserve
+            {t("nav.reserve")}
           </a>
         </div>
       </div>
@@ -74,6 +74,7 @@ function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
 }
 
 function Hero() {
+  const { t } = useI18n();
   return (
     <section id="top" className="vignette relative h-[100svh] min-h-[640px] w-full overflow-hidden">
       <img
@@ -87,7 +88,7 @@ function Hero() {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-end pb-20 text-center md:pb-28">
         <p className="animate-fade-up mb-6 text-[0.65rem] uppercase tracking-[0.5em] text-amber-glow md:text-xs">
-          Vancouver · est. 2009 — Toronto · Spring 2026
+          {t("hero.subhead")}
         </p>
         <h1
           className="animate-fade-up font-display text-[clamp(3rem,10vw,8.5rem)] font-light leading-[0.95] text-cream"
@@ -100,55 +101,47 @@ function Hero() {
           style={{ animationDelay: "0.3s" }}
         >
           <span className="h-px w-10 bg-amber-glow/60" />
-          <span>Toronto</span>
+          <span>{t("hero.brand_line")}</span>
           <span className="h-px w-10 bg-amber-glow/60" />
         </div>
         <p
           className="animate-fade-up mt-10 max-w-md px-6 text-balance text-base font-light leading-relaxed text-cream/80 md:text-lg"
           style={{ animationDelay: "0.45s" }}
         >
-          A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of
-          pouring sake for a friend.
+          {t("hero.tagline")}
         </p>
       </div>
 
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[0.6rem] uppercase tracking-[0.4em] text-cream/50">
-        Scroll
+        {t("hero.scroll")}
       </div>
     </section>
   );
 }
 
 function Story() {
+  const { t } = useI18n();
   return (
     <section id="story" className="bg-gradient-warm px-6 py-32 md:px-12 md:py-48">
       <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-12 md:gap-20">
         <div className="md:col-span-5">
           <p className="mb-8 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
-            01 — The Story
+            {t("story.section_label")}
           </p>
           <h2 className="font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-            Sixteen years of fire,
-            <em className="block italic text-amber-glow/90">now arriving east.</em>
+            {t("story.heading_line1")}
+            <em className="block italic text-amber-glow/90">{t("story.heading_line2")}</em>
           </h2>
         </div>
         <div className="space-y-6 text-base leading-relaxed text-cream/75 md:col-span-6 md:col-start-7 md:text-lg">
-          <p>
-            Tomoko Watanabe opened her first izakaya on a quiet Vancouver side street in 2009 with
-            eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin
-            recommendation later, the philosophy hasn&rsquo;t moved an inch.
-          </p>
-          <p>
-            In 2026, Tomoko&rsquo;s arrives on King West — a 64-seat room built around the same
-            counter, the same fire, the same insistence that an izakaya is, before anything else,
-            a place to stay a little longer than you planned.
-          </p>
+          <p>{t("story.body1")}</p>
+          <p>{t("story.body2")}</p>
           <div className="hairline mt-12 w-24" />
           <p className="font-display text-xl italic text-cream/90 md:text-2xl">
-            &ldquo;The grill is the conversation. Everything else is hospitality.&rdquo;
+            {t("story.quote")}
           </p>
           <p className="text-xs uppercase tracking-[0.3em] text-cream/50">
-            — Tomoko Watanabe, Chef &amp; Owner
+            {t("story.quote_attribution")}
           </p>
         </div>
       </div>
@@ -156,204 +149,104 @@ function Story() {
   );
 }
 
-type Dish = {
-  star?: boolean;
-  name: { EN: string; JA: string; CN?: string };
-  ja: string;
-  price_cad: number;
-  desc: { EN: string; JA: string; CN?: string };
-};
-
-type Counter = {
+type CounterDef = {
   num: string;
-  en: string;
-  ja: string;
-  tagline: { EN: string; JA: string; CN?: string };
-  dishes: Dish[];
+  key: "robata" | "sashimi" | "donabe_sake";
+  dishIds: string[];
 };
 
-const counters: Counter[] = [
-  {
-    num: "i",
-    en: "The Robata",
-    ja: "焚き火",
-    tagline: {
-      EN: "The grill is the conversation. Straw flame, white-oak charcoal, theater of fire.",
-      JA: "炭火が会話。藁の炎、白樫の炭、火の劇場。",
-    },
-    dishes: [
-      {
-        star: true,
-        name: { EN: "Straw-Flame Bonito Tataki", JA: "わら焼き 戻り鰹のたたき" },
-        ja: "わら焼き 戻り鰹のたたき",
-        price_cad: 26,
-        desc: {
-          EN: "Pacific bonito seared over a pillar of burning rice straw at the counter — smoke-perfumed exterior, ruby-rare interior. Tosa-style ponzu.",
-          JA: "目の前で藁火に炙る戻り鰹。香ばしい表面とルビーのような中。土佐風ポン酢で。",
-        },
-      },
-      {
-        name: { EN: "Straw-Flame Sablefish Saikyo-yaki", JA: "わら焼き 銀ダラ西京焼き" },
-        ja: "わら焼き 銀ダラ西京焼き",
-        price_cad: 32,
-        desc: {
-          EN: "Black cod marinated 72 hours in Kyoto white miso, finished over straw flame. Buttery, sweet-savory, deeply Kyoto.",
-          JA: "京都白味噌に72時間漬け込んだ銀ダラを藁火で仕上げる。バターのように甘く、京の味。",
-        },
-      },
-    ],
-  },
-  {
-    num: "ii",
-    en: "The Counter",
-    ja: "季節の刺身",
-    tagline: {
-      EN: "Sashimi cut to order. Today's catch from Pacific suppliers, finished by knife.",
-      JA: "注文ごとに引く刺身。今朝の太平洋の魚を、包丁で仕上げる。",
-    },
-    dishes: [
-      {
-        star: true,
-        name: { EN: "Today's Sashimi Trio", JA: "本日の刺身 三点盛り" },
-        ja: "本日の刺身 三点盛り",
-        price_cad: 28,
-        desc: {
-          EN: "Three fish chosen at this morning's market, cut to order. Today: bluefin chū-toro, king salmon, hirame.",
-          JA: "今朝の市場で選んだ三種を注文ごとに引く。本日：本鮪中トロ、キングサーモン、平目。",
-        },
-      },
-      {
-        star: true,
-        name: { EN: "Aburi Saba-zushi", JA: "炙り 鯖寿司" },
-        ja: "炙り 鯖寿司",
-        price_cad: 22,
-        desc: {
-          EN: "Kyoto-style pressed mackerel sushi, kelp-cured and torch-seared at the counter.",
-          JA: "京都風の押し鯖寿司。昆布締めにし、目の前で炙る。",
-        },
-      },
-    ],
-  },
-  {
-    num: "iii",
-    en: "Donabe & Sake",
-    ja: "土鍋と酒",
-    tagline: {
-      EN: "Clay pot rice, served one portion at a time. Twenty-four bottles, breweries we know.",
-      JA: "土鍋ご飯、一人前ずつ。蔵元を知る二十四本の酒。",
-    },
-    dishes: [
-      {
-        star: true,
-        name: { EN: "Donabe Silver Rice", JA: "土鍋 銀シャリ" },
-        ja: "土鍋 銀シャリ",
-        price_cad: 9,
-        desc: {
-          EN: "Single bowl cooked at the table in an Iga-ware donabe. Niigata Koshihikari. Order at the start — it takes 25 minutes.",
-          JA: "伊賀焼きの土鍋でテーブルにて炊く一人前。新潟コシヒカリ。最初にご注文を、25分かかります。",
-        },
-      },
-      {
-        star: true,
-        name: { EN: "Takibiya Potato Salad", JA: "名物 ポテトサラダ" },
-        ja: "名物 ポテトサラダ",
-        price_cad: 10,
-        desc: {
-          EN: "Yukon gold potatoes, cured egg yolk, smoked sausage, fried potato strings on top. Our most-ordered side.",
-          JA: "ユーコンゴールド、漬け卵黄、燻製ソーセージ、揚げポテトを散らして。一番人気の一品。",
-        },
-      },
-    ],
-  },
+const COUNTERS_HOME: CounterDef[] = [
+  { num: "i", key: "robata", dishIds: ["dish-001", "dish-003"] },
+  { num: "ii", key: "sashimi", dishIds: ["dish-007", "dish-008"] },
+  { num: "iii", key: "donabe_sake", dishIds: ["dish-012", "dish-016"] },
 ];
 
-function pick<T extends { EN: string; JA: string; CN?: string }>(field: T, lang: Lang): string {
-  if (lang === "CN") return field.CN ?? field.EN;
-  return field[lang];
-}
-
-function Menu({ lang }: { lang: Lang }) {
+function Menu() {
   const { format } = useCurrency();
+  const { t, locale } = useI18n();
   return (
     <section id="menu" className="bg-charcoal px-6 py-32 md:px-12 md:py-48">
       <div className="mx-auto max-w-7xl">
         <div className="mb-20 flex flex-col items-start justify-between gap-6 md:mb-24 md:flex-row md:items-end">
           <div>
             <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
-              02 — The Menu
+              {t("menu.section_label")}
             </p>
             <h2 className="max-w-2xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-              Three counters, <em className="italic text-amber-glow/90">one fire.</em>
+              {t("menu.heading_line1")} <em className="italic text-amber-glow/90">{t("menu.heading_line2")}</em>
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
-            Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds
-            differently from each.
+            {t("menu.intro")}
           </p>
         </div>
 
         <div className="space-y-24 md:space-y-32">
-          {counters.map((c) => (
-            <div key={c.en}>
-              <div className="mb-10 flex flex-col gap-4 md:mb-12">
-                <div className="flex items-baseline gap-5">
-                  <span className="font-display text-sm uppercase tracking-[0.4em] text-amber-glow/70">
-                    {c.num}
-                  </span>
-                  <h3 className="font-display text-3xl font-light text-cream md:text-5xl">
-                    {c.en}
-                  </h3>
-                  <span className="font-display text-xl text-amber-glow/80 md:text-2xl">
-                    {c.ja}
-                  </span>
+          {COUNTERS_HOME.map((c) => {
+            const dishes = c.dishIds
+              .map((id) => dishById(id))
+              .filter((d): d is Dish => !!d);
+            return (
+              <div key={c.key}>
+                <div className="mb-10 flex flex-col gap-4 md:mb-12">
+                  <div className="flex items-baseline gap-5">
+                    <span className="font-display text-sm uppercase tracking-[0.4em] text-amber-glow/70">
+                      {c.num}
+                    </span>
+                    <h3 className="font-display text-3xl font-light text-cream md:text-5xl">
+                      {t(`counter.${c.key}.name`)}
+                    </h3>
+                  </div>
+                  <p className="max-w-2xl text-sm leading-relaxed text-cream/65 md:text-base">
+                    {t(`counter.${c.key}.tagline`)}
+                  </p>
                 </div>
-                <p className="max-w-2xl text-sm leading-relaxed text-cream/65 md:text-base">
-                  {pick(c.tagline, lang)}
-                </p>
-              </div>
 
-              <div className="grid gap-6 md:grid-cols-2 md:gap-8">
-                {c.dishes.map((d) => (
-                  <article
-                    key={d.ja}
-                    className="group border border-border/60 bg-card/40 p-8 transition duration-500 hover:border-amber-glow/50 md:p-10"
-                  >
-                    <div className="flex items-start justify-between gap-6">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          {d.star && (
-                            <Star
-                              className="h-4 w-4 fill-amber-glow text-amber-glow"
-                              aria-label="Signature"
-                            />
+                <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+                  {dishes.map((d) => (
+                    <article
+                      key={d.id}
+                      className="group border border-border/60 bg-card/40 p-8 transition duration-500 hover:border-amber-glow/50 md:p-10"
+                    >
+                      <div className="flex items-start justify-between gap-6">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            {d.is_signature && (
+                              <Star
+                                className="h-4 w-4 fill-amber-glow text-amber-glow"
+                                aria-label="Signature"
+                              />
+                            )}
+                            <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
+                              {pickLocalized(d.names, locale)}
+                            </h4>
+                          </div>
+                          {locale !== "ja" && (
+                            <p className="mt-1 text-xs tracking-wide text-cream/45">{d.names.ja}</p>
                           )}
-                          <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
-                            {pick(d.name, lang)}
-                          </h4>
                         </div>
-                        <p className="mt-1 text-xs tracking-wide text-cream/45">{d.ja}</p>
+                        <span className="font-display text-base text-amber-glow md:text-lg">
+                          {format(d.price_cad)}
+                        </span>
                       </div>
-                      <span className="font-display text-base text-amber-glow md:text-lg">
-                        {format(d.price_cad)}
-                      </span>
-                    </div>
-                    <p className="mt-5 text-sm leading-relaxed text-cream/70">
-                      {pick(d.desc, lang)}
-                    </p>
-                  </article>
-                ))}
-              </div>
+                      <p className="mt-5 text-sm leading-relaxed text-cream/70">
+                        {pickLocalized(d.descriptions, locale)}
+                      </p>
+                    </article>
+                  ))}
+                </div>
 
-              <div className="mt-8 md:mt-10">
-                <Link
-                  to="/menu"
-                  className="text-[0.7rem] uppercase tracking-[0.35em] text-amber-glow transition hover:text-cream"
-                >
-                  View Full Menu →
-                </Link>
+                <div className="mt-8 md:mt-10">
+                  <Link
+                    to="/menu"
+                    className="text-[0.7rem] uppercase tracking-[0.35em] text-amber-glow transition hover:text-cream"
+                  >
+                    {t("menu.view_full")}
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -361,6 +254,12 @@ function Menu({ lang }: { lang: Lang }) {
 }
 
 function Room() {
+  const { t } = useI18n();
+  const stats: Array<[string, string]> = [
+    ["64", t("room.stats.seats")],
+    ["12", t("room.stats.counter")],
+    ["24", t("room.stats.sake")],
+  ];
   return (
     <section id="room" className="relative overflow-hidden bg-charcoal">
       <div className="grid md:grid-cols-2">
@@ -377,23 +276,17 @@ function Room() {
         <div className="flex items-center bg-gradient-warm px-6 py-24 md:px-20 md:py-32">
           <div className="max-w-md">
             <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
-              03 — The Room
+              {t("room.section_label")}
             </p>
             <h2 className="font-display text-4xl font-light leading-[1.05] text-cream md:text-5xl">
-              Lantern light, smoked oak, and a copper hood that has done this before.
+              {t("room.heading")}
             </h2>
             <p className="mt-8 text-base leading-relaxed text-cream/70">
-              Sixty-four seats arranged around an open robata, a twelve-seat counter overlooking
-              the straw flame, and a private tatami room for eight. Designed by Atelier Ito (Kyoto)
-              with reclaimed Douglas fir from the Vancouver original.
+              {t("room.body")}
             </p>
 
             <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-10">
-              {[
-                ["64", "Seats"],
-                ["12", "Counter"],
-                ["24", "Sake labels"],
-              ].map(([n, l]) => (
+              {stats.map(([n, l]) => (
                 <div key={l}>
                   <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
                   <dd className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
@@ -410,25 +303,30 @@ function Room() {
 }
 
 function Visit() {
+  const { t } = useI18n();
+  const cols = [
+    { h: t("visit.address_label"), b: ["482 King Street West", "Toronto, ON M5V 1L7"] },
+    {
+      h: t("visit.hours_label"),
+      b: [t("visit.hours_tuesat"), t("visit.hours_sun"), t("visit.hours_closed")],
+    },
+    { h: t("visit.contact_label"), b: ["reserve@tomokos.to", "+1 416 555 0188"] },
+  ];
   return (
     <section id="visit" className="bg-gradient-warm px-6 py-32 md:px-12 md:py-48">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
-            04 — Visit
+            {t("visit.section_label")}
           </p>
           <h2 className="font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-            On King West, <em className="italic text-amber-glow/90">opening Spring 2026.</em>
+            {t("visit.heading_line1")} <em className="italic text-amber-glow/90">{t("visit.heading_line2")}</em>
           </h2>
         </div>
 
         <div className="grid gap-12 border-y border-border/60 py-14 md:grid-cols-3 md:gap-16">
-          {[
-            { h: "Address", b: ["482 King Street West", "Toronto, ON M5V 1L7"] },
-            { h: "Hours", b: ["Tue – Sat · 5pm – late", "Sun · 5pm – 10pm", "Closed Monday"] },
-            { h: "Contact", b: ["reserve@tomokos.to", "+1 416 555 0188"] },
-          ].map((c) => (
-            <div key={c.h}>
+          {cols.map((c, i) => (
+            <div key={i}>
               <p className="mb-4 text-[0.65rem] uppercase tracking-[0.4em] text-amber-glow">
                 {c.h}
               </p>
@@ -440,36 +338,43 @@ function Visit() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div id="reserve" className="mt-20 flex flex-col items-center text-center">
-          <p className="max-w-md text-sm leading-relaxed text-cream/60">
-            The waitlist for opening week is now open. Members of our list receive first access two
-            weeks before public reservations.
-          </p>
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mt-10 flex w-full max-w-lg flex-col gap-3 sm:flex-row"
+function Reserve() {
+  const { t } = useI18n();
+  return (
+    <section id="reserve" className="bg-gradient-warm px-6 pb-32 md:px-12 md:pb-48">
+      <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
+        <p className="max-w-md text-sm leading-relaxed text-cream/60">
+          {t("reserve.heading")}
+        </p>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="mt-10 flex w-full max-w-lg flex-col gap-3 sm:flex-row"
+        >
+          <input
+            type="email"
+            required
+            placeholder={t("reserve.email_placeholder")}
+            className="flex-1 rounded-none border border-border bg-transparent px-5 py-4 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-gradient-amber px-8 py-4 text-[0.7rem] uppercase tracking-[0.35em] text-charcoal shadow-glow transition hover:opacity-90"
           >
-            <input
-              type="email"
-              required
-              placeholder="your@email.com"
-              className="flex-1 rounded-none border border-border bg-transparent px-5 py-4 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="bg-gradient-amber px-8 py-4 text-[0.7rem] uppercase tracking-[0.35em] text-charcoal shadow-glow transition hover:opacity-90"
-            >
-              Join Waitlist
-            </button>
-          </form>
-        </div>
+            {t("reserve.submit_button")}
+          </button>
+        </form>
       </div>
     </section>
   );
 }
 
 function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="border-t border-border/60 bg-charcoal px-6 py-16 md:px-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
@@ -477,12 +382,12 @@ function Footer() {
           知子 <span className="text-amber-glow/70">·</span> Tomoko&rsquo;s
         </div>
         <div className="flex gap-8 text-[0.65rem] uppercase tracking-[0.35em] text-cream/50">
-          <a href="#" className="transition hover:text-amber-glow">Instagram</a>
-          <a href="#" className="transition hover:text-amber-glow">Vancouver</a>
-          <a href="#" className="transition hover:text-amber-glow">Press</a>
+          <a href="#" className="transition hover:text-amber-glow">{t("footer.instagram")}</a>
+          <a href="#" className="transition hover:text-amber-glow">{t("footer.vancouver")}</a>
+          <a href="#" className="transition hover:text-amber-glow">{t("footer.press")}</a>
         </div>
         <p className="text-[0.65rem] uppercase tracking-[0.3em] text-cream/40">
-          © 2026 Tomoko&rsquo;s Restaurant Group
+          {t("footer.copyright")}
         </p>
       </div>
     </footer>
@@ -490,15 +395,15 @@ function Footer() {
 }
 
 function Index() {
-  const [lang, setLang] = useState<Lang>("EN");
   return (
     <main className="min-h-screen bg-background">
-      <Nav lang={lang} setLang={setLang} />
+      <Nav />
       <Hero />
       <Story />
-      <Menu lang={lang} />
+      <Menu />
       <Room />
       <Visit />
+      <Reserve />
       <Footer />
     </main>
   );
