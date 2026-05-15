@@ -24,7 +24,7 @@ const SLIDES: SlideDef[] = [
 
 const AUTO_MS = 6000;
 
-export function SpringSeasonal() {
+export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}) {
   const { t, locale } = useI18n();
   const { format } = useCurrency();
   const [index, setIndex] = useState(0);
@@ -58,18 +58,14 @@ export function SpringSeasonal() {
     setTimeout(() => setPaused(false), 1500);
   };
 
-  return (
-    <section
-      id="spring-seasonal"
-      className="bg-gradient-warm px-6 py-32 md:px-12 md:py-44"
-    >
-      <div className="mx-auto max-w-6xl">
-        <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
-          {t("spring.section_label")}
-        </p>
-        <h2 className="mb-12 max-w-3xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-          {t("spring.heading")}
-        </h2>
+  const inner = (
+    <>
+      <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
+        {t("spring.section_label")}
+      </p>
+      <h3 className="mb-10 max-w-3xl font-display text-2xl font-light leading-[1.1] text-cream md:text-4xl">
+        {t("spring.heading")}
+      </h3>
 
         <div
           className="relative overflow-hidden border border-amber-glow/20"
