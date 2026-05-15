@@ -173,7 +173,7 @@ const en: Dict = {
 
   "footer.instagram": "Instagram",
   "footer.vancouver": "Vancouver",
-  "footer.press": "Press",
+  "footer.press": "Media",
   "footer.brand_line": "鎮座ヒノカミ · HINOKAMI",
   "footer.copyright": "© 2026 HINOKAMI RESTAURANT GROUP",
 
@@ -429,7 +429,7 @@ const ja: Dict = {
 
   "footer.instagram": "Instagram",
   "footer.vancouver": "バンクーバー",
-  "footer.press": "プレス",
+  "footer.press": "メディア",
   "footer.brand_line": "鎮座ヒノカミ · HINOKAMI",
   "footer.copyright": "© 2026 鎮座ヒノカミ レストラングループ",
 
