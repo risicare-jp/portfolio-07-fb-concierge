@@ -205,18 +205,33 @@ export function ConciergeWidget() {
 
   return (
     <>
+      {/* Tooltip + proactive bubble, anchored above the floating button */}
+      {!open && (showTooltip || showProactive) && (
+        <div className="fixed bottom-[80px] right-5 z-[100] max-w-[260px] animate-fade-up md:bottom-[96px] md:right-6">
+          <div className="rounded-2xl rounded-br-sm border border-amber-glow/40 bg-charcoal/95 px-4 py-3 text-xs text-cream shadow-lg shadow-black/40 backdrop-blur">
+            {showProactive ? (
+              <button onClick={() => { setOpen(true); setShowProactive(false); }} className="text-left">
+                {t("concierge.proactive")}
+              </button>
+            ) : (
+              <span>{t("concierge.tooltip_hint")}</span>
+            )}
+          </div>
+        </div>
+      )}
+
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={t("concierge.button_tooltip")}
         title={t("concierge.button_tooltip")}
-        className="group fixed bottom-5 right-5 z-[100] flex h-12 w-12 items-center justify-center rounded-full bg-accent text-cream shadow-lg shadow-black/40 ring-1 ring-amber-glow/40 transition-all hover:scale-110 hover:shadow-xl hover:shadow-amber-glow/30 md:bottom-6 md:right-6 md:h-14 md:w-14"
+        className="group fixed bottom-5 right-5 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-accent text-cream shadow-[0_0_24px_4px_rgba(217,160,84,0.35)] ring-1 ring-amber-glow/50 transition-all hover:scale-110 hover:shadow-[0_0_32px_8px_rgba(217,160,84,0.55)] md:bottom-6 md:right-6 md:h-16 md:w-16"
         style={{ backgroundColor: "hsl(var(--accent, 25 50% 40%))" }}
       >
         {open ? (
-          <X className="h-5 w-5 md:h-6 md:w-6" />
+          <X className="h-6 w-6 md:h-7 md:w-7" />
         ) : (
-          <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
+          <MessageCircle className="h-6 w-6 md:h-7 md:w-7" />
         )}
       </button>
 
