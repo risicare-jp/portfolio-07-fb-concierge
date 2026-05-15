@@ -4,8 +4,9 @@ import { MENU, type Dish } from "@/data/menu";
 import { DRINKS, type Drink } from "@/data/drinks";
 import { SAKE, type Sake } from "@/data/sake";
 import { useCurrency } from "@/lib/currency";
-import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
+import { useI18n, pickLocalized } from "@/lib/i18n";
 import { DetailModal, openDetail } from "@/components/DetailModal";
+import { Nav } from "@/routes/index";
 
 type TabKey = "all" | "robata" | "sashimi" | "donabe" | "drinks";
 
@@ -28,14 +29,11 @@ export const Route = createFileRoute("/menu")({
   }),
 });
 
-const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ja: "日本語", cn: "中文" };
-
 function MenuPage() {
-  const { t, locale, setLocale } = useI18n();
+  const { t, locale } = useI18n();
   const { format } = useCurrency();
   const { counter } = Route.useSearch();
   const [tab, setTab] = useState<TabKey>(counter ?? "all");
-  const [localeOpen, setLocaleOpen] = useState(false);
 
   const tabs: Array<{ key: TabKey; label: string }> = [
     { key: "all", label: t("fullmenu.tab_all") },
@@ -52,10 +50,11 @@ function MenuPage() {
     ? (tab === "drinks" ? [] : MENU)
     : MENU.filter((d) => d.counter === tab);
 
-  const goBack = () => {
+  const goBackToMenuSection = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (typeof window === "undefined") return;
-    if (window.history.length > 1) window.history.back();
-    else window.location.href = "/";
+    try { sessionStorage.setItem("hinokami_pending_anchor", "menu"); } catch { /* noop */ }
+    window.location.href = "/#menu";
   };
 
   const drinkCategories: Array<{ key: Drink["category"] | "sake"; items: Array<Drink | Sake> }> = [
@@ -68,50 +67,19 @@ function MenuPage() {
 
   return (
     <main className="min-h-screen bg-background pb-24">
-      <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:px-8 md:py-5">
-          <button
-            onClick={goBack}
-            className="text-[0.7rem] uppercase tracking-[0.25em] text-amber-glow transition hover:text-cream"
-          >
-            {t("nav.back")}
-          </button>
-          <div className="flex flex-col items-center font-display text-cream">
-            <span className="whitespace-nowrap text-[16px] leading-[1.1] tracking-[0.05em] md:text-[18px]">
-              鎮座ヒノカミ
-            </span>
-            <span className="hidden text-[10px] uppercase tracking-[0.25em] text-cream/70 md:inline-block">
-              HINOKAMI
-            </span>
-          </div>
-          <div className="relative">
-            <button
-              onClick={() => setLocaleOpen((o) => !o)}
-              className="flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 transition hover:text-amber-glow md:text-xs"
-            >
-              {LOCALE_LABELS[locale]} <span aria-hidden>▾</span>
-            </button>
-            {localeOpen && (
-              <ul className="absolute right-0 top-full z-50 mt-2 min-w-[6rem] rounded-sm border border-amber-glow/30 bg-charcoal/95 py-1 text-[0.7rem] uppercase tracking-[0.25em] shadow-glow backdrop-blur">
-                {LOCALES.map((l) => (
-                  <li key={l}>
-                    <button
-                      onClick={() => { setLocale(l); setLocaleOpen(false); }}
-                      className={`block w-full px-4 py-1.5 text-left transition hover:text-amber-glow ${
-                        locale === l ? "font-semibold text-amber-glow" : "text-cream/70"
-                      }`}
-                    >
-                      {LOCALE_LABELS[l]}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
-      </header>
+      <Nav />
 
-      <div className="mx-auto max-w-5xl px-6 pt-16 md:px-12">
+      <div className="mx-auto max-w-5xl px-6 pt-32 md:px-12 md:pt-40">
+        <div className="sticky top-20 z-30 mb-8 md:top-24">
+          <a
+            href="/#menu"
+            onClick={goBackToMenuSection}
+            className="inline-flex items-center rounded-full border border-amber-glow/60 bg-charcoal/85 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow shadow-md backdrop-blur transition hover:bg-amber-glow hover:text-charcoal"
+          >
+            {t("gallery.back_button")}
+          </a>
+        </div>
+
         <h1 className="font-display text-4xl font-light text-cream md:text-6xl">
           {t("fullmenu.title")}
         </h1>
