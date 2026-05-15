@@ -67,7 +67,8 @@ export const ALLERGEN_KEYS: AllergenKey[] = [
 export const COUNTERS = [
   { id: "robata" as const, name_en: "The Robata", name_ja: "焚き火" },
   { id: "sashimi" as const, name_en: "The Counter", name_ja: "季節の刺身" },
-  { id: "donabe_sake" as const, name_en: "Donabe & Sake", name_ja: "土鍋と酒" },
+  { id: "donabe" as const, name_en: "Donabe", name_ja: "土鍋" },
+  { id: "sides_sweets" as const, name_en: "Sides & Sweets", name_ja: "小料理 & デザート" },
 ];
 
 export const MENU: Dish[] = [
