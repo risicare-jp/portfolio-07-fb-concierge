@@ -236,20 +236,12 @@ export function OrderAssistant({ onClose }: Props) {
               })}
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2 pl-9 pt-2">
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={goBackPerson}
-                  className="rounded-full border border-amber-glow/50 px-3 py-1.5 text-xs text-amber-glow transition hover:bg-amber-glow/10"
-                >
-                  {t("oa.step2.back")}
-                </button>
-                <button
-                  onClick={clearCurrent}
-                  className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
-                >
-                  {t("oa.step2.none")}
-                </button>
-              </div>
+              <button
+                onClick={clearCurrent}
+                className="rounded-full border border-cream/20 px-3 py-1.5 text-xs text-cream/70 transition hover:border-cream/50 hover:text-cream"
+              >
+                {t("oa.step2.none")}
+              </button>
               <button
                 onClick={advancePerson}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
