@@ -238,14 +238,6 @@ export function ChefsRecommendation({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div className="flex justify-start pl-9">
-              <button
-                onClick={() => setStep(1)}
-                className="text-[0.7rem] uppercase tracking-wider text-cream/50 hover:text-cream"
-              >
-                {t("cr.back")}
-              </button>
-            </div>
           </div>
         )}
 
