@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Star, ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import { CurrencySelector } from "@/components/CurrencySelector";
