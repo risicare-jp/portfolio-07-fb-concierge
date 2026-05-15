@@ -39,7 +39,7 @@ const en: Dict = {
   "page.title": "HINOKAMI Toronto — A modern izakaya, opening Spring 2027",
   "hero.tagline":
     "A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of pouring sake for a friend.",
-  "hero.scroll": "Scroll",
+  
 
   "story.section_label": "01 — The Story",
   "story.heading_line1": "Sixteen years of fire,",
@@ -379,7 +379,7 @@ const ja: Dict = {
   "page.title": "鎮座ヒノカミ トロント — 2027 春オープンの現代居酒屋",
   "hero.tagline":
     "焚き火の炎、季節の刺身、そして友のために酒を注ぐ静かな儀式に根ざした、現代の居酒屋。",
-  "hero.scroll": "スクロール",
+  
 
   "story.section_label": "01 — 物語",
   "story.heading_line1": "16 年の炎、",
@@ -718,7 +718,7 @@ const cn: Dict = {
   "page.title": "镇座火神 多伦多 — 2027 春开业的现代居酒屋",
   "hero.tagline":
     "扎根于焚火炉、当季刺身，与为友人斟酒之静谧仪式的现代居酒屋。",
-  "hero.scroll": "向下滚动",
+  
 
   "story.section_label": "01 — 故事",
   "story.heading_line1": "十六年炉火，",
