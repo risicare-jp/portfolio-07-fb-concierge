@@ -25,7 +25,6 @@ const en: Dict = {
   "nav.back_to_top": "↑ Back to top",
   "nav.back": "← Back",
 
-  "menu.legend": "⭐ Signature · 🌸 Seasonal",
   "fullmenu.title": "Full Menu",
   "fullmenu.tab_all": "All",
 
@@ -57,6 +56,12 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
+
+  "spring.section_label": "02B — Spring 2026 Seasonal",
+  "spring.heading": "Three dishes, only until the cherry blossoms fall.",
+  "spring.image_coming_soon": "Image coming soon",
+  "spring.prev": "Previous slide",
+  "spring.next": "Next slide",
 
   "counter.robata.name": "The Robata",
   "counter.robata.tagline":
@@ -240,7 +245,6 @@ const ja: Dict = {
   "nav.back_to_top": "↑ トップへ",
   "nav.back": "← 戻る",
 
-  "menu.legend": "⭐ 看板 · 🌸 季節限定",
   "fullmenu.title": "お品書き",
   "fullmenu.tab_all": "すべて",
 
@@ -272,6 +276,12 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
+
+  "spring.section_label": "02B — 2026 春 季節限定",
+  "spring.heading": "桜が散るまで、たった三品。",
+  "spring.image_coming_soon": "画像準備中",
+  "spring.prev": "前のスライド",
+  "spring.next": "次のスライド",
 
   "counter.robata.name": "焚き火",
   "counter.robata.tagline":
@@ -454,7 +464,6 @@ const cn: Dict = {
   "nav.back_to_top": "↑ 返回顶部",
   "nav.back": "← 返回",
 
-  "menu.legend": "⭐ 招牌 · 🌸 季节限定",
   "fullmenu.title": "菜单",
   "fullmenu.tab_all": "全部",
 
@@ -486,6 +495,12 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
+
+  "spring.section_label": "02B — 2026 春 季节限定",
+  "spring.heading": "仅至樱花飘落之时，三道菜。",
+  "spring.image_coming_soon": "图片即将上传",
+  "spring.prev": "上一张",
+  "spring.next": "下一张",
 
   "counter.robata.name": "焚火炉",
   "counter.robata.tagline": "炉火即对话。稻草烈焰、白橡备长炭，火之剧场。",

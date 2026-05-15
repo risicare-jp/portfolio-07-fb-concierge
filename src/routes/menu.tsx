@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { MENU, type Dish } from "@/data/menu";
 import { useCurrency } from "@/lib/currency";
@@ -47,9 +46,8 @@ function MenuPage() {
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:px-8 md:py-5">
           <button
             onClick={goBack}
-            className="inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.25em] text-amber-glow transition hover:text-cream"
+            className="text-[0.7rem] uppercase tracking-[0.25em] text-amber-glow transition hover:text-cream"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
             {t("nav.back")}
           </button>
           <div className="flex flex-col items-center font-display text-cream">
@@ -91,9 +89,6 @@ function MenuPage() {
         <h1 className="font-display text-4xl font-light text-cream md:text-6xl">
           {t("fullmenu.title")}
         </h1>
-        <p className="mt-4 text-[0.7rem] tracking-[0.2em] text-cream/50">
-          {t("menu.legend")}
-        </p>
 
         {/* Tabs */}
         <div className="mt-10 flex flex-wrap gap-2 border-b border-border/60 pb-1">
@@ -118,17 +113,9 @@ function MenuPage() {
             <li key={d.id} className="border-b border-border/40 pb-8">
               <div className="flex items-baseline justify-between gap-4">
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    {d.is_signature && (
-                      <span className="text-amber-glow" aria-label="Signature">⭐</span>
-                    )}
-                    {d.is_seasonal && (
-                      <span className="text-pink-300" aria-label="Seasonal">🌸</span>
-                    )}
-                    <h3 className="font-display text-xl font-light text-cream md:text-2xl">
-                      {pickLocalized(d.names, locale)}
-                    </h3>
-                  </div>
+                  <h3 className="font-display text-xl font-light text-cream md:text-2xl">
+                    {pickLocalized(d.names, locale)}
+                  </h3>
                   {locale !== "ja" && (
                     <p className="mt-0.5 text-xs tracking-wide text-cream/45">{d.names.ja}</p>
                   )}

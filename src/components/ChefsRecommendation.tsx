@@ -318,9 +318,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1">
-                      <div className="flex items-center gap-1.5 text-sm text-cream">
-                        {dish.is_signature && <span className="text-amber-glow">★</span>}
-                        {dish.is_seasonal && <span className="text-pink-300">🌸</span>}
+                      <div className="text-sm text-cream">
                         {pickLocalized(dish.names, locale)}
                       </div>
                       {locale !== "ja" && (
