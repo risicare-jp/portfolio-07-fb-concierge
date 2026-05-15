@@ -35,9 +35,9 @@ const en: Dict = {
   "story.heading_line1": "Sixteen years of fire,",
   "story.heading_line2": "now arriving east.",
   "story.body1":
-    "Tomoko Watanabe opened her first izakaya on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
+    "Tomoko Watanabe opened the first Hinokami on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
   "story.body2":
-    "In 2026, Tomoko's arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
+    "In 2026, Hinokami arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
   "story.quote": "\u201CThe grill is the conversation. Everything else is hospitality.\u201D",
   "story.quote_attribution": "— Tomoko Watanabe, Chef & Owner",
 
