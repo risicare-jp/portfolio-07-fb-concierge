@@ -295,13 +295,7 @@ export function ChefsRecommendation({ onClose }: Props) {
                 </select>
               </div>
             </div>
-            <div className="flex items-center justify-between gap-2 pl-9 pt-1">
-              <button
-                onClick={() => setStep(2)}
-                className="text-[0.7rem] uppercase tracking-wider text-cream/50 hover:text-cream"
-              >
-                {t("cr.back")}
-              </button>
+            <div className="flex items-center justify-end gap-2 pl-9 pt-1">
               <button
                 onClick={() => setStep(4)}
                 className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
