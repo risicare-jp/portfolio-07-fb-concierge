@@ -1012,6 +1012,21 @@ function Index() {
     if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
       window.history.scrollRestoration = "auto";
     }
+    if (typeof window === "undefined") return;
+    let pending: string | null = null;
+    try {
+      pending = sessionStorage.getItem("hinokami_pending_anchor");
+      if (pending) sessionStorage.removeItem("hinokami_pending_anchor");
+    } catch { /* noop */ }
+    if (!pending && window.location.hash) pending = window.location.hash.slice(1);
+    if (pending) {
+      const anchor = pending;
+      // Wait for layout
+      setTimeout(() => {
+        const el = document.getElementById(anchor);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
   }, []);
   return (
     <main className="min-h-screen bg-background">
