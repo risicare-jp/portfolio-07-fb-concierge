@@ -354,18 +354,15 @@ export function ReservationAssistant({ onClose }: Props) {
               placeholder={t("ra.step6_placeholder")}
               className="w-full rounded-md border border-cream/15 bg-transparent px-3 py-2 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow/60 focus:outline-none"
             />
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={5} />
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => { update({ requests: "" }); goto(7); }}
-                  className="rounded-full border border-cream/20 px-3.5 py-1.5 text-xs text-cream/70 transition hover:border-amber-glow/60 hover:text-amber-glow"
-                >
-                  {t("ra.skip")}
-                </button>
-                <PrimaryBtn onClick={() => goto(7)}>{t("ra.continue")}</PrimaryBtn>
-              </div>
+            <div className="flex items-center justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => { update({ requests: "" }); goto(7); }}
+                className="rounded-full border border-cream/20 px-3.5 py-1.5 text-xs text-cream/70 transition hover:border-amber-glow/60 hover:text-amber-glow"
+              >
+                {t("ra.skip")}
+              </button>
+              <PrimaryBtn onClick={() => goto(7)}>{t("ra.continue")}</PrimaryBtn>
             </div>
           </>
         )}
