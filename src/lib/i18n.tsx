@@ -565,6 +565,34 @@ const cn: Dict = {
   "counter.donabe_sake.name": "土锅与清酒",
   "counter.donabe_sake.tagline":
     "土锅米饭，每次只为一位炊煮。24 款，皆来自我们熟识的酒造。",
+  "counter.drinks.name": "饮品",
+  "counter.drinks.tagline":
+    "清酒、啤酒、Highball、尼亚加拉葡萄酒、茶 — 与炉火相伴的一杯。",
+
+  "modal.close": "关闭",
+  "modal.counter_label": "吧台",
+  "modal.category_label": "类别",
+  "modal.origin_label": "产地",
+  "modal.description_label": "描述",
+  "modal.flavor_label": "风味",
+  "modal.abv_label": "酒精度",
+  "modal.allergens_label": "过敏原",
+  "modal.allergens_none": "无显著过敏原。",
+  "modal.allergens_contains": "含",
+  "modal.allergens_trace": "微量",
+  "modal.pairings_label": "推荐搭配",
+  "modal.sake_label": "清酒",
+  "modal.other_drinks_label": "其他饮品",
+  "modal.best_with_label": "最佳搭配",
+  "modal.glass_label": "单杯",
+
+  "drinks.cat.sake": "清酒",
+  "drinks.cat.beer": "啤酒",
+  "drinks.cat.highball": "Highball",
+  "drinks.cat.wine": "葡萄酒",
+  "drinks.cat.soft": "软饮 & 茶",
+
+  "reserve.interior_caption": "店内照片 即将上传",
 
   "room.section_label": "03 — 室内",
   "room.heading": "灯笼之光、烟熏橡木，与一座做过同样工作的铜烟罩。",
