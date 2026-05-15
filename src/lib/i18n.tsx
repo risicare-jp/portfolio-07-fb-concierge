@@ -110,7 +110,7 @@ const en: Dict = {
   "reserve.guest_many": "{n} guests",
 
   "about.section_label": "05 — ABOUT THIS SITE",
-  "about.heading": "Built in 7 days with AI.",
+  "about.heading": "Built in 1 day with AI.",
   "about.stack_label": "STACK",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
