@@ -270,7 +270,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div><BackBtn to={2} /></div>
+            
           </>
         )}
 
