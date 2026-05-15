@@ -255,16 +255,19 @@ function Story() {
   );
 }
 
+type CounterKey = "robata" | "sashimi" | "donabe" | "sides_sweets";
+
 type CounterDef = {
   num: string;
-  key: "robata" | "sashimi" | "donabe_sake";
+  key: CounterKey;
   dishIds: string[];
 };
 
 const COUNTERS_HOME: CounterDef[] = [
   { num: "i", key: "robata", dishIds: ["dish-001", "dish-003"] },
   { num: "ii", key: "sashimi", dishIds: ["dish-007", "dish-008"] },
-  { num: "iii", key: "donabe_sake", dishIds: ["dish-012", "dish-016"] },
+  { num: "iii", key: "donabe", dishIds: ["dish-012", "dish-013"] },
+  { num: "iv", key: "sides_sweets", dishIds: ["dish-016", "dish-018"] },
 ];
 
 const FEATURED_DRINK_IDS = [
