@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ImageIcon, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Nav, Footer } from "@/routes/index";
