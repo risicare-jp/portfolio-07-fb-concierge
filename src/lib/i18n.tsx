@@ -22,6 +22,16 @@ const en: Dict = {
   "nav.room": "The Room",
   "nav.visit": "Visit",
   "nav.portfolio_note": "↓ Portfolio note",
+  "nav.back_to_top": "↑ Back to top",
+  "nav.back": "← Back",
+
+  "menu.legend": "⭐ Signature · 🌸 Seasonal",
+  "fullmenu.title": "Full Menu",
+  "fullmenu.tab_all": "All",
+
+  "hero.try_concierge": "Try the AI Concierge ↓",
+  "concierge.tooltip_hint": "Try the AI Concierge",
+  "concierge.proactive": "Need help with allergens, menu, or sake pairing?",
 
   "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
   "hero.wordmark": "HINOKAMI",
