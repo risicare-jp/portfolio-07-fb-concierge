@@ -22,6 +22,16 @@ const en: Dict = {
   "nav.room": "The Room",
   "nav.visit": "Visit",
   "nav.portfolio_note": "↓ Portfolio note",
+  "nav.back_to_top": "↑ Back to top",
+  "nav.back": "← Back",
+
+  "menu.legend": "⭐ Signature · 🌸 Seasonal",
+  "fullmenu.title": "Full Menu",
+  "fullmenu.tab_all": "All",
+
+  "hero.try_concierge": "Try the AI Concierge ↓",
+  "concierge.tooltip_hint": "Try the AI Concierge",
+  "concierge.proactive": "Need help with allergens, menu, or sake pairing?",
 
   "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
   "hero.wordmark": "HINOKAMI",
@@ -100,7 +110,7 @@ const en: Dict = {
   "reserve.guest_many": "{n} guests",
 
   "about.section_label": "05 — ABOUT THIS SITE",
-  "about.heading": "Built in 7 days with AI.",
+  "about.heading": "Built in 1 day with AI.",
   "about.stack_label": "STACK",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
@@ -227,6 +237,16 @@ const ja: Dict = {
   "nav.room": "室",
   "nav.visit": "お越しの方へ",
   "nav.portfolio_note": "↓ ポートフォリオ note",
+  "nav.back_to_top": "↑ トップへ",
+  "nav.back": "← 戻る",
+
+  "menu.legend": "⭐ 看板 · 🌸 季節限定",
+  "fullmenu.title": "お品書き",
+  "fullmenu.tab_all": "すべて",
+
+  "hero.try_concierge": "AI コンシェルジュを試す ↓",
+  "concierge.tooltip_hint": "AI コンシェルジュを試す",
+  "concierge.proactive": "アレルゲン・メニュー・酒のおすすめなど、お気軽にどうぞ。",
 
   "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2026 春",
   "hero.wordmark": "鎮座ヒノカミ",
@@ -305,7 +325,7 @@ const ja: Dict = {
   "reserve.guest_many": "{n} 名",
 
   "about.section_label": "05 — このサイトについて",
-  "about.heading": "AI で 7 日間で制作。",
+  "about.heading": "AI で 1 日で制作。",
   "about.stack_label": "スタック",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
@@ -431,6 +451,16 @@ const cn: Dict = {
   "nav.room": "室内",
   "nav.visit": "到访",
   "nav.portfolio_note": "↓ 作品介绍",
+  "nav.back_to_top": "↑ 返回顶部",
+  "nav.back": "← 返回",
+
+  "menu.legend": "⭐ 招牌 · 🌸 季节限定",
+  "fullmenu.title": "菜单",
+  "fullmenu.tab_all": "全部",
+
+  "hero.try_concierge": "试用 AI 礼宾 ↓",
+  "concierge.tooltip_hint": "试用 AI 礼宾",
+  "concierge.proactive": "过敏原、菜单、清酒搭配 — 欢迎询问。",
 
   "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2026 春",
   "hero.wordmark": "镇座火神",
@@ -506,7 +536,7 @@ const cn: Dict = {
   "reserve.guest_many": "{n} 位",
 
   "about.section_label": "05 — 关于本站",
-  "about.heading": "由 AI 在 7 天内打造。",
+  "about.heading": "由 AI 在 1 天内打造。",
   "about.stack_label": "技术栈",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",

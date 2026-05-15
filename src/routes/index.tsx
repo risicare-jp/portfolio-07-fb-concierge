@@ -1,13 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Star, ExternalLink } from "lucide-react";
+import { Star, ExternalLink, MessageCircle, ArrowUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
-import { CurrencySelector } from "@/components/CurrencySelector";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { dishById, type Dish } from "@/data/menu";
+
+const openConcierge = () => {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("hinokami:open-concierge"));
+  }
+};
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -113,8 +118,6 @@ function Nav() {
           </div>
           <span className="hidden text-cream/30 md:inline">·</span>
           <div className="hidden items-center gap-3 md:flex md:gap-4">
-            <CurrencySelector />
-            <span className="text-cream/30">·</span>
             <LocaleDropdown locale={locale} setLocale={setLocale} />
           </div>
           <a
@@ -147,8 +150,6 @@ function Nav() {
             ))}
           </ul>
           <div className="mt-6 flex items-center gap-4 border-t border-white/[0.08] pt-6">
-            <CurrencySelector />
-            <span className="text-cream/30">·</span>
             <LocaleDropdown locale={locale} setLocale={setLocale} />
           </div>
           <a
@@ -201,6 +202,15 @@ function Hero() {
         >
           {t("hero.tagline")}
         </p>
+        <button
+          type="button"
+          onClick={openConcierge}
+          className="animate-fade-up mt-6 inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.3em] text-amber-glow transition hover:text-cream"
+          style={{ animationDelay: "0.6s" }}
+        >
+          <MessageCircle className="h-3.5 w-3.5" />
+          {t("hero.try_concierge")}
+        </button>
       </div>
 
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[0.6rem] uppercase tracking-[0.4em] text-cream/50">
@@ -266,6 +276,9 @@ function Menu() {
             <h2 className="max-w-2xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
               {t("menu.heading_line1")} <em className="italic text-amber-glow/90">{t("menu.heading_line2")}</em>
             </h2>
+            <p className="mt-4 text-[0.7rem] tracking-[0.2em] text-cream/50">
+              {t("menu.legend")}
+            </p>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
             {t("menu.intro")}
@@ -307,6 +320,11 @@ function Menu() {
                                 className="h-4 w-4 fill-amber-glow text-amber-glow"
                                 aria-label="Signature"
                               />
+                            )}
+                            {d.is_seasonal && (
+                              <span aria-label="Seasonal" className="text-base text-pink-300">
+                                🌸
+                              </span>
                             )}
                             <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
                               {pickLocalized(d.names, locale)}
@@ -610,20 +628,27 @@ function AboutThisSite() {
   );
 }
 
-function PortfolioNotePill() {
+function BackToTopButton() {
   const { t } = useI18n();
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const el = document.getElementById("about-site");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 800);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <button
-      onClick={handleClick}
-      className="fixed bottom-6 left-6 z-40 rounded-full border border-amber-glow/70 bg-charcoal/70 px-4 py-2 text-xs text-cream backdrop-blur-sm transition hover:border-amber-glow hover:bg-charcoal hover:text-amber-glow hover:shadow-glow md:px-5 md:text-sm"
-      aria-label={t("nav.portfolio_note")}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label={t("nav.back_to_top")}
+      className={`fixed bottom-6 left-6 z-40 rounded-full border border-amber-glow/70 bg-charcoal/70 px-4 py-2 text-xs text-amber-glow backdrop-blur-sm transition-all duration-300 hover:bg-charcoal hover:shadow-glow md:px-5 md:text-sm ${
+        visible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+      }`}
     >
-      {t("nav.portfolio_note")}
+      <span className="inline-flex items-center gap-1.5">
+        <ArrowUp className="h-3.5 w-3.5" />
+        {t("nav.back_to_top")}
+      </span>
     </button>
   );
 }
@@ -661,7 +686,7 @@ function Index() {
       <Reserve />
       <AboutThisSite />
       <Footer />
-      <PortfolioNotePill />
+      <BackToTopButton />
     </main>
   );
 }
