@@ -886,6 +886,8 @@ const cn: Dict = {
   "concierge.followup": "还有什么可以帮您的吗?",
 
   "oa.exit": "退出",
+  "flow.back": "← 返回",
+  "flow.exit": "退出",
   "oa.step_label": "步骤 {n} / 4 — {step_name}",
   "oa.step1.name": "用餐人数",
   "oa.step1.prompt": "请问几位用餐? (1–8 位)",
