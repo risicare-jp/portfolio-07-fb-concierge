@@ -135,16 +135,13 @@ export function Nav() {
     { href: "#reserve", anchor: "reserve", label: t("nav.reserve").toUpperCase() },
   ];
 
-  const isHome = typeof window !== "undefined" && window.location.pathname === "/";
-
   const handleAnchorClick = (anchor: string) => {
     setDrawerOpen(false);
-    if (isHome) {
-      // smooth scroll on home
+    if (typeof window === "undefined") return;
+    if (window.location.pathname === "/") {
       const el = document.getElementById(anchor);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } else {
-      // store pending anchor and navigate to home
       try {
         sessionStorage.setItem("hinokami_pending_anchor", anchor);
       } catch { /* noop */ }
