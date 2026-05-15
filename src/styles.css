@@ -61,7 +61,7 @@
   --radius: 0.25rem;
 
   /* Warm dark izakaya palette */
-  --background: oklch(0.18 0.012 50);          /* deep warm charcoal */
+  --background: #15110E;                       /* Sumi 墨 — warm near-black */
   --foreground: oklch(0.93 0.018 75);          /* warm cream */
 
   --card: oklch(0.21 0.014 50);
