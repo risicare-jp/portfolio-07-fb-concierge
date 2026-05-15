@@ -168,7 +168,19 @@ export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}
             ))}
           </div>
         </div>
-      </div>
+    </>
+  );
+
+  if (embedded) {
+    return <div id="spring-seasonal">{inner}</div>;
+  }
+
+  return (
+    <section
+      id="spring-seasonal"
+      className="bg-gradient-warm px-6 py-32 md:px-12 md:py-44"
+    >
+      <div className="mx-auto max-w-6xl">{inner}</div>
     </section>
   );
 }
