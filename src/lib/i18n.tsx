@@ -451,6 +451,16 @@ const cn: Dict = {
   "nav.room": "室内",
   "nav.visit": "到访",
   "nav.portfolio_note": "↓ 作品介绍",
+  "nav.back_to_top": "↑ 返回顶部",
+  "nav.back": "← 返回",
+
+  "menu.legend": "⭐ 招牌 · 🌸 季节限定",
+  "fullmenu.title": "菜单",
+  "fullmenu.tab_all": "全部",
+
+  "hero.try_concierge": "试用 AI 礼宾 ↓",
+  "concierge.tooltip_hint": "试用 AI 礼宾",
+  "concierge.proactive": "过敏原、菜单、清酒搭配 — 欢迎询问。",
 
   "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2026 春",
   "hero.wordmark": "镇座火神",
