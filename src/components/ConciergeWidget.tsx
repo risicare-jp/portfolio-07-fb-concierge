@@ -5,17 +5,20 @@ import { askConcierge } from "@/lib/concierge.functions";
 import { OrderAssistant } from "@/components/OrderAssistant";
 import { SakePairing } from "@/components/SakePairing";
 import { ChefsRecommendation } from "@/components/ChefsRecommendation";
+import { ReservationAssistant } from "@/components/ReservationAssistant";
 import { useI18n } from "@/lib/i18n";
 
 const ORDER_INTENT = /\[INTENT:\s*ORDER_ASSISTANT\]/;
 const SAKE_INTENT = /\[INTENT:\s*SAKE_PAIRING:([a-z0-9-]+)\]/i;
 const CHEF_INTENT = /\[INTENT:\s*CHEFS_REC\]/;
+const RESERVATION_INTENT = /\[INTENT:\s*RESERVATION_ASSISTANT\]/;
 
 type Intent =
   | { kind: "none" }
   | { kind: "order" }
   | { kind: "sake"; dishId: string }
-  | { kind: "chef" };
+  | { kind: "chef" }
+  | { kind: "reservation" };
 
 type Msg = {
   role: "user" | "assistant";
