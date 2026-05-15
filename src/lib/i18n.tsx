@@ -754,6 +754,8 @@ const cn: Dict = {
 
   "spring.section_label": "02B — 2027 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
+  "spring.heading_line1": "仅至樱花飘落之时，",
+  "spring.heading_line2": "三道菜。",
   "spring.image_coming_soon": "图片即将上传",
   "spring.prev": "上一张",
   "spring.next": "下一张",
