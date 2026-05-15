@@ -33,15 +33,21 @@ function Nav() {
   const { locale, setLocale, t } = useI18n();
   return (
     <nav className="fixed top-0 z-[100] w-full border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 py-6 md:px-12 md:py-8">
-        <a href="#top" className="flex shrink-0 items-center whitespace-nowrap font-display text-base tracking-[0.2em] text-cream md:text-xl">
-          <span className="whitespace-nowrap">鎮座ヒノカミ</span>
-          <span className="ml-3 hidden whitespace-nowrap text-[0.7em] tracking-[0.4em] text-cream/70 md:inline">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:gap-4 md:px-8 md:py-6">
+        <a
+          href="#top"
+          className="flex shrink-0 flex-col items-start font-display text-cream"
+          style={{ maxWidth: "200px" }}
+        >
+          <span className="whitespace-nowrap text-[18px] leading-[1.1] tracking-[0.05em] md:text-[20px]">
+            鎮座ヒノカミ
+          </span>
+          <span className="mt-[2px] hidden whitespace-nowrap text-[10px] uppercase leading-[1.1] tracking-[0.25em] text-cream/70 md:inline-block md:text-[11px]">
             HINOKAMI
           </span>
         </a>
-        <div className="flex items-center gap-3 md:gap-5">
-          <div className="hidden items-center gap-5 text-xs uppercase tracking-[0.25em] text-cream/80 md:flex">
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-cream/80 xl:flex">
             <a href="#story" className="transition hover:text-amber-glow">{t("nav.story")}</a>
             <span className="text-cream/30">·</span>
             <a href="#menu" className="transition hover:text-amber-glow">{t("nav.menu")}</a>
@@ -49,11 +55,11 @@ function Nav() {
             <a href="#room" className="transition hover:text-amber-glow">{t("nav.room")}</a>
             <span className="text-cream/30">·</span>
             <a href="#visit" className="transition hover:text-amber-glow">{t("nav.visit")}</a>
-            <span className="text-cream/30">·</span>
           </div>
+          <span className="hidden text-cream/30 xl:inline">·</span>
           <CurrencySelector />
           <span className="hidden text-cream/30 md:inline">·</span>
-          <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 md:text-xs">
+          <div className="hidden items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 lg:flex md:text-xs">
             {LOCALES.map((l, i) => (
               <span key={l} className="flex items-center gap-2">
                 <button
@@ -68,9 +74,10 @@ function Nav() {
               </span>
             ))}
           </div>
+          <LocaleDropdown locale={locale} setLocale={setLocale} className="lg:hidden" />
           <a
             href="#reserve"
-            className="rounded-none border border-amber-glow/60 px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-6 md:text-xs"
+            className="shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs"
           >
             {t("nav.reserve")}
           </a>
