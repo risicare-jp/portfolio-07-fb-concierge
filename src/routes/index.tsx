@@ -976,8 +976,8 @@ export function Footer() {
             HINOKAMI
           </span>
         </div>
-        <div className="flex gap-8 text-[0.65rem] uppercase tracking-[0.35em] text-cream/50">
-          <a href="#" className="transition hover:text-amber-glow">{t("footer.instagram")}</a>
+        <div className="flex items-center gap-8 text-[0.65rem] uppercase tracking-[0.35em] text-cream/50">
+          <SocialIcons size="h-5 w-5" gap="gap-6" />
           <a href="#" className="transition hover:text-amber-glow">{t("footer.vancouver")}</a>
           <a href="#" className="transition hover:text-amber-glow">{t("footer.press")}</a>
         </div>
