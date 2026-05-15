@@ -549,8 +549,6 @@ function Reserve() {
         </div>
       </div>
 
-      </div>
-
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <p className="max-w-md text-sm leading-relaxed text-cream/60">
           {t("reserve.heading")}
