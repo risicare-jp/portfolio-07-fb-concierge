@@ -333,13 +333,14 @@ type CounterDef = {
   num: string;
   key: CounterKey;
   imageFile: string;
+  reversed?: boolean;
 };
 
 const COUNTERS_HOME: CounterDef[] = [
   { num: "i", key: "robata", imageFile: "robata-counter.jpg" },
-  { num: "ii", key: "sashimi", imageFile: "counter-sashimi.jpg" },
+  { num: "ii", key: "sashimi", imageFile: "counter-sashimi.jpg", reversed: true },
   { num: "iii", key: "donabe", imageFile: "donabe-counter.jpg" },
-  { num: "iv", key: "drinks", imageFile: "drinks-counter.jpg" },
+  { num: "iv", key: "drinks", imageFile: "drinks-counter.jpg", reversed: true },
 ];
 
 // Auto-discover counter photos. Files appear automatically when uploaded.
@@ -398,7 +399,7 @@ function Menu() {
                 </div>
 
                 <div className="grid gap-8 md:grid-cols-2 md:gap-10">
-                  <div className="overflow-hidden rounded-[4px] aspect-[4/3] md:aspect-[3/2]">
+                  <div className={`overflow-hidden rounded-[4px] aspect-[4/3] md:aspect-[3/2] ${c.reversed ? "md:order-2" : ""}`}>
                     {imgSrc ? (
                       <img
                         src={imgSrc}
@@ -415,7 +416,7 @@ function Menu() {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-col justify-center">
+                  <div className={`flex flex-col justify-center ${c.reversed ? "md:order-1" : ""}`}>
                     <p className="text-sm leading-relaxed text-cream/80 md:text-base">
                       {t(`counter.${c.key}.description`)}
                     </p>
