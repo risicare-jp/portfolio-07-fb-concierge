@@ -366,7 +366,8 @@ function Menu() {
               {t("menu.section_label")}
             </p>
             <h2 className="max-w-2xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-              {t("menu.heading_line1")} <em className="italic text-amber-glow/90">{t("menu.heading_line2")}</em>
+              <span className="block md:inline">{t("menu.heading_line1")}</span>{" "}
+              <em className="block italic text-amber-glow/90 md:inline">{t("menu.heading_line2")}</em>
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
