@@ -152,15 +152,6 @@ export function ReservationAssistant({ onClose }: Props) {
     </div>
   );
 
-  const BackBtn = ({ to }: { to: number }) => (
-    <button
-      type="button"
-      onClick={() => goto(to)}
-      className="rounded-full border border-cream/20 px-3.5 py-1.5 text-xs text-cream/70 transition hover:border-amber-glow/60 hover:text-amber-glow"
-    >
-      {t("ra.back")}
-    </button>
-  );
 
   const PrimaryBtn = ({
     children, onClick, disabled, full,
@@ -245,8 +236,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={1} />
+            <div className="flex items-center justify-end gap-2">
               <PrimaryBtn onClick={() => goto(3)}>{t("ra.continue")}</PrimaryBtn>
             </div>
           </>
@@ -271,7 +261,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div><BackBtn to={2} /></div>
+            
           </>
         )}
 
@@ -298,7 +288,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div><BackBtn to={3} /></div>
+            
           </>
         )}
 
@@ -334,8 +324,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={4} />
+            <div className="flex items-center justify-end gap-2">
               <PrimaryBtn
                 onClick={() => goto(6)}
                 disabled={!state.name.trim() || !isValidEmail(state.email.trim())}
@@ -356,18 +345,15 @@ export function ReservationAssistant({ onClose }: Props) {
               placeholder={t("ra.step6_placeholder")}
               className="w-full rounded-md border border-cream/15 bg-transparent px-3 py-2 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow/60 focus:outline-none"
             />
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={5} />
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => { update({ requests: "" }); goto(7); }}
-                  className="rounded-full border border-cream/20 px-3.5 py-1.5 text-xs text-cream/70 transition hover:border-amber-glow/60 hover:text-amber-glow"
-                >
-                  {t("ra.skip")}
-                </button>
-                <PrimaryBtn onClick={() => goto(7)}>{t("ra.continue")}</PrimaryBtn>
-              </div>
+            <div className="flex items-center justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => { update({ requests: "" }); goto(7); }}
+                className="rounded-full border border-cream/20 px-3.5 py-1.5 text-xs text-cream/70 transition hover:border-amber-glow/60 hover:text-amber-glow"
+              >
+                {t("ra.skip")}
+              </button>
+              <PrimaryBtn onClick={() => goto(7)}>{t("ra.continue")}</PrimaryBtn>
             </div>
           </>
         )}
@@ -386,8 +372,7 @@ export function ReservationAssistant({ onClose }: Props) {
               {state.requests && <SummaryRow label={t("ra.summary.requests")} value={state.requests} />}
             </div>
             <p className="text-[0.65rem] italic text-cream/50">{cancelNote}</p>
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={6} />
+            <div className="flex items-center justify-end gap-2">
               <PrimaryBtn onClick={handleConfirm} disabled={confirming}>
                 {confirming ? t("ra.confirming") : t("ra.confirm")}
               </PrimaryBtn>
