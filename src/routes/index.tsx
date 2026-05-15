@@ -3,6 +3,7 @@ import { ExternalLink, MessageCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
+import interiorImg from "@/assets/reserve/interior-dining.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { SpringSeasonal } from "@/components/SpringSeasonal";
 import { DetailModal, openDetail } from "@/components/DetailModal";
