@@ -229,7 +229,9 @@ const ja: Dict = {
   "nav.portfolio_note": "↓ ポートフォリオ note",
 
   "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2026 春",
+  "hero.wordmark": "鎮座ヒノカミ",
   "hero.brand_line": "トロント",
+  "page.title": "鎮座ヒノカミ トロント — 2026 春オープンの現代居酒屋",
   "hero.tagline":
     "焚き火の炎、季節の刺身、そして友のために酒を注ぐ静かな儀式に根ざした、現代の居酒屋。",
   "hero.scroll": "スクロール",
