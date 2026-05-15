@@ -7,9 +7,9 @@ import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { DetailModal, openDetail } from "@/components/DetailModal";
 
-type TabKey = "all" | "robata" | "sashimi" | "donabe_sake" | "drinks";
+type TabKey = "all" | "robata" | "sashimi" | "donabe" | "sides_sweets" | "drinks";
 
-const TAB_KEYS: TabKey[] = ["all", "robata", "sashimi", "donabe_sake", "drinks"];
+const TAB_KEYS: TabKey[] = ["all", "robata", "sashimi", "donabe", "sides_sweets", "drinks"];
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
