@@ -18,20 +18,28 @@ export function SakePairing({ dishId, onBack }: Props) {
   const dishName = dish ? pickLocalized(dish.names, locale) : "";
 
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex min-h-0 w-full flex-1 flex-col">
       <div className="flex items-center justify-between border-b border-cream/10 bg-background/80 px-4 py-2 backdrop-blur">
         <div className="text-[0.65rem] uppercase tracking-[0.2em] text-cream/50">
           {t("sp.label")}
         </div>
-        <button
-          onClick={onBack}
-          className="text-[0.65rem] uppercase tracking-[0.18em] text-cream/40 hover:text-cream/80"
-        >
-          {t("sp.action.back_chat")}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onBack}
+            className="text-[0.65rem] uppercase tracking-[0.18em] text-amber-glow hover:text-amber-glow/80"
+          >
+            {t("flow.back")}
+          </button>
+          <button
+            onClick={onBack}
+            className="text-[0.65rem] uppercase tracking-[0.18em] text-amber-glow hover:text-amber-glow/80"
+          >
+            {t("flow.exit")}
+          </button>
+        </div>
       </div>
 
-      <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 pb-6 pt-4">
         {!dish ? (
           <Bubble>{t("sp.not_found")}</Bubble>
         ) : (
