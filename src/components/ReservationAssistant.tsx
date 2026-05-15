@@ -297,7 +297,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div><BackBtn to={3} /></div>
+            
           </>
         )}
 
