@@ -58,7 +58,7 @@ const en: Dict = {
   "counter.donabe_sake.tagline":
     "Clay pot rice, served one portion at a time. 24 bottles, breweries we know.",
 
-  "room.section_label": "03 — The Room",
+  "room.section_label": "03 — Room",
   "room.heading":
     "Lantern light, smoked oak, and a copper hood that has done this before.",
   "room.body":

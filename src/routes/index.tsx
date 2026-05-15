@@ -80,6 +80,13 @@ function LocaleDropdown({
 
 function Nav() {
   const { locale, setLocale, t } = useI18n();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const sections: Array<{ href: string; label: string }> = [
+    { href: "#story", label: "STORY" },
+    { href: "#menu", label: "MENU" },
+    { href: "#room", label: "ROOM" },
+    { href: "#visit", label: t("nav.visit").toUpperCase() },
+  ];
   return (
     <nav className="fixed top-0 z-[100] w-full border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:gap-4 md:px-8 md:py-6">
@@ -96,42 +103,63 @@ function Nav() {
           </span>
         </a>
         <div className="flex items-center gap-3 md:gap-4">
-          <div className="hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-cream/80 xl:flex">
-            <a href="#story" className="transition hover:text-amber-glow">{t("nav.story")}</a>
-            <span className="text-cream/30">·</span>
-            <a href="#menu" className="transition hover:text-amber-glow">{t("nav.menu")}</a>
-            <span className="text-cream/30">·</span>
-            <a href="#room" className="transition hover:text-amber-glow">{t("nav.room")}</a>
-            <span className="text-cream/30">·</span>
-            <a href="#visit" className="transition hover:text-amber-glow">{t("nav.visit")}</a>
-          </div>
-          <span className="hidden text-cream/30 xl:inline">·</span>
-          <CurrencySelector />
-          <span className="hidden text-cream/30 md:inline">·</span>
-          <div className="hidden items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 lg:flex md:text-xs">
-            {LOCALES.map((l, i) => (
-              <span key={l} className="flex items-center gap-2">
-                <button
-                  onClick={() => setLocale(l)}
-                  className={`transition hover:text-amber-glow ${
-                    locale === l ? "font-semibold text-amber-glow underline underline-offset-4" : ""
-                  }`}
-                >
-                  {LOCALE_LABELS[l]}
-                </button>
-                {i < LOCALES.length - 1 && <span className="text-cream/30">·</span>}
+          <div className="hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-cream/80 lg:flex">
+            {sections.map((s, i) => (
+              <span key={s.href} className="flex items-center gap-3">
+                <a href={s.href} className="transition hover:text-amber-glow">{s.label}</a>
+                {i < sections.length - 1 && <span className="text-cream/30">·</span>}
               </span>
             ))}
           </div>
-          <LocaleDropdown locale={locale} setLocale={setLocale} className="lg:hidden" />
+          <span className="hidden text-cream/30 lg:inline">·</span>
+          <div className="hidden items-center gap-3 lg:flex md:gap-4">
+            <CurrencySelector />
+            <span className="text-cream/30">·</span>
+            <LocaleDropdown locale={locale} setLocale={setLocale} />
+          </div>
           <a
             href="#reserve"
-            className="shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs"
+            className="hidden shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs lg:inline-block"
+          >
+            {t("nav.reserve")}
+          </a>
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((o) => !o)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-amber-glow/40 text-cream transition hover:text-amber-glow lg:hidden"
+          >
+            <span className="sr-only">Menu</span>
+            <span aria-hidden className="text-lg leading-none">{mobileOpen ? "✕" : "☰"}</span>
+          </button>
+        </div>
+      </div>
+      {mobileOpen && (
+        <div className="border-t border-white/[0.08] bg-charcoal/95 px-6 py-6 backdrop-blur-md lg:hidden">
+          <ul className="flex flex-col gap-4 text-sm uppercase tracking-[0.25em] text-cream/85">
+            {sections.map((s) => (
+              <li key={s.href}>
+                <a href={s.href} onClick={() => setMobileOpen(false)} className="block transition hover:text-amber-glow">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 flex items-center gap-4 border-t border-white/[0.08] pt-6">
+            <CurrencySelector />
+            <span className="text-cream/30">·</span>
+            <LocaleDropdown locale={locale} setLocale={setLocale} />
+          </div>
+          <a
+            href="#reserve"
+            onClick={() => setMobileOpen(false)}
+            className="mt-6 inline-block rounded-none border border-amber-glow/60 px-5 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal"
           >
             {t("nav.reserve")}
           </a>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
