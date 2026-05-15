@@ -7,8 +7,19 @@ import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { DetailModal, openDetail } from "@/components/DetailModal";
 
+type TabKey = "all" | "robata" | "sashimi" | "donabe_sake" | "drinks";
+
+const TAB_KEYS: TabKey[] = ["all", "robata", "sashimi", "donabe_sake", "drinks"];
+
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
+  validateSearch: (search: Record<string, unknown>): { counter?: TabKey } => {
+    const c = search.counter;
+    if (typeof c === "string" && (TAB_KEYS as string[]).includes(c)) {
+      return { counter: c as TabKey };
+    }
+    return {};
+  },
   head: () => ({
     meta: [
       { title: "Full Menu — HINOKAMI Toronto" },
@@ -19,12 +30,11 @@ export const Route = createFileRoute("/menu")({
 
 const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ja: "日本語", cn: "中文" };
 
-type TabKey = "all" | "robata" | "sashimi" | "donabe_sake" | "drinks";
-
 function MenuPage() {
   const { t, locale, setLocale } = useI18n();
   const { format } = useCurrency();
-  const [tab, setTab] = useState<TabKey>("all");
+  const { counter } = Route.useSearch();
+  const [tab, setTab] = useState<TabKey>(counter ?? "all");
   const [localeOpen, setLocaleOpen] = useState(false);
 
   const tabs: Array<{ key: TabKey; label: string }> = [

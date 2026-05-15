@@ -56,6 +56,10 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
+  "menu.view_robata": "View all Robata dishes (6) →",
+  "menu.view_sashimi": "View all sashimi dishes (5) →",
+  "menu.view_donabe_sake": "View all Donabe & Sake (6) →",
+  "menu.view_drinks": "View all drinks (24) →",
 
   "spring.section_label": "02B — Spring 2026 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
@@ -304,6 +308,10 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
+  "menu.view_robata": "焚き火の全料理を見る (6 品) →",
+  "menu.view_sashimi": "刺身の全料理を見る (5 品) →",
+  "menu.view_donabe_sake": "土鍋と酒の全料理を見る (6 品) →",
+  "menu.view_drinks": "お飲み物 全 24 種を見る →",
 
   "spring.section_label": "02B — 2026 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
@@ -551,6 +559,10 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
+  "menu.view_robata": "查看全部焚火炉菜品 (6 道) →",
+  "menu.view_sashimi": "查看全部刺身菜品 (5 道) →",
+  "menu.view_donabe_sake": "查看全部土锅与清酒菜品 (6 道) →",
+  "menu.view_drinks": "查看全部 24 种饮品 →",
 
   "spring.section_label": "02B — 2026 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
