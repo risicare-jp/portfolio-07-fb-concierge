@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ImageIcon, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Nav, Footer } from "@/routes/index";
@@ -106,19 +106,12 @@ function GalleryPage() {
       <section className="bg-charcoal px-6 pb-24 pt-32 md:px-12 md:pt-40">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8">
-            <button
-              type="button"
-              onClick={() => {
-                if (typeof window !== "undefined" && window.history.length > 1) {
-                  window.history.back();
-                } else {
-                  void navigate({ to: "/" });
-                }
-              }}
+            <Link
+              to="/"
               className="inline-flex items-center rounded-full border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal"
             >
               {t("gallery.back_button")}
-            </button>
+            </Link>
           </div>
           <div className="mb-12 text-center md:mb-16">
             <p className="mb-4 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">HINOKAMI</p>

@@ -33,10 +33,10 @@ const en: Dict = {
   "concierge.tooltip_hint": "Try the AI Concierge",
   "concierge.proactive": "Need help with allergens, menu, or sake pairing?",
 
-  "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
+  "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2027",
   "hero.wordmark": "HINOKAMI",
   "hero.brand_line": "Toronto",
-  "page.title": "HINOKAMI Toronto — A modern izakaya, opening Spring 2026",
+  "page.title": "HINOKAMI Toronto — A modern izakaya, opening Spring 2027",
   "hero.tagline":
     "A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of pouring sake for a friend.",
   "hero.scroll": "Scroll",
@@ -47,7 +47,7 @@ const en: Dict = {
   "story.body1":
     "Tomoko Watanabe opened the first HINOKAMI on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
   "story.body2":
-    "In 2026, HINOKAMI arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
+    "In 2027, HINOKAMI arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
   "story.quote": "\u201CThe grill is the conversation. Everything else is hospitality.\u201D",
   "story.quote_attribution": "— Tomoko Watanabe, Chef & Owner",
 
@@ -57,6 +57,7 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
+  "menu.view_full_button": "View the full menu →",
   "menu.view_robata": "View the full Robata menu →",
   "menu.view_sashimi": "View the full sashimi menu →",
   "menu.view_donabe": "View the full donabe & sake menu →",
@@ -64,7 +65,7 @@ const en: Dict = {
   "menu.view_drinks": "View the full drinks menu →",
   "menu.counter_photo_placeholder": "Counter photo coming soon",
 
-  "spring.section_label": "02B — Spring 2026 Seasonal",
+  "spring.section_label": "02B — Spring 2027 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
   "spring.image_coming_soon": "Image coming soon",
   "spring.prev": "Previous slide",
@@ -131,7 +132,7 @@ const en: Dict = {
 
   "visit.section_label": "04 — Visit",
   "visit.heading_line1": "On King West,",
-  "visit.heading_line2": "opening Spring 2026.",
+  "visit.heading_line2": "opening Spring 2027.",
   "visit.address_label": "Address",
   "visit.hours_label": "Hours",
   "visit.hours_tuesat": "Tue – Sat · 5pm – late",
@@ -372,10 +373,10 @@ const ja: Dict = {
   "concierge.tooltip_hint": "AI コンシェルジュを試す",
   "concierge.proactive": "アレルゲン・メニュー・酒のおすすめなど、お気軽にどうぞ。",
 
-  "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2026 春",
+  "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2027 春",
   "hero.wordmark": "鎮座ヒノカミ",
   "hero.brand_line": "トロント",
-  "page.title": "鎮座ヒノカミ トロント — 2026 春オープンの現代居酒屋",
+  "page.title": "鎮座ヒノカミ トロント — 2027 春オープンの現代居酒屋",
   "hero.tagline":
     "焚き火の炎、季節の刺身、そして友のために酒を注ぐ静かな儀式に根ざした、現代の居酒屋。",
   "hero.scroll": "スクロール",
@@ -386,7 +387,7 @@ const ja: Dict = {
   "story.body1":
     "渡邊知子は 2009 年、バンクーバーの静かな脇道に最初の鎮座ヒノカミを開きました。8 席、炭火コンロ、酒の棚 1 つから。3 店舗を経てミシュランに名を連ねた今も、哲学は 1 ミリも動いていません。",
   "story.body2":
-    "2026 年、鎮座ヒノカミは King West にやってきます。64 席、同じカウンター、同じ炎、そして居酒屋とは何よりもまず「予定より少し長く居たくなる場所」だという同じ信念。",
+    "2027 年、鎮座ヒノカミは King West にやってきます。64 席、同じカウンター、同じ炎、そして居酒屋とは何よりもまず「予定より少し長く居たくなる場所」だという同じ信念。",
   "story.quote": "「炭火が会話。それ以外はすべておもてなし。」",
   "story.quote_attribution": "— 渡邊知子、料理長兼オーナー",
 
@@ -396,6 +397,7 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
+  "menu.view_full_button": "全メニューを見る →",
   "menu.view_robata": "焚き火の全メニューを見る →",
   "menu.view_sashimi": "刺身の全メニューを見る →",
   "menu.view_donabe": "土鍋と酒の全メニューを見る →",
@@ -403,7 +405,7 @@ const ja: Dict = {
   "menu.view_drinks": "全ドリンクメニューを見る →",
   "menu.counter_photo_placeholder": "カウンター写真準備中",
 
-  "spring.section_label": "02B — 2026 春 季節限定",
+  "spring.section_label": "02B — 2027 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
   "spring.image_coming_soon": "画像準備中",
   "spring.prev": "前のスライド",
@@ -470,7 +472,7 @@ const ja: Dict = {
 
   "visit.section_label": "04 — お越しの方へ",
   "visit.heading_line1": "King West にて、",
-  "visit.heading_line2": "2026 年春オープン。",
+  "visit.heading_line2": "2027 年春オープン。",
   "visit.address_label": "住所",
   "visit.hours_label": "営業時間",
   "visit.hours_tuesat": "火 – 土 · 17:00 – 深夜",
@@ -710,10 +712,10 @@ const cn: Dict = {
   "concierge.tooltip_hint": "试用 AI 礼宾",
   "concierge.proactive": "过敏原、菜单、清酒搭配 — 欢迎询问。",
 
-  "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2026 春",
+  "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2027 春",
   "hero.wordmark": "镇座火神",
   "hero.brand_line": "多伦多",
-  "page.title": "镇座火神 多伦多 — 2026 春开业的现代居酒屋",
+  "page.title": "镇座火神 多伦多 — 2027 春开业的现代居酒屋",
   "hero.tagline":
     "扎根于焚火炉、当季刺身，与为友人斟酒之静谧仪式的现代居酒屋。",
   "hero.scroll": "向下滚动",
@@ -724,7 +726,7 @@ const cn: Dict = {
   "story.body1":
     "渡边知子于2009年在温哥华一条静谧的小巷开设了第一家镇座火神——8个座位、一座炭火炉、一柜清酒。三家分店与米其林推荐之后，理念未曾偏移分毫。",
   "story.body2":
-    "2026年，镇座火神来到King West街——64个座位，同样的吧台，同样的炉火，同样坚信：居酒屋首先是一处让你不知不觉多待片刻的所在。",
+    "2027年，镇座火神来到King West街——64个座位，同样的吧台，同样的炉火，同样坚信：居酒屋首先是一处让你不知不觉多待片刻的所在。",
   "story.quote": "\u201C炉火即对话。其余皆是款待。\u201D",
   "story.quote_attribution": "—— 渡边知子，主厨兼店主",
 
@@ -734,6 +736,7 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
+  "menu.view_full_button": "查看全菜单 →",
   "menu.view_robata": "查看炉端全菜单 →",
   "menu.view_sashimi": "查看刺身全菜单 →",
   "menu.view_donabe": "查看土锅与酒全菜单 →",
@@ -741,7 +744,7 @@ const cn: Dict = {
   "menu.view_drinks": "查看全饮品菜单 →",
   "menu.counter_photo_placeholder": "吧台照片即将上传",
 
-  "spring.section_label": "02B — 2026 春 季节限定",
+  "spring.section_label": "02B — 2027 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
   "spring.image_coming_soon": "图片即将上传",
   "spring.prev": "上一张",
@@ -805,7 +808,7 @@ const cn: Dict = {
 
   "visit.section_label": "04 — 到访",
   "visit.heading_line1": "落户 King West，",
-  "visit.heading_line2": "2026 年春开业。",
+  "visit.heading_line2": "2027 年春开业。",
   "visit.address_label": "地址",
   "visit.hours_label": "营业时间",
   "visit.hours_tuesat": "周二 – 周六 · 17:00 – 深夜",
