@@ -372,6 +372,16 @@ function Menu() {
                     </button>
                   ))}
                 </div>
+
+                <div className="mt-8">
+                  <Link
+                    to="/menu"
+                    search={{ counter: c.key }}
+                    className="text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow/80 transition hover:text-cream"
+                  >
+                    {t(`menu.view_${c.key}`)}
+                  </Link>
+                </div>
               </div>
             );
           })}
