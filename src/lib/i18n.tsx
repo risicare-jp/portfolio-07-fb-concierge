@@ -123,7 +123,8 @@ const en: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "Vancouver",
   "footer.press": "Press",
-  "footer.copyright": "© 2026 Tomoko's Restaurant Group",
+  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.copyright": "© 2026 HINOKAMI RESTAURANT GROUP",
 
   "concierge.button_tooltip": "Ask the Concierge",
   "concierge.header_title": "AI Concierge",
