@@ -313,7 +313,7 @@ function Visit() {
       h: t("visit.hours_label"),
       b: [t("visit.hours_tuesat"), t("visit.hours_sun"), t("visit.hours_closed")],
     },
-    { h: t("visit.contact_label"), b: ["reserve@tomokos.to", "+1 416 555 0188"] },
+    { h: t("visit.contact_label"), b: ["reserve@hinokami.to", "+1 416 555 0188"] },
   ];
   return (
     <section id="visit" className="bg-gradient-warm px-6 py-32 md:px-12 md:py-48">
