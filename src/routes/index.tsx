@@ -9,11 +9,7 @@ import interiorImg from "@/assets/reserve/interior-dining.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { SpringSeasonal } from "@/components/SpringSeasonal";
 import { DetailModal, openDetail } from "@/components/DetailModal";
-import { useCurrency } from "@/lib/currency";
-import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
-import { dishById, type Dish } from "@/data/menu";
-import { drinkById, type Drink } from "@/data/drinks";
-import { sakeById } from "@/data/sake";
+import { useI18n, LOCALES, type Locale } from "@/lib/i18n";
 
 const openConcierge = () => {
   if (typeof window !== "undefined") {
