@@ -84,12 +84,6 @@ export function SakePairing({ dishId, onBack }: Props) {
                 >
                   {t("sp.action.add_glass")}
                 </button>
-                <button
-                  onClick={onBack}
-                  className="rounded-full bg-amber-glow px-4 py-1.5 text-xs font-medium text-background transition hover:opacity-90"
-                >
-                  {t("sp.action.back_chat")}
-                </button>
               </div>
             )}
           </>
