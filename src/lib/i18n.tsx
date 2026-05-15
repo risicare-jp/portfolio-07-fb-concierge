@@ -411,6 +411,8 @@ const ja: Dict = {
 
   "spring.section_label": "02B — 2027 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
+  "spring.heading_line1": "桜が散るまで、",
+  "spring.heading_line2": "たった三品。",
   "spring.image_coming_soon": "画像準備中",
   "spring.prev": "前のスライド",
   "spring.next": "次のスライド",
