@@ -8,7 +8,7 @@ import roomPrivateImg from "@/assets/room-private.jpeg";
 import interiorImg from "@/assets/reserve/interior-dining.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { SpringSeasonal } from "@/components/SpringSeasonal";
-import { DetailModal, openDetail } from "@/components/DetailModal";
+import { DetailModal } from "@/components/DetailModal";
 import { useI18n, LOCALES, type Locale } from "@/lib/i18n";
 
 const openConcierge = () => {
