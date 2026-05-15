@@ -140,8 +140,7 @@ export function SpringSeasonal() {
             type="button"
             aria-label={t("spring.prev")}
             onClick={() => go(index - 1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/40 p-2 text-amber-glow opacity-0 backdrop-blur transition group-hover:opacity-100 hover:bg-charcoal/70 md:opacity-0 md:hover:opacity-100"
-            style={{ opacity: undefined }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/40 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
