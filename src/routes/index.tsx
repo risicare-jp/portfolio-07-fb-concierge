@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
+import { useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import { CurrencySelector } from "@/components/CurrencySelector";
+import { ReservationWidget } from "@/components/ReservationWidget";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { dishById, type Dish } from "@/data/menu";
