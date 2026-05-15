@@ -1,22 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { MENU, type Dish } from "@/data/menu";
+import { DRINKS, type Drink } from "@/data/drinks";
+import { SAKE, type Sake } from "@/data/sake";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
+import { DetailModal, openDetail } from "@/components/DetailModal";
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
   head: () => ({
     meta: [
       { title: "Full Menu — HINOKAMI Toronto" },
-      { name: "description", content: "The full HINOKAMI Toronto menu — robata, sashimi, donabe & sake." },
+      { name: "description", content: "The full HINOKAMI Toronto menu — robata, sashimi, donabe & sake, and drinks." },
     ],
   }),
 });
 
 const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ja: "日本語", cn: "中文" };
 
-type TabKey = "all" | "robata" | "sashimi" | "donabe_sake";
+type TabKey = "all" | "robata" | "sashimi" | "donabe_sake" | "drinks";
 
 function MenuPage() {
   const { t, locale, setLocale } = useI18n();
@@ -29,9 +32,15 @@ function MenuPage() {
     { key: "robata", label: t("counter.robata.name") },
     { key: "sashimi", label: t("counter.sashimi.name") },
     { key: "donabe_sake", label: t("counter.donabe_sake.name") },
+    { key: "drinks", label: t("counter.drinks.name") },
   ];
 
-  const dishes: Dish[] = tab === "all" ? MENU : MENU.filter((d) => d.counter === tab);
+  const showDishes = tab === "all" || tab === "robata" || tab === "sashimi" || tab === "donabe_sake";
+  const showDrinks = tab === "all" || tab === "drinks";
+
+  const dishes: Dish[] = tab === "all" || tab === "drinks"
+    ? (tab === "drinks" ? [] : MENU)
+    : MENU.filter((d) => d.counter === tab);
 
   const goBack = () => {
     if (typeof window === "undefined") return;
@@ -39,9 +48,16 @@ function MenuPage() {
     else window.location.href = "/";
   };
 
+  const drinkCategories: Array<{ key: Drink["category"] | "sake"; items: Array<Drink | Sake> }> = [
+    { key: "sake", items: SAKE },
+    { key: "beer", items: DRINKS.filter((d) => d.category === "beer") },
+    { key: "highball", items: DRINKS.filter((d) => d.category === "highball") },
+    { key: "wine", items: DRINKS.filter((d) => d.category === "wine") },
+    { key: "soft", items: DRINKS.filter((d) => d.category === "soft") },
+  ];
+
   return (
     <main className="min-h-screen bg-background pb-24">
-      {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:px-8 md:py-5">
           <button
@@ -90,7 +106,6 @@ function MenuPage() {
           {t("fullmenu.title")}
         </h1>
 
-        {/* Tabs */}
         <div className="mt-10 flex flex-wrap gap-2 border-b border-border/60 pb-1">
           {tabs.map((tb) => (
             <button
@@ -107,30 +122,93 @@ function MenuPage() {
           ))}
         </div>
 
-        {/* Dish list */}
-        <ul className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
-          {dishes.map((d) => (
-            <li key={d.id} className="border-b border-border/40 pb-8">
-              <div className="flex items-baseline justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="font-display text-xl font-light text-cream md:text-2xl">
-                    {pickLocalized(d.names, locale)}
-                  </h3>
-                  {locale !== "ja" && (
-                    <p className="mt-0.5 text-xs tracking-wide text-cream/45">{d.names.ja}</p>
-                  )}
-                </div>
-                <span className="font-display text-sm text-amber-glow md:text-base">
-                  {format(d.price_cad)}
-                </span>
+        {showDishes && dishes.length > 0 && (
+          <ul className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+            {dishes.map((d) => (
+              <li key={d.id}>
+                <button
+                  type="button"
+                  onClick={() => openDetail({ kind: "dish", id: d.id })}
+                  className="group block w-full text-left border-b border-border/40 pb-8"
+                >
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex-1">
+                      <h3 className="font-display text-xl font-light text-cream group-hover:text-amber-glow md:text-2xl">
+                        {pickLocalized(d.names, locale)}
+                      </h3>
+                      {locale !== "ja" && (
+                        <p className="mt-0.5 text-xs tracking-wide text-cream/45">{d.names.ja}</p>
+                      )}
+                    </div>
+                    <span className="font-display text-sm text-amber-glow md:text-base">
+                      {format(d.price_cad)}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-cream/70">
+                    {pickLocalized(d.descriptions, locale)}
+                  </p>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {showDrinks && (
+          <div className="mt-16 space-y-12">
+            {drinkCategories.map((cat) => (
+              <div key={cat.key}>
+                <h2 className="mb-6 font-display text-2xl font-light text-cream md:text-3xl">
+                  {t(`drinks.cat.${cat.key}`)}
+                </h2>
+                <ul className="grid gap-x-10 gap-y-6 md:grid-cols-2">
+                  {cat.items.map((item) => {
+                    const isSake = cat.key === "sake";
+                    const id = item.id;
+                    const price = isSake
+                      ? (item as Sake).price_glass_cad
+                      : (item as Drink).price_cad;
+                    return (
+                      <li key={id}>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            openDetail(
+                              isSake
+                                ? { kind: "drink", id: id }
+                                : { kind: "drink", id },
+                            )
+                          }
+                          className="group block w-full text-left border-b border-border/40 pb-5"
+                        >
+                          <div className="flex items-baseline justify-between gap-4">
+                            <div className="flex-1">
+                              <h3 className="font-display text-base font-light text-cream group-hover:text-amber-glow md:text-lg">
+                                {pickLocalized(item.names, locale)}
+                              </h3>
+                              {locale !== "ja" && (
+                                <p className="mt-0.5 text-[11px] tracking-wide text-cream/45">
+                                  {item.names.ja}
+                                </p>
+                              )}
+                            </div>
+                            <span className="font-display text-sm text-amber-glow">
+                              {format(price)}
+                            </span>
+                          </div>
+                          <p className="mt-2 text-xs leading-relaxed text-cream/65">
+                            {isSake ? (item as Sake).flavor : (item as Drink).flavor}
+                          </p>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-cream/70">
-                {pickLocalized(d.descriptions, locale)}
-              </p>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+        )}
       </div>
+      <DetailModal />
     </main>
   );
 }
