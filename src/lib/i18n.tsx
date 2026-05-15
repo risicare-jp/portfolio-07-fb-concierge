@@ -57,6 +57,7 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
+  "menu.view_full_button": "View the full menu →",
   "menu.view_robata": "View the full Robata menu →",
   "menu.view_sashimi": "View the full sashimi menu →",
   "menu.view_donabe": "View the full donabe & sake menu →",
@@ -396,6 +397,7 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
+  "menu.view_full_button": "全メニューを見る →",
   "menu.view_robata": "焚き火の全メニューを見る →",
   "menu.view_sashimi": "刺身の全メニューを見る →",
   "menu.view_donabe": "土鍋と酒の全メニューを見る →",
@@ -734,6 +736,7 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
+  "menu.view_full_button": "查看全菜单 →",
   "menu.view_robata": "查看炉端全菜单 →",
   "menu.view_sashimi": "查看刺身全菜单 →",
   "menu.view_donabe": "查看土锅与酒全菜单 →",
