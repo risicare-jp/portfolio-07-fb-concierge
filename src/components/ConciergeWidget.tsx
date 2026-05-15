@@ -273,6 +273,7 @@ export function ConciergeWidget() {
             <SakePairing dishId={sakeDishId} onBack={returnToChat} />
           )}
           {mode === "chef" && <ChefsRecommendation onClose={returnToChat} />}
+          {mode === "reservation" && <ReservationAssistant onClose={returnToChat} />}
 
           {mode === "chat" && (
             <>
