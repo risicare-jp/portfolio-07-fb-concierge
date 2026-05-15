@@ -223,6 +223,7 @@ const ja: Dict = {
   "nav.menu": "お品書き",
   "nav.room": "室",
   "nav.visit": "お越しの方へ",
+  "nav.portfolio_note": "↓ ポートフォリオ note",
 
   "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2026 春",
   "hero.brand_line": "トロント",
