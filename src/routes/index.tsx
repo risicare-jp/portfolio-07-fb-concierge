@@ -255,7 +255,7 @@ function Story() {
   );
 }
 
-type CounterKey = "robata" | "sashimi" | "donabe" | "sides_sweets";
+type CounterKey = "robata" | "sashimi" | "donabe";
 
 type CounterDef = {
   num: string;
@@ -267,7 +267,6 @@ const COUNTERS_HOME: CounterDef[] = [
   { num: "i", key: "robata", dishIds: ["dish-001", "dish-003"] },
   { num: "ii", key: "sashimi", dishIds: ["dish-007", "dish-008"] },
   { num: "iii", key: "donabe", dishIds: ["dish-012", "dish-013"] },
-  { num: "iv", key: "sides_sweets", dishIds: ["dish-016", "dish-018"] },
 ];
 
 const FEATURED_DRINK_IDS = [
