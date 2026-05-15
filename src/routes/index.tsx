@@ -546,7 +546,7 @@ function Footer() {
     <footer className="border-t border-border/60 bg-charcoal px-6 py-16 md:px-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
         <div className="flex items-center gap-4 font-display text-lg tracking-[0.2em] text-cream">
-          知子 <span className="text-amber-glow/70">·</span> Tomoko&rsquo;s
+          {t("footer.brand_line")}
         </div>
         <div className="flex gap-8 text-[0.65rem] uppercase tracking-[0.35em] text-cream/50">
           <a href="#" className="transition hover:text-amber-glow">{t("footer.instagram")}</a>
