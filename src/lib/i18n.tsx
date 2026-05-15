@@ -130,13 +130,13 @@ const en: Dict = {
   "concierge.header_title": "AI Concierge",
   "concierge.header_subtitle": "Hours · Menu · Allergens · Pairings",
   "concierge.welcome":
-    "Hi — I'm the Concierge for Tomoko's Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
+    "Hi — I'm the Concierge for Hinokami Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
   "concierge.input_placeholder": "Ask the Concierge…",
   "concierge.typing": "Concierge is typing…",
   "concierge.error_network":
-    "I'm having trouble reaching my notes right now — please email us at reserve@tomokos.to and we'll get back to you within a few hours.",
+    "I'm having trouble reaching my notes right now — please email us at reserve@hinokami.to and we'll get back to you within a few hours.",
   "concierge.error_unauthorized":
-    "Concierge is offline for maintenance — please contact reserve@tomokos.to directly.",
+    "Concierge is offline for maintenance — please contact reserve@hinokami.to directly.",
   "concierge.continue_order_assistant": "Continue to Order Assistant →",
   "concierge.continue_sake_pairing": "View Sake Pairing →",
   "concierge.continue_chefs_rec": "Continue to Chef's Recommendation →",
