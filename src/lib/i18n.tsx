@@ -57,11 +57,12 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
-  "menu.view_robata": "View all Robata dishes →",
-  "menu.view_sashimi": "View all sashimi dishes →",
-  "menu.view_donabe": "View all Donabe dishes →",
+  "menu.view_robata": "View the full Robata menu →",
+  "menu.view_sashimi": "View the full sashimi menu →",
+  "menu.view_donabe": "View the full donabe & sake menu →",
   "menu.view_sides_sweets": "View all sides & sweets →",
-  "menu.view_drinks": "View all drinks →",
+  "menu.view_drinks": "View the full drinks menu →",
+  "menu.counter_photo_placeholder": "Counter photo coming soon",
 
   "spring.section_label": "02B — Spring 2026 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
@@ -72,18 +73,26 @@ const en: Dict = {
   "counter.robata.name": "The Robata",
   "counter.robata.tagline":
     "The grill is the conversation. Straw flame, white-oak charcoal, theater of fire.",
+  "counter.robata.description":
+    "The straw flame is the conversation. Pacific bonito seared inches from your seat, sablefish lacquered over rice straw, Hokkaido scallops caramelized in seconds. Below the flame, white-oak binchotan glows at 800°C — the same charcoal used in Kyoto's three-Michelin counters. Order what catches your eye; we'll cook it in front of you.",
   "counter.sashimi.name": "The Counter",
   "counter.sashimi.tagline":
     "Sashimi cut to order. Today's catch from Pacific suppliers, finished by knife.",
+  "counter.sashimi.description":
+    "Sashimi cut to order. This morning's catch arrives from Pacific suppliers — bluefin chū-toro, king salmon, hirame, the day's three best. Wasabi grated at the counter, soy poured from a Tosa cedar masu. The Counter is for those who want to talk knife and rice with the chef.",
   "counter.donabe.name": "The Donabe",
   "counter.donabe.tagline":
     "Clay pot rice, cooked at your table — one portion at a time, twenty-five minutes of patience.",
+  "counter.donabe.description":
+    "Rice cooked at your table in an Iga-ware donabe — Niigata Koshihikari, 25 minutes from rinse to lid-open. The lid lifts the moment the grains are standing. Pair with house-cured salmon ikura, charcoal-grilled mackerel, or our most-ordered side: the Takibiya potato salad. Order the donabe at the start of your meal.",
   "counter.sides_sweets.name": "Sides & Sweets",
   "counter.sides_sweets.tagline":
     "Small plates, our most-told sides, and the hojicha pudding everyone asks for.",
   "counter.drinks.name": "Drinks",
   "counter.drinks.tagline":
     "Sake, beer, highballs, Niagara wine, and tea — to match the fire.",
+  "counter.drinks.description":
+    "Twenty-four sake labels from small-production breweries — Yamagata, Niigata, Kōchi. Five highballs we got right (the binchotan smoke variant is the chef's pick). Three wines that don't fight the fire. Six soft drinks and teas for nights you're not drinking. Ask the chef for a pairing; we'll find what fits your dish.",
 
   "modal.close": "Close",
   "modal.counter_label": "Counter",
