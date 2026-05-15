@@ -425,26 +425,17 @@ function Menu() {
                   </div>
                 </div>
 
-                <div className="mt-8">
-                  <Link
-                    to="/menu"
-                    search={{ counter: c.key }}
-                    className="inline-flex w-full items-center justify-center rounded-full border border-amber-glow/70 px-6 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-background md:w-auto"
-                  >
-                    {t(`menu.view_${c.key}`)}
-                  </Link>
-                </div>
               </div>
             );
           })}
         </div>
 
-        <div className="mt-16 md:mt-20">
+        <div className="mt-16 flex justify-center md:mt-20">
           <Link
             to="/menu"
-            className="text-[0.7rem] uppercase tracking-[0.35em] text-amber-glow transition hover:text-cream"
+            className="inline-flex items-center justify-center rounded-full border border-amber-glow/70 px-8 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal"
           >
-            {t("menu.view_full")}
+            {t("menu.view_full_button")}
           </Link>
         </div>
       </div>
