@@ -21,13 +21,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "HINOKAMI Toronto — A modern izakaya, opening Spring 2026" },
+      { title: "HINOKAMI Toronto — A modern izakaya, opening Spring 2027" },
       {
         name: "description",
         content:
-          "From Vancouver to Toronto. HINOKAMI brings its acclaimed izakaya — robata grill, sushi counter, and rare sake — to King West. Reservations open Spring 2026.",
+          "From Vancouver to Toronto. HINOKAMI brings its acclaimed izakaya — robata grill, sushi counter, and rare sake — to King West. Reservations open Spring 2027.",
       },
-      { property: "og:title", content: "HINOKAMI Toronto — A modern izakaya, opening Spring 2026" },
+      { property: "og:title", content: "HINOKAMI Toronto — A modern izakaya, opening Spring 2027" },
       { property: "og:site_name", content: "HINOKAMI Toronto" },
       { property: "og:description", content: "Vancouver's beloved izakaya arrives in Toronto." },
       { property: "og:image", content: heroImg },
