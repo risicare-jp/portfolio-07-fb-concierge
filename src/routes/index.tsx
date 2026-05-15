@@ -5,9 +5,12 @@ import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { SpringSeasonal } from "@/components/SpringSeasonal";
+import { DetailModal, openDetail } from "@/components/DetailModal";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { dishById, type Dish } from "@/data/menu";
+import { drinkById, type Drink } from "@/data/drinks";
+import { sakeById } from "@/data/sake";
 
 const openConcierge = () => {
   if (typeof window !== "undefined") {
