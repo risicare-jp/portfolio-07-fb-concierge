@@ -56,6 +56,10 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
+  "menu.view_robata": "View all Robata dishes (6) →",
+  "menu.view_sashimi": "View all sashimi dishes (5) →",
+  "menu.view_donabe_sake": "View all Donabe & Sake (6) →",
+  "menu.view_drinks": "View all drinks (24) →",
 
   "spring.section_label": "02B — Spring 2026 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
