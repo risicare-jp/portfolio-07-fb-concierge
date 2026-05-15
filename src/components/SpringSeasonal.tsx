@@ -3,6 +3,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized } from "@/lib/i18n";
 import { dishById, type Dish } from "@/data/menu";
+import spring002 from "@/assets/seasonal/spring-002-vegetables.jpg";
+import spring009 from "@/assets/seasonal/spring-009-sakura-dai.jpg";
+import spring014 from "@/assets/seasonal/spring-014-chawanmushi.jpg";
 
 type SlideDef = {
   dishId: string;
@@ -14,9 +17,9 @@ type SlideDef = {
 };
 
 const SLIDES: SlideDef[] = [
-  { dishId: "dish-002" },
-  { dishId: "dish-009" },
-  { dishId: "dish-014" },
+  { dishId: "dish-002", image: spring002 },
+  { dishId: "dish-009", image: spring009 },
+  { dishId: "dish-014", image: spring014 },
 ];
 
 const AUTO_MS = 6000;
