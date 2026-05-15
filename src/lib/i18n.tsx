@@ -529,19 +529,20 @@ const cn: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "温哥华",
   "footer.press": "媒体",
-  "footer.copyright": "© 2026 知子餐饮集团",
+  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.copyright": "© 2026 镇座火神 餐饮集团",
 
   "concierge.button_tooltip": "询问礼宾",
   "concierge.header_title": "AI 礼宾",
   "concierge.header_subtitle": "营业时间 · 菜单 · 过敏原 · 搭配",
   "concierge.welcome":
-    "您好，我是知子多伦多的礼宾。营业时间、地址、菜单、过敏原或推荐，请随时询问。我能以 English / 日本語 / 中文 回应。",
+    "您好，我是镇座火神 多伦多的礼宾。营业时间、地址、菜单、过敏原或推荐，请随时询问。我能以 English / 日本語 / 中文 回应。",
   "concierge.input_placeholder": "询问礼宾…",
   "concierge.typing": "礼宾正在输入…",
   "concierge.error_network":
-    "我现在无法访问资料库。请发邮件至 reserve@tomokos.to，我们将在数小时内回复您。",
+    "我现在无法访问资料库。请发邮件至 reserve@hinokami.to，我们将在数小时内回复您。",
   "concierge.error_unauthorized":
-    "礼宾正在维护中。请直接联系 reserve@tomokos.to。",
+    "礼宾正在维护中。请直接联系 reserve@hinokami.to。",
   "concierge.continue_order_assistant": "继续至点单助手 →",
   "concierge.continue_sake_pairing": "查看推荐清酒 →",
   "concierge.continue_chefs_rec": "继续至主厨推荐 →",
