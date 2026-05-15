@@ -7,9 +7,9 @@ import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { DetailModal, openDetail } from "@/components/DetailModal";
 
-type TabKey = "all" | "robata" | "sashimi" | "donabe" | "sides_sweets" | "drinks";
+type TabKey = "all" | "robata" | "sashimi" | "donabe" | "drinks";
 
-const TAB_KEYS: TabKey[] = ["all", "robata", "sashimi", "donabe", "sides_sweets", "drinks"];
+const TAB_KEYS: TabKey[] = ["all", "robata", "sashimi", "donabe", "drinks"];
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
@@ -42,11 +42,10 @@ function MenuPage() {
     { key: "robata", label: t("counter.robata.name") },
     { key: "sashimi", label: t("counter.sashimi.name") },
     { key: "donabe", label: t("counter.donabe.name") },
-    { key: "sides_sweets", label: t("counter.sides_sweets.name") },
     { key: "drinks", label: t("counter.drinks.name") },
   ];
 
-  const showDishes = tab === "all" || tab === "robata" || tab === "sashimi" || tab === "donabe" || tab === "sides_sweets";
+  const showDishes = tab === "all" || tab === "robata" || tab === "sashimi" || tab === "donabe";
   const showDrinks = tab === "all" || tab === "drinks";
 
   const dishes: Dish[] = tab === "all" || tab === "drinks"
