@@ -105,10 +105,10 @@ function GalleryPage() {
       <Nav />
       <section className="bg-charcoal px-6 pb-24 pt-32 md:px-12 md:pt-40">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8">
+          <div className="sticky top-20 z-30 mb-8 md:top-24">
             <Link
               to="/"
-              className="inline-flex items-center rounded-full border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal"
+              className="inline-flex items-center rounded-full border border-amber-glow/60 bg-charcoal/85 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow shadow-md backdrop-blur transition hover:bg-amber-glow hover:text-charcoal"
             >
               {t("gallery.back_button")}
             </Link>
