@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Star, ExternalLink, MessageCircle, ArrowUp } from "lucide-react";
+import { ExternalLink, MessageCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
+import { SpringSeasonal } from "@/components/SpringSeasonal";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { dishById, type Dish } from "@/data/menu";
@@ -276,9 +277,6 @@ function Menu() {
             <h2 className="max-w-2xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
               {t("menu.heading_line1")} <em className="italic text-amber-glow/90">{t("menu.heading_line2")}</em>
             </h2>
-            <p className="mt-4 text-[0.7rem] tracking-[0.2em] text-cream/50">
-              {t("menu.legend")}
-            </p>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
             {t("menu.intro")}
@@ -314,22 +312,9 @@ function Menu() {
                     >
                       <div className="flex items-start justify-between gap-6">
                         <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            {d.is_signature && (
-                              <Star
-                                className="h-4 w-4 fill-amber-glow text-amber-glow"
-                                aria-label="Signature"
-                              />
-                            )}
-                            {d.is_seasonal && (
-                              <span aria-label="Seasonal" className="text-base text-pink-300">
-                                🌸
-                              </span>
-                            )}
-                            <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
-                              {pickLocalized(d.names, locale)}
-                            </h4>
-                          </div>
+                          <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
+                            {pickLocalized(d.names, locale)}
+                          </h4>
                           {locale !== "ja" && (
                             <p className="mt-1 text-xs tracking-wide text-cream/45">{d.names.ja}</p>
                           )}
@@ -645,10 +630,7 @@ function BackToTopButton() {
         visible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
-      <span className="inline-flex items-center gap-1.5">
-        <ArrowUp className="h-3.5 w-3.5" />
-        {t("nav.back_to_top")}
-      </span>
+      {t("nav.back_to_top")}
     </button>
   );
 }
@@ -675,12 +657,18 @@ function Footer() {
 }
 
 function Index() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "auto";
+    }
+  }, []);
   return (
     <main className="min-h-screen bg-background">
       <Nav />
       <Hero />
       <Story />
       <Menu />
+      <SpringSeasonal />
       <Room />
       <Visit />
       <Reserve />
