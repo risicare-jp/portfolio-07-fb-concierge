@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
+import { useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import { CurrencySelector } from "@/components/CurrencySelector";
+import { ReservationWidget } from "@/components/ReservationWidget";
 import { useCurrency } from "@/lib/currency";
 import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
 import { dishById, type Dish } from "@/data/menu";
@@ -345,31 +347,195 @@ function Visit() {
 
 function Reserve() {
   const { t } = useI18n();
+  const [tab, setTab] = useState<"waitlist" | "table">("waitlist");
+
+  const tabBase =
+    "flex-1 px-6 py-3 text-[0.7rem] uppercase tracking-[0.3em] transition border-b-2 cursor-pointer";
+  const activeCls = "border-amber-glow text-amber-glow";
+  const inactiveCls = "border-transparent text-cream/50 hover:text-cream/80";
+
   return (
     <section id="reserve" className="bg-gradient-warm px-6 pb-32 md:px-12 md:pb-48">
-      <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
+      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <p className="max-w-md text-sm leading-relaxed text-cream/60">
           {t("reserve.heading")}
         </p>
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="mt-10 flex w-full max-w-lg flex-col gap-3 sm:flex-row"
-        >
-          <input
-            type="email"
-            required
-            placeholder={t("reserve.email_placeholder")}
-            className="flex-1 rounded-none border border-border bg-transparent px-5 py-4 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow focus:outline-none"
-          />
+
+        <div className="mt-10 flex w-full">
           <button
-            type="submit"
-            className="bg-gradient-amber px-8 py-4 text-[0.7rem] uppercase tracking-[0.35em] text-charcoal shadow-glow transition hover:opacity-90"
+            onClick={() => setTab("waitlist")}
+            className={`${tabBase} ${tab === "waitlist" ? activeCls : inactiveCls}`}
           >
-            {t("reserve.submit_button")}
+            {t("reserve.tab_waitlist")}
           </button>
-        </form>
+          <button
+            onClick={() => setTab("table")}
+            className={`${tabBase} ${tab === "table" ? activeCls : inactiveCls}`}
+          >
+            {t("reserve.tab_reserve_table")}
+          </button>
+        </div>
+
+        <div className="mt-10 w-full">
+          {tab === "waitlist" ? (
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="flex w-full flex-col gap-3 sm:flex-row"
+            >
+              <input
+                type="email"
+                required
+                placeholder={t("reserve.email_placeholder")}
+                className="flex-1 rounded-none border border-border bg-transparent px-5 py-4 text-sm text-cream placeholder:text-cream/40 focus:border-amber-glow focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-gradient-amber px-8 py-4 text-[0.7rem] uppercase tracking-[0.35em] text-charcoal shadow-glow transition hover:opacity-90"
+              >
+                {t("reserve.submit_button")}
+              </button>
+            </form>
+          ) : (
+            <ReservationWidget />
+          )}
+        </div>
       </div>
     </section>
+  );
+}
+
+function AboutThisSite() {
+  const { t } = useI18n();
+  const stackItems = [
+    t("about.stack_item1"),
+    t("about.stack_item2"),
+    t("about.stack_item3"),
+  ];
+  const capItems = [
+    t("about.cap_concierge"),
+    t("about.cap_allergen"),
+    t("about.cap_sake"),
+    t("about.cap_currency"),
+  ];
+  const comingSoon = t("about.contact_coming_soon");
+  return (
+    <section
+      id="about-site"
+      className="bg-charcoal px-6 py-32 md:px-12 md:py-40"
+    >
+      <div className="mx-auto max-w-6xl">
+        <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
+          {t("about.section_label")}
+        </p>
+        <h2 className="mb-16 max-w-3xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
+          {t("about.heading")}
+        </h2>
+
+        <div className="grid gap-10 md:grid-cols-2 md:gap-x-16 md:gap-y-14">
+          {/* Stack */}
+          <div className="border-t border-border/60 pt-8">
+            <p className="mb-5 text-[0.65rem] uppercase tracking-[0.4em] text-amber-glow">
+              {t("about.stack_label")}
+            </p>
+            <ul className="space-y-2 font-mono text-sm text-cream/80">
+              {stackItems.map((it) => (
+                <li key={it} className="border-b border-border/40 pb-2">
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Cost */}
+          <div className="border-t border-border/60 pt-8">
+            <p className="mb-5 text-[0.65rem] uppercase tracking-[0.4em] text-amber-glow">
+              {t("about.cost_label")}
+            </p>
+            <p className="font-display text-2xl text-cream">
+              {t("about.cost_runs_at")}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-cream/60">
+              {t("about.cost_vs_agency")}
+            </p>
+          </div>
+
+          {/* Capabilities */}
+          <div className="border-t border-border/60 pt-8">
+            <p className="mb-5 text-[0.65rem] uppercase tracking-[0.4em] text-amber-glow">
+              {t("about.cap_label")}
+            </p>
+            <ul className="space-y-2 text-sm text-cream/80">
+              {capItems.map((it) => (
+                <li key={it} className="border-b border-border/40 pb-2">
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="border-t border-border/60 pt-8">
+            <p className="mb-3 font-display text-xl text-cream">
+              {t("about.contact_heading")}
+            </p>
+            <p className="mb-5 text-sm leading-relaxed text-cream/60">
+              {t("about.contact_body")}
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-baseline gap-3">
+                <span className="text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
+                  {t("about.contact_email_label")}
+                </span>
+                <a
+                  href="mailto:risicare929@gmail.com"
+                  className="text-amber-glow transition hover:text-cream"
+                >
+                  risicare929@gmail.com
+                </a>
+              </li>
+              <li className="flex items-baseline gap-3">
+                <span className="text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
+                  {t("about.contact_upwork_label")}
+                </span>
+                <span className="text-cream/50 italic">{comingSoon}</span>
+              </li>
+              <li className="flex items-baseline gap-3">
+                <span className="text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
+                  {t("about.contact_github_label")}
+                </span>
+                <a
+                  href="https://github.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-amber-glow transition hover:text-cream"
+                >
+                  {comingSoon}
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortfolioNotePill() {
+  const { t } = useI18n();
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById("about-site");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  return (
+    <button
+      onClick={handleClick}
+      className="fixed bottom-6 left-6 z-40 rounded-full border border-amber-glow/70 bg-charcoal/70 px-4 py-2 text-xs text-cream backdrop-blur-sm transition hover:border-amber-glow hover:bg-charcoal hover:text-amber-glow hover:shadow-glow md:px-5 md:text-sm"
+      aria-label={t("nav.portfolio_note")}
+    >
+      {t("nav.portfolio_note")}
+    </button>
   );
 }
 
@@ -404,7 +570,9 @@ function Index() {
       <Room />
       <Visit />
       <Reserve />
+      <AboutThisSite />
       <Footer />
+      <PortfolioNotePill />
     </main>
   );
 }
