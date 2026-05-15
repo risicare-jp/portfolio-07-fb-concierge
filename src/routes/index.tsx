@@ -126,21 +126,35 @@ export function Nav() {
     };
   }, [drawerOpen]);
 
-  const drawerLinks: Array<{ href: string; label: string; route?: string }> = [
-    { href: "#story", label: t("nav.story").toUpperCase() },
-    { href: "#menu", label: t("nav.menu").toUpperCase() },
-    { href: "#room", label: t("nav.room").toUpperCase() },
-    { href: "#visit", label: t("nav.visit").toUpperCase() },
+  const drawerLinks: Array<{ href: string; label: string; route?: string; anchor?: string }> = [
+    { href: "#story", anchor: "story", label: t("nav.story").toUpperCase() },
+    { href: "#menu", anchor: "menu", label: t("nav.menu").toUpperCase() },
+    { href: "#room", anchor: "room", label: t("nav.room").toUpperCase() },
+    { href: "#visit", anchor: "visit", label: t("nav.visit").toUpperCase() },
     { href: "/gallery", label: t("nav.gallery").toUpperCase(), route: "/gallery" },
-    { href: "#reserve", label: t("nav.reserve").toUpperCase() },
+    { href: "#reserve", anchor: "reserve", label: t("nav.reserve").toUpperCase() },
   ];
+
+  const handleAnchorClick = (anchor: string) => {
+    setDrawerOpen(false);
+    if (typeof window === "undefined") return;
+    if (window.location.pathname === "/") {
+      const el = document.getElementById(anchor);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      try {
+        sessionStorage.setItem("hinokami_pending_anchor", anchor);
+      } catch { /* noop */ }
+      window.location.href = "/#" + anchor;
+    }
+  };
 
   return (
     <>
       <nav className="fixed top-0 z-[100] w-full border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:gap-4 md:px-8 md:py-6">
-          <a
-            href="#top"
+          <Link
+            to="/"
             className="flex shrink-0 flex-col items-start font-display text-cream"
             style={{ maxWidth: "200px" }}
           >
@@ -150,15 +164,16 @@ export function Nav() {
             <span className="mt-[2px] hidden whitespace-nowrap text-[10px] uppercase leading-[1.1] tracking-[0.25em] text-cream/70 md:inline-block md:text-[11px]">
               HINOKAMI
             </span>
-          </a>
+          </Link>
           <div className="flex items-center gap-3 md:gap-4">
             <LocaleDropdown locale={locale} setLocale={setLocale} />
-            <a
-              href="#reserve"
+            <button
+              type="button"
+              onClick={() => handleAnchorClick("reserve")}
               className="shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-3 py-2 text-[0.6rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs"
             >
               {t("nav.reserve")}
-            </a>
+            </button>
             <button
               type="button"
               aria-label={t("nav.open_menu")}
@@ -207,14 +222,14 @@ export function Nav() {
                     {l.label}
                   </Link>
                 ) : (
-                  <a
+                  <button
                     key={l.href}
-                    href={l.href}
-                    onClick={() => setDrawerOpen(false)}
-                    className="font-display text-2xl tracking-[0.15em] text-amber-glow transition hover:text-cream"
+                    type="button"
+                    onClick={() => handleAnchorClick(l.anchor!)}
+                    className="text-left font-display text-2xl tracking-[0.15em] text-amber-glow transition hover:text-cream"
                   >
                     {l.label}
-                  </a>
+                  </button>
                 ),
               )}
             </nav>
@@ -993,6 +1008,21 @@ function Index() {
   useEffect(() => {
     if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
       window.history.scrollRestoration = "auto";
+    }
+    if (typeof window === "undefined") return;
+    let pending: string | null = null;
+    try {
+      pending = sessionStorage.getItem("hinokami_pending_anchor");
+      if (pending) sessionStorage.removeItem("hinokami_pending_anchor");
+    } catch { /* noop */ }
+    if (!pending && window.location.hash) pending = window.location.hash.slice(1);
+    if (pending) {
+      const anchor = pending;
+      // Wait for layout
+      setTimeout(() => {
+        const el = document.getElementById(anchor);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
     }
   }, []);
   return (

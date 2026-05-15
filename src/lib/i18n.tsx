@@ -24,6 +24,7 @@ const en: Dict = {
   "nav.portfolio_note": "↓ Portfolio note",
   "nav.back_to_top": "↑ Back to top",
   "nav.back": "← Back",
+  "gallery.back_button": "← Back",
 
   "fullmenu.title": "Full Menu",
   "fullmenu.tab_all": "All",
@@ -353,6 +354,7 @@ const ja: Dict = {
   "nav.portfolio_note": "↓ ポートフォリオ note",
   "nav.back_to_top": "↑ トップへ",
   "nav.back": "← 戻る",
+  "gallery.back_button": "← 戻る",
 
   "fullmenu.title": "お品書き",
   "fullmenu.tab_all": "すべて",
@@ -681,6 +683,7 @@ const cn: Dict = {
   "nav.portfolio_note": "↓ 作品介绍",
   "nav.back_to_top": "↑ 返回顶部",
   "nav.back": "← 返回",
+  "gallery.back_button": "← 返回",
 
   "fullmenu.title": "菜单",
   "fullmenu.tab_all": "全部",

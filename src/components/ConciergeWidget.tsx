@@ -5,17 +5,20 @@ import { askConcierge } from "@/lib/concierge.functions";
 import { OrderAssistant } from "@/components/OrderAssistant";
 import { SakePairing } from "@/components/SakePairing";
 import { ChefsRecommendation } from "@/components/ChefsRecommendation";
+import { ReservationAssistant } from "@/components/ReservationAssistant";
 import { useI18n } from "@/lib/i18n";
 
 const ORDER_INTENT = /\[INTENT:\s*ORDER_ASSISTANT\]/;
 const SAKE_INTENT = /\[INTENT:\s*SAKE_PAIRING:([a-z0-9-]+)\]/i;
 const CHEF_INTENT = /\[INTENT:\s*CHEFS_REC\]/;
+const RESERVATION_INTENT = /\[INTENT:\s*RESERVATION_ASSISTANT\]/;
 
 type Intent =
   | { kind: "none" }
   | { kind: "order" }
   | { kind: "sake"; dishId: string }
-  | { kind: "chef" };
+  | { kind: "chef" }
+  | { kind: "reservation" };
 
 type Msg = {
   role: "user" | "assistant";
@@ -25,7 +28,7 @@ type Msg = {
   isFollowup?: boolean;
 };
 
-type Mode = "chat" | "order" | "sake" | "chef";
+type Mode = "chat" | "order" | "sake" | "chef" | "reservation";
 
 export function ConciergeWidget() {
   const { t, locale } = useI18n();
@@ -117,6 +120,9 @@ export function ConciergeWidget() {
     } else if (ORDER_INTENT.test(raw)) {
       intent = { kind: "order" };
       text = text.replace(ORDER_INTENT, "").trim();
+    } else if (RESERVATION_INTENT.test(raw)) {
+      intent = { kind: "reservation" };
+      text = text.replace(RESERVATION_INTENT, "").trim();
     }
     return { text, intent };
   };
@@ -180,6 +186,7 @@ export function ConciergeWidget() {
   const launchIntent = (intent: Intent) => {
     if (intent.kind === "order") setMode("order");
     else if (intent.kind === "chef") setMode("chef");
+    else if (intent.kind === "reservation") setMode("reservation");
     else if (intent.kind === "sake") {
       setSakeDishId(intent.dishId);
       setMode("sake");
@@ -200,6 +207,7 @@ export function ConciergeWidget() {
     if (intent.kind === "order") return t("concierge.continue_order_assistant");
     if (intent.kind === "sake") return t("concierge.continue_sake_pairing");
     if (intent.kind === "chef") return t("concierge.continue_chefs_rec");
+    if (intent.kind === "reservation") return t("concierge.continue_reservation_assistant");
     return null;
   };
 
@@ -265,6 +273,7 @@ export function ConciergeWidget() {
             <SakePairing dishId={sakeDishId} onBack={returnToChat} />
           )}
           {mode === "chef" && <ChefsRecommendation onClose={returnToChat} />}
+          {mode === "reservation" && <ReservationAssistant onClose={returnToChat} />}
 
           {mode === "chat" && (
             <>
