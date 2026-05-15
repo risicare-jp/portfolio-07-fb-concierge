@@ -3,6 +3,8 @@ import { ExternalLink, MessageCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
+import roomCounterImg from "@/assets/room-counter.jpeg";
+import roomPrivateImg from "@/assets/room-private.jpeg";
 import interiorImg from "@/assets/reserve/interior-dining.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { SpringSeasonal } from "@/components/SpringSeasonal";
@@ -463,7 +465,8 @@ const ROOM_SPACE_CONTENT: Record<
   {
     heading: Record<Locale, string>;
     body: Record<Locale, string>;
-    placeholder: Record<Locale, string>;
+    image: string;
+    alt: Record<Locale, string>;
   }
 > = {
   counter: {
@@ -477,10 +480,11 @@ const ROOM_SPACE_CONTENT: Record<
       ja: "オープン焚き火を真正面に見据える 12 席カウンター。わらの炎、職人の手、片手で運ばれてくる中トロ。最初に埋まる席です。",
       cn: "面对开放式焚火炉的 12 个吧台座位。稻草烈焰、厨师之手、单手送上的中腹。最先订满的位置。",
     },
-    placeholder: {
-      en: "Counter image coming soon",
-      ja: "カウンター写真 準備中",
-      cn: "吧台照片 即将上传",
+    image: roomCounterImg,
+    alt: {
+      en: "Counter seats facing the open robata grill with flames and a chef at work",
+      ja: "オープン焚き火を望むカウンター席と職人",
+      cn: "面对开放式焚火炉的吧台座位与厨师",
     },
   },
   private: {
@@ -494,10 +498,11 @@ const ROOM_SPACE_CONTENT: Record<
       ja: "障子の引き戸の向こうにある 8 人用個室の畳の間。低い座卓、一灯の提灯、壁の向こうには同じ炎。一番大切な夜のために。",
       cn: "障子滑门后的 8 人私人榻榻米房间。一张矮桌、一盏提灯，墙的另一侧仍是那炉火。为您最重要的夜晚。",
     },
-    placeholder: {
-      en: "Private room image coming soon",
-      ja: "個室写真 準備中",
-      cn: "私人房间照片 即将上传",
+    image: roomPrivateImg,
+    alt: {
+      en: "Private tatami room with shoji sliding doors, low wooden table and a paper lantern",
+      ja: "障子の引き戸、低い座卓と提灯のある畳の個室",
+      cn: "带障子滑门、矮木桌与纸灯笼的榻榻米私人房间",
     },
   },
 };
@@ -623,11 +628,12 @@ function RoomSpaceModal({
         >
           <span aria-hidden className="text-lg leading-none">×</span>
         </button>
-        <div className="flex aspect-[16/10] w-full items-center justify-center bg-gradient-to-br from-amber-glow/20 via-charcoal to-charcoal">
-          <p className="px-6 text-center text-sm uppercase tracking-[0.3em] text-amber-glow/70">
-            {content.placeholder[locale]}
-          </p>
-        </div>
+        <img
+          src={content.image}
+          alt={content.alt[locale]}
+          loading="lazy"
+          className="aspect-[16/10] w-full object-cover"
+        />
         <div className="space-y-5 px-6 py-8 md:px-9 md:py-10">
           <h2 className="font-display text-2xl font-light leading-tight text-cream md:text-3xl">
             {content.heading[locale]}
