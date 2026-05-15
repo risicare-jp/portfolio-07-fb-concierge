@@ -255,16 +255,19 @@ function Story() {
   );
 }
 
+type CounterKey = "robata" | "sashimi" | "donabe" | "sides_sweets";
+
 type CounterDef = {
   num: string;
-  key: "robata" | "sashimi" | "donabe_sake";
+  key: CounterKey;
   dishIds: string[];
 };
 
 const COUNTERS_HOME: CounterDef[] = [
   { num: "i", key: "robata", dishIds: ["dish-001", "dish-003"] },
   { num: "ii", key: "sashimi", dishIds: ["dish-007", "dish-008"] },
-  { num: "iii", key: "donabe_sake", dishIds: ["dish-012", "dish-016"] },
+  { num: "iii", key: "donabe", dishIds: ["dish-012", "dish-013"] },
+  { num: "iv", key: "sides_sweets", dishIds: ["dish-016", "dish-018"] },
 ];
 
 const FEATURED_DRINK_IDS = [
@@ -386,12 +389,12 @@ function Menu() {
             );
           })}
 
-          {/* IV — Drinks */}
+          {/* V — Drinks */}
           <div>
             <div className="mb-10 flex flex-col gap-4 md:mb-12">
               <div className="flex items-baseline gap-5">
                 <span className="font-display text-sm uppercase tracking-[0.4em] text-amber-glow/70">
-                  iv
+                  v
                 </span>
                 <h3 className="font-display text-3xl font-light text-cream md:text-5xl">
                   {t("counter.drinks.name")}

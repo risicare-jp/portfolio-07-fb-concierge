@@ -56,10 +56,11 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
-  "menu.view_robata": "View all Robata dishes (6) →",
-  "menu.view_sashimi": "View all sashimi dishes (5) →",
-  "menu.view_donabe_sake": "View all Donabe & Sake (6) →",
-  "menu.view_drinks": "View all drinks (24) →",
+  "menu.view_robata": "View all Robata dishes →",
+  "menu.view_sashimi": "View all sashimi dishes →",
+  "menu.view_donabe": "View all Donabe dishes →",
+  "menu.view_sides_sweets": "View all sides & sweets →",
+  "menu.view_drinks": "View all drinks →",
 
   "spring.section_label": "02B — Spring 2026 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
@@ -73,9 +74,12 @@ const en: Dict = {
   "counter.sashimi.name": "The Counter",
   "counter.sashimi.tagline":
     "Sashimi cut to order. Today's catch from Pacific suppliers, finished by knife.",
-  "counter.donabe_sake.name": "Donabe & Sake",
-  "counter.donabe_sake.tagline":
-    "Clay pot rice, served one portion at a time. 24 bottles, breweries we know.",
+  "counter.donabe.name": "The Donabe",
+  "counter.donabe.tagline":
+    "Clay pot rice, cooked at your table — one portion at a time, twenty-five minutes of patience.",
+  "counter.sides_sweets.name": "Sides & Sweets",
+  "counter.sides_sweets.tagline":
+    "Small plates, our most-told sides, and the hojicha pudding everyone asks for.",
   "counter.drinks.name": "Drinks",
   "counter.drinks.tagline":
     "Sake, beer, highballs, Niagara wine, and tea — to match the fire.",
@@ -308,10 +312,11 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
-  "menu.view_robata": "焚き火の全料理を見る (6 品) →",
-  "menu.view_sashimi": "刺身の全料理を見る (5 品) →",
-  "menu.view_donabe_sake": "土鍋と酒の全料理を見る (6 品) →",
-  "menu.view_drinks": "お飲み物 全 24 種を見る →",
+  "menu.view_robata": "焚き火 全メニュー →",
+  "menu.view_sashimi": "刺身 全メニュー →",
+  "menu.view_donabe": "土鍋 全メニュー →",
+  "menu.view_sides_sweets": "小料理 全メニュー →",
+  "menu.view_drinks": "お飲み物 全メニュー →",
 
   "spring.section_label": "02B — 2026 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
@@ -325,9 +330,12 @@ const ja: Dict = {
   "counter.sashimi.name": "季節の刺身",
   "counter.sashimi.tagline":
     "刺身は注文ごとにお切りつけ。本日の太平洋産、包丁で仕上げます。",
-  "counter.donabe_sake.name": "土鍋と酒",
-  "counter.donabe_sake.tagline":
-    "土鍋ご飯、1 人前ずつお炊き上げ。24 銘柄、私たちの知る蔵元から。",
+  "counter.donabe.name": "土鍋",
+  "counter.donabe.tagline":
+    "客席で炊き上げる土鍋ご飯。一人前ずつ、二十五分の待ち時間。",
+  "counter.sides_sweets.name": "小料理 & デザート",
+  "counter.sides_sweets.tagline":
+    "小料理、看板の一品、皆が頼むほうじ茶プリン。",
   "counter.drinks.name": "お飲み物",
   "counter.drinks.tagline":
     "日本酒・ビール・ハイボール・ナイアガラワイン・お茶 — 炎に寄り添う一杯を。",
@@ -559,10 +567,11 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
-  "menu.view_robata": "查看全部焚火炉菜品 (6 道) →",
-  "menu.view_sashimi": "查看全部刺身菜品 (5 道) →",
-  "menu.view_donabe_sake": "查看全部土锅与清酒菜品 (6 道) →",
-  "menu.view_drinks": "查看全部 24 种饮品 →",
+  "menu.view_robata": "查看焚火炉全部菜品 →",
+  "menu.view_sashimi": "查看刺身全部菜品 →",
+  "menu.view_donabe": "查看土锅全部菜品 →",
+  "menu.view_sides_sweets": "查看小菜与甜品全部 →",
+  "menu.view_drinks": "查看饮品全部 →",
 
   "spring.section_label": "02B — 2026 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
@@ -574,9 +583,12 @@ const cn: Dict = {
   "counter.robata.tagline": "炉火即对话。稻草烈焰、白橡备长炭，火之剧场。",
   "counter.sashimi.name": "季节刺身",
   "counter.sashimi.tagline": "刺身现点现切。今日太平洋渔获，以刀工完成。",
-  "counter.donabe_sake.name": "土锅与清酒",
-  "counter.donabe_sake.tagline":
-    "土锅米饭，每次只为一位炊煮。24 款，皆来自我们熟识的酒造。",
+  "counter.donabe.name": "土锅",
+  "counter.donabe.tagline":
+    "客席现炊土锅米饭。每次一人份，二十五分钟的等待。",
+  "counter.sides_sweets.name": "小菜 与 甜品",
+  "counter.sides_sweets.tagline":
+    "小菜、招牌一品、人人都点的焙茶布丁。",
   "counter.drinks.name": "饮品",
   "counter.drinks.tagline":
     "清酒、啤酒、Highball、尼亚加拉葡萄酒、茶 — 与炉火相伴的一杯。",

@@ -40,7 +40,7 @@ function reasonForDish(d: Dish): { key: string; vars?: Record<string, string> } 
   if (d.is_signature) return { key: "cr.reason.signature" };
   if (d.is_seasonal) return { key: "cr.reason.seasonal", vars: { s: d.is_seasonal } };
   if (d.is_dessert) return { key: "cr.reason.dessert" };
-  if (d.counter === "donabe_sake") return { key: "cr.reason.donabe" };
+  if (d.counter === "donabe") return { key: "cr.reason.donabe" };
   if (d.counter === "robata") return { key: "cr.reason.robata" };
   return { key: "cr.reason.sashimi" };
 }
@@ -102,7 +102,7 @@ function buildCourse(
   } else if (vibe === "sake") {
     dishes = pickFrom(safe, 5);
   } else {
-    dishes = pickFrom(safe, 6, ["robata", "sashimi", "donabe_sake"]);
+    dishes = pickFrom(safe, 6, ["robata", "sashimi", "donabe", "sides_sweets"]);
     const dessert = safe.find((d) => d.is_dessert && within(d));
     if (dessert && !dishes.some((d) => d.id === dessert.id)) {
       dishes.pop();
