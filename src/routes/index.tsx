@@ -13,13 +13,14 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Tomoko's Toronto — Modern Japanese Izakaya" },
+      { title: "Hinokami Toronto — A modern izakaya, opening Spring 2026" },
       {
         name: "description",
         content:
-          "From Vancouver to Toronto. Tomoko's brings its acclaimed izakaya — robata grill, sushi counter, and rare sake — to King West. Reservations open Spring 2026.",
+          "From Vancouver to Toronto. Hinokami brings its acclaimed izakaya — robata grill, sushi counter, and rare sake — to King West. Reservations open Spring 2026.",
       },
-      { property: "og:title", content: "Tomoko's Toronto — Modern Japanese Izakaya" },
+      { property: "og:title", content: "Hinokami Toronto — A modern izakaya, opening Spring 2026" },
+      { property: "og:site_name", content: "Hinokami Toronto" },
       { property: "og:description", content: "Vancouver's beloved izakaya arrives in Toronto." },
       { property: "og:image", content: heroImg },
     ],
