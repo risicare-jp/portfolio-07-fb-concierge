@@ -90,85 +90,147 @@ function LocaleDropdown({
   );
 }
 
+function XMark({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
+      <path d="M18.244 2H21l-6.52 7.45L22 22h-6.81l-4.77-6.24L4.8 22H2.04l6.97-7.96L2 2h6.94l4.31 5.7L18.244 2Zm-2.39 18h1.88L8.23 4H6.27l9.584 16Z" />
+    </svg>
+  );
+}
+
+function SocialIcons({ size = "h-5 w-5", gap = "gap-6" }: { size?: string; gap?: string }) {
+  const { t } = useI18n();
+  const cls = `text-amber-glow transition-transform hover:scale-110 hover:brightness-125`;
+  return (
+    <div className={`flex items-center ${gap}`}>
+      <a href="#" aria-label={t("nav.social_instagram")} className={cls}><Instagram className={size} /></a>
+      <a href="#" aria-label={t("nav.social_facebook")} className={cls}><Facebook className={size} /></a>
+      <a href="#" aria-label={t("nav.social_x")} className={cls}><XMark className={size} /></a>
+    </div>
+  );
+}
+
 export function Nav() {
   const { locale, setLocale, t } = useI18n();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const sections: Array<{ href: string; label: string }> = [
-    { href: "#story", label: "STORY" },
-    { href: "#menu", label: "MENU" },
-    { href: "#room", label: "ROOM" },
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setDrawerOpen(false); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [drawerOpen]);
+
+  const drawerLinks: Array<{ href: string; label: string; route?: string }> = [
+    { href: "#story", label: t("nav.story").toUpperCase() },
+    { href: "#menu", label: t("nav.menu").toUpperCase() },
+    { href: "#room", label: t("nav.room").toUpperCase() },
     { href: "#visit", label: t("nav.visit").toUpperCase() },
+    { href: "/gallery", label: t("nav.gallery").toUpperCase(), route: "/gallery" },
+    { href: "#reserve", label: t("nav.reserve").toUpperCase() },
   ];
+
   return (
-    <nav className="fixed top-0 z-[100] w-full border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:gap-4 md:px-8 md:py-6">
-        <a
-          href="#top"
-          className="flex shrink-0 flex-col items-start font-display text-cream"
-          style={{ maxWidth: "200px" }}
-        >
-          <span className="whitespace-nowrap text-[18px] leading-[1.1] tracking-[0.05em] md:text-[20px]">
-            鎮座ヒノカミ
-          </span>
-          <span className="mt-[2px] hidden whitespace-nowrap text-[10px] uppercase leading-[1.1] tracking-[0.25em] text-cream/70 md:inline-block md:text-[11px]">
-            HINOKAMI
-          </span>
-        </a>
-        <div className="flex items-center gap-3 md:gap-4">
-          <div className="hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-cream/80 md:flex">
-            {sections.map((s, i) => (
-              <span key={s.href} className="flex items-center gap-3">
-                <a href={s.href} className="transition hover:text-amber-glow">{s.label}</a>
-                {i < sections.length - 1 && <span className="text-cream/30">·</span>}
-              </span>
-            ))}
-          </div>
-          <span className="hidden text-cream/30 md:inline">·</span>
-          <div className="hidden items-center gap-3 md:flex md:gap-4">
-            <LocaleDropdown locale={locale} setLocale={setLocale} />
-          </div>
+    <>
+      <nav className="fixed top-0 z-[100] w-full border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
+        <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:gap-4 md:px-8 md:py-6">
           <a
-            href="#reserve"
-            className="hidden shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs md:inline-block"
+            href="#top"
+            className="flex shrink-0 flex-col items-start font-display text-cream"
+            style={{ maxWidth: "200px" }}
           >
-            {t("nav.reserve")}
+            <span className="whitespace-nowrap text-[18px] leading-[1.1] tracking-[0.05em] md:text-[20px]">
+              鎮座ヒノカミ
+            </span>
+            <span className="mt-[2px] hidden whitespace-nowrap text-[10px] uppercase leading-[1.1] tracking-[0.25em] text-cream/70 md:inline-block md:text-[11px]">
+              HINOKAMI
+            </span>
           </a>
+          <div className="flex items-center gap-3 md:gap-4">
+            <LocaleDropdown locale={locale} setLocale={setLocale} />
+            <a
+              href="#reserve"
+              className="shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-3 py-2 text-[0.6rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs"
+            >
+              {t("nav.reserve")}
+            </a>
+            <button
+              type="button"
+              aria-label={t("nav.open_menu")}
+              aria-expanded={drawerOpen}
+              onClick={() => setDrawerOpen(true)}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-amber-glow/40 text-cream transition hover:text-amber-glow"
+            >
+              <MenuIcon className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {drawerOpen && (
+        <>
           <button
             type="button"
-            aria-label="Open menu"
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((o) => !o)}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-amber-glow/40 text-cream transition hover:text-amber-glow md:hidden"
+            aria-label={t("nav.close_menu")}
+            onClick={() => setDrawerOpen(false)}
+            className="fixed inset-0 z-[110] bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+          />
+          <aside
+            className="fixed right-0 top-0 z-[120] flex h-full w-full flex-col border-l border-amber-glow/20 bg-charcoal/95 backdrop-blur-xl shadow-2xl animate-in slide-in-from-right duration-300 sm:w-[320px]"
+            role="dialog"
+            aria-modal="true"
           >
-            <span className="sr-only">Menu</span>
-            <span aria-hidden className="text-lg leading-none">{mobileOpen ? "✕" : "☰"}</span>
-          </button>
-        </div>
-      </div>
-      {mobileOpen && (
-        <div className="border-t border-white/[0.08] bg-charcoal/95 px-6 py-6 backdrop-blur-md md:hidden">
-          <ul className="flex flex-col gap-4 text-sm uppercase tracking-[0.25em] text-cream/85">
-            {sections.map((s) => (
-              <li key={s.href}>
-                <a href={s.href} onClick={() => setMobileOpen(false)} className="block transition hover:text-amber-glow">
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 flex items-center gap-4 border-t border-white/[0.08] pt-6">
-            <LocaleDropdown locale={locale} setLocale={setLocale} />
-          </div>
-          <a
-            href="#reserve"
-            onClick={() => setMobileOpen(false)}
-            className="mt-6 inline-block rounded-none border border-amber-glow/60 px-5 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal"
-          >
-            {t("nav.reserve")}
-          </a>
-        </div>
+            <div className="flex justify-end p-4">
+              <button
+                type="button"
+                aria-label={t("nav.close_menu")}
+                onClick={() => setDrawerOpen(false)}
+                className="flex h-10 w-10 items-center justify-center rounded-sm text-cream/80 transition hover:text-amber-glow"
+              >
+                <XIcon className="h-5 w-5" />
+              </button>
+            </div>
+            <nav className="flex flex-1 flex-col gap-8 px-8 pt-4">
+              {drawerLinks.map((l) =>
+                l.route ? (
+                  <Link
+                    key={l.href}
+                    to={l.route}
+                    onClick={() => setDrawerOpen(false)}
+                    className="font-display text-2xl tracking-[0.15em] text-amber-glow transition hover:text-cream"
+                  >
+                    {l.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setDrawerOpen(false)}
+                    className="font-display text-2xl tracking-[0.15em] text-amber-glow transition hover:text-cream"
+                  >
+                    {l.label}
+                  </a>
+                ),
+              )}
+            </nav>
+            <div className="px-6 pb-8">
+              <div className="mx-auto mb-6 h-px w-full bg-amber-glow/40" />
+              <div className="flex justify-center">
+                <SocialIcons size="h-6 w-6" gap="gap-8" />
+              </div>
+              <p className="mt-6 text-center text-[0.65rem] italic tracking-[0.2em] text-cream/50">
+                {t("nav.drawer_caption")}
+              </p>
+            </div>
+          </aside>
+        </>
       )}
-    </nav>
+    </>
   );
 }
 
