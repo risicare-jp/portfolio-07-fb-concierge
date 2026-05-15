@@ -90,7 +90,7 @@ function LocaleDropdown({
   );
 }
 
-function Nav() {
+export function Nav() {
   const { locale, setLocale, t } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
   const sections: Array<{ href: string; label: string }> = [
@@ -901,7 +901,7 @@ function BackToTopButton() {
   );
 }
 
-function Footer() {
+export function Footer() {
   const { t } = useI18n();
   return (
     <footer className="border-t border-border/60 bg-charcoal px-6 py-16 md:px-12">
