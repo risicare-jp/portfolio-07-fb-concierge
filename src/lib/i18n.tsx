@@ -57,11 +57,12 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
-  "menu.view_robata": "View all Robata dishes →",
-  "menu.view_sashimi": "View all sashimi dishes →",
-  "menu.view_donabe": "View all Donabe dishes →",
+  "menu.view_robata": "View the full Robata menu →",
+  "menu.view_sashimi": "View the full sashimi menu →",
+  "menu.view_donabe": "View the full donabe & sake menu →",
   "menu.view_sides_sweets": "View all sides & sweets →",
-  "menu.view_drinks": "View all drinks →",
+  "menu.view_drinks": "View the full drinks menu →",
+  "menu.counter_photo_placeholder": "Counter photo coming soon",
 
   "spring.section_label": "02B — Spring 2026 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
@@ -72,18 +73,26 @@ const en: Dict = {
   "counter.robata.name": "The Robata",
   "counter.robata.tagline":
     "The grill is the conversation. Straw flame, white-oak charcoal, theater of fire.",
+  "counter.robata.description":
+    "The straw flame is the conversation. Pacific bonito seared inches from your seat, sablefish lacquered over rice straw, Hokkaido scallops caramelized in seconds. Below the flame, white-oak binchotan glows at 800°C — the same charcoal used in Kyoto's three-Michelin counters. Order what catches your eye; we'll cook it in front of you.",
   "counter.sashimi.name": "The Counter",
   "counter.sashimi.tagline":
     "Sashimi cut to order. Today's catch from Pacific suppliers, finished by knife.",
+  "counter.sashimi.description":
+    "Sashimi cut to order. This morning's catch arrives from Pacific suppliers — bluefin chū-toro, king salmon, hirame, the day's three best. Wasabi grated at the counter, soy poured from a Tosa cedar masu. The Counter is for those who want to talk knife and rice with the chef.",
   "counter.donabe.name": "The Donabe",
   "counter.donabe.tagline":
     "Clay pot rice, cooked at your table — one portion at a time, twenty-five minutes of patience.",
+  "counter.donabe.description":
+    "Rice cooked at your table in an Iga-ware donabe — Niigata Koshihikari, 25 minutes from rinse to lid-open. The lid lifts the moment the grains are standing. Pair with house-cured salmon ikura, charcoal-grilled mackerel, or our most-ordered side: the Takibiya potato salad. Order the donabe at the start of your meal.",
   "counter.sides_sweets.name": "Sides & Sweets",
   "counter.sides_sweets.tagline":
     "Small plates, our most-told sides, and the hojicha pudding everyone asks for.",
   "counter.drinks.name": "Drinks",
   "counter.drinks.tagline":
     "Sake, beer, highballs, Niagara wine, and tea — to match the fire.",
+  "counter.drinks.description":
+    "Twenty-four sake labels from small-production breweries — Yamagata, Niigata, Kōchi. Five highballs we got right (the binchotan smoke variant is the chef's pick). Three wines that don't fight the fire. Six soft drinks and teas for nights you're not drinking. Ask the chef for a pairing; we'll find what fits your dish.",
 
   "modal.close": "Close",
   "modal.counter_label": "Counter",
@@ -387,11 +396,12 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
-  "menu.view_robata": "焚き火 全メニュー →",
-  "menu.view_sashimi": "刺身 全メニュー →",
-  "menu.view_donabe": "土鍋 全メニュー →",
+  "menu.view_robata": "焚き火の全メニューを見る →",
+  "menu.view_sashimi": "刺身の全メニューを見る →",
+  "menu.view_donabe": "土鍋と酒の全メニューを見る →",
   "menu.view_sides_sweets": "小料理 全メニュー →",
-  "menu.view_drinks": "お飲み物 全メニュー →",
+  "menu.view_drinks": "全ドリンクメニューを見る →",
+  "menu.counter_photo_placeholder": "カウンター写真準備中",
 
   "spring.section_label": "02B — 2026 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
@@ -402,18 +412,26 @@ const ja: Dict = {
   "counter.robata.name": "焚き火",
   "counter.robata.tagline":
     "炭火が会話。わらの炎、白オーク備長炭、火の劇場。",
+  "counter.robata.description":
+    "わらの炎が会話。目の前で立ち上るわらの炎で鰹を炙り、銀ダラを照り焼きに、北海道帆立を一瞬でキャラメリゼに。その下では京都の三ツ星店と同じ白オーク備長炭が800°Cで赤く熱を保つ。気になる一皿をご注文ください、目の前で焼き上げます。",
   "counter.sashimi.name": "季節の刺身",
   "counter.sashimi.tagline":
     "刺身は注文ごとにお切りつけ。本日の太平洋産、包丁で仕上げます。",
+  "counter.sashimi.description":
+    "刺身は切りつけ。朝の市場から届く本日の三種 — 本鮪中トロ、キングサーモン、平目。本わさびはカウンターで擦り下ろし、醤油は土佐杉の升から注ぐ。包丁とシャリの話を職人と交わす席です。",
   "counter.donabe.name": "土鍋",
   "counter.donabe.tagline":
     "客席で炊き上げる土鍋ご飯。一人前ずつ、二十五分の待ち時間。",
+  "counter.donabe.description":
+    "土鍋ご飯は席にて炊く — 伊賀焼の土鍋に新潟コシヒカリ、洗米から蓋開けまで25分。粒が立ったその瞬間に蓋を開ける。自家製サーモンいくら、炭火焼鯖、そして名物ポテトサラダと合わせて。ご注文は最初に。",
   "counter.sides_sweets.name": "小料理 & デザート",
   "counter.sides_sweets.tagline":
     "小料理、看板の一品、皆が頼むほうじ茶プリン。",
   "counter.drinks.name": "お飲み物",
   "counter.drinks.tagline":
     "日本酒・ビール・ハイボール・ナイアガラワイン・お茶 — 炎に寄り添う一杯を。",
+  "counter.drinks.description":
+    "全国の少量生産蔵から24銘柄の日本酒 — 山形・新潟・高知。手応えのあるハイボール5種 (備長炭スモークは料理長の自信作)。火の料理を邪魔しないワイン3種。飲まない夜のためのソフト・お茶6種。料理に合わせた一杯、職人にお尋ねください。",
 
   "modal.close": "閉じる",
   "modal.counter_label": "カウンター",
@@ -716,11 +734,12 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
-  "menu.view_robata": "查看焚火炉全部菜品 →",
-  "menu.view_sashimi": "查看刺身全部菜品 →",
-  "menu.view_donabe": "查看土锅全部菜品 →",
+  "menu.view_robata": "查看炉端全菜单 →",
+  "menu.view_sashimi": "查看刺身全菜单 →",
+  "menu.view_donabe": "查看土锅与酒全菜单 →",
   "menu.view_sides_sweets": "查看小菜与甜品全部 →",
-  "menu.view_drinks": "查看饮品全部 →",
+  "menu.view_drinks": "查看全饮品菜单 →",
+  "menu.counter_photo_placeholder": "吧台照片即将上传",
 
   "spring.section_label": "02B — 2026 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
@@ -730,17 +749,25 @@ const cn: Dict = {
 
   "counter.robata.name": "焚火炉",
   "counter.robata.tagline": "炉火即对话。稻草烈焰、白橡备长炭，火之剧场。",
+  "counter.robata.description":
+    "稻草烈焰即是对话。鲣鱼以咫尺之间的稻草火焰炙烤，银鳕鱼覆以稻草火光泽，北海道扇贝瞬间焦糖化。其下，京都三星店同源的白橡备长炭赤红炭温稳保800°C。请挑选您心仪的一品，我们将于您面前烹制。",
   "counter.sashimi.name": "季节刺身",
   "counter.sashimi.tagline": "刺身现点现切。今日太平洋渔获，以刀工完成。",
+  "counter.sashimi.description":
+    "刺身现点现切。今晨市场精选三种 — 蓝鳍中腹、帝王鲑、比目鱼。山葵于吧台现磨，酱油由土佐杉木升斟出。此席为愿与厨师畅谈刀工与寿司饭者所设。",
   "counter.donabe.name": "土锅",
   "counter.donabe.tagline":
     "客席现炊土锅米饭。每次一人份，二十五分钟的等待。",
+  "counter.donabe.description":
+    "土锅米饭于客席现炊 — 伊贺烧土锅，新潟越光米，洗米至开盖共25分。米粒挺立的瞬间揭盖。佐自制鲑鱼籽、炭火烤鲭鱼，与我们最热销的配菜 — 招牌土豆沙拉。请于用餐开始时点选土锅。",
   "counter.sides_sweets.name": "小菜 与 甜品",
   "counter.sides_sweets.tagline":
     "小菜、招牌一品、人人都点的焙茶布丁。",
   "counter.drinks.name": "饮品",
   "counter.drinks.tagline":
     "清酒、啤酒、Highball、尼亚加拉葡萄酒、茶 — 与炉火相伴的一杯。",
+  "counter.drinks.description":
+    "全国小量生产酒造24款清酒 — 山形、新潟、高知。我们调出的5款Highball (备长炭烟熏款是主厨自信作)。不与炉火相争的3款葡萄酒。不饮的夜晚6款软饮与茶。请向厨师询问搭配，我们会找到契合您菜品的那一杯。",
 
   "modal.close": "关闭",
   "modal.counter_label": "吧台",
