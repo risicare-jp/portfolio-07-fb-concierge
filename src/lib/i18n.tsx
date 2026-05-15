@@ -559,6 +559,10 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
+  "menu.view_robata": "查看全部焚火炉菜品 (6 道) →",
+  "menu.view_sashimi": "查看全部刺身菜品 (5 道) →",
+  "menu.view_donabe_sake": "查看全部土锅与清酒菜品 (6 道) →",
+  "menu.view_drinks": "查看全部 24 种饮品 →",
 
   "spring.section_label": "02B — 2026 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
