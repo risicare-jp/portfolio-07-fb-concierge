@@ -548,6 +548,8 @@ const ja: Dict = {
   "concierge.followup": "他にお手伝いできることはございますか?",
 
   "oa.exit": "終了",
+  "flow.back": "← 戻る",
+  "flow.exit": "終了",
   "oa.step_label": "ステップ {n} / 4 — {step_name}",
   "oa.step1.name": "ご人数",
   "oa.step1.prompt": "何名様でしょうか? (1–8 名)",
