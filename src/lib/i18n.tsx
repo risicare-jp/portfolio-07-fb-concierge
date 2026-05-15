@@ -677,6 +677,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const title = TABLE[locale]["page.title"] ?? TABLE.en["page.title"];
+    if (title) document.title = title;
+  }, [locale]);
+
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
     try {
