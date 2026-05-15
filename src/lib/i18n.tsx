@@ -67,6 +67,8 @@ const en: Dict = {
 
   "spring.section_label": "02B — Spring 2027 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
+  "spring.heading_line1": "Three dishes,",
+  "spring.heading_line2": "only until the cherry blossoms fall.",
   "spring.image_coming_soon": "Image coming soon",
   "spring.prev": "Previous slide",
   "spring.next": "Next slide",
@@ -409,6 +411,8 @@ const ja: Dict = {
 
   "spring.section_label": "02B — 2027 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
+  "spring.heading_line1": "桜が散るまで、",
+  "spring.heading_line2": "たった三品。",
   "spring.image_coming_soon": "画像準備中",
   "spring.prev": "前のスライド",
   "spring.next": "次のスライド",
@@ -750,6 +754,8 @@ const cn: Dict = {
 
   "spring.section_label": "02B — 2027 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
+  "spring.heading_line1": "仅至樱花飘落之时，",
+  "spring.heading_line2": "三道菜。",
   "spring.image_coming_soon": "图片即将上传",
   "spring.prev": "上一张",
   "spring.next": "下一张",

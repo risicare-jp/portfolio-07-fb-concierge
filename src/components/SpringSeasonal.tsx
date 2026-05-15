@@ -64,7 +64,8 @@ export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}
         {t("spring.section_label")}
       </p>
       <h3 className="mb-10 max-w-3xl font-display text-2xl font-light leading-[1.1] text-cream md:text-4xl">
-        {t("spring.heading")}
+        <span className="block md:inline">{t("spring.heading_line1")}</span>{" "}
+        <span className="block md:inline">{t("spring.heading_line2")}</span>
       </h3>
 
         <div
@@ -74,7 +75,8 @@ export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          <div className="relative aspect-[16/9] w-full bg-charcoal">
+          {/* Desktop: overlay layout */}
+          <div className="relative hidden aspect-[16/9] w-full bg-charcoal md:block">
             {slides.map((s, i) => {
               const active = i === index;
               const dish = s.dish;
@@ -108,7 +110,6 @@ export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}
                       </p>
                     </div>
                   )}
-                  {/* Bottom gradient + overlay */}
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent px-6 pb-6 pt-20 md:px-10 md:pb-10">
                     <div className="flex items-end justify-between gap-6">
                       <div className="flex-1 text-cream">
@@ -132,40 +133,118 @@ export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}
                 </div>
               );
             })}
+
+            {/* Desktop arrows */}
+            <button
+              type="button"
+              aria-label={t("spring.prev")}
+              onClick={() => go(index - 1)}
+              className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/40 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label={t("spring.next")}
+              onClick={() => go(index + 1)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/40 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+
+            {/* Desktop dots */}
+            <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-2">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Slide ${i + 1}`}
+                  onClick={() => go(i)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === index
+                      ? "w-6 bg-amber-glow"
+                      : "w-1.5 border border-amber-glow/60 bg-transparent"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Prev / Next */}
-          <button
-            type="button"
-            aria-label={t("spring.prev")}
-            onClick={() => go(index - 1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/40 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label={t("spring.next")}
-            onClick={() => go(index + 1)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/40 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-
-          {/* Dots */}
-          <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-2">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Slide ${i + 1}`}
-                onClick={() => go(i)}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === index
-                    ? "w-6 bg-amber-glow"
-                    : "w-1.5 border border-amber-glow/60 bg-transparent"
-                }`}
-              />
-            ))}
+          {/* Mobile: photo on top, text stacked below */}
+          <div className="md:hidden">
+            {(() => {
+              const s = slides[index];
+              if (!s) return null;
+              const dish = s.dish;
+              return (
+                <>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-charcoal">
+                    {s.image ? (
+                      <img
+                        src={s.image}
+                        alt={pickLocalized(dish.names, locale)}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center px-6 text-center"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(135deg, hsl(28 50% 20%) 0%, hsl(20 60% 12%) 50%, hsl(0 0% 6%) 100%)",
+                        }}
+                      >
+                        <p className="text-[0.65rem] uppercase tracking-[0.4em] text-cream/40">
+                          {t("spring.image_coming_soon")}
+                        </p>
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      aria-label={t("spring.prev")}
+                      onClick={() => go(index - 1)}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/50 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label={t("spring.next")}
+                      onClick={() => go(index + 1)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-amber-glow/40 bg-charcoal/50 p-2 text-amber-glow backdrop-blur transition hover:bg-charcoal/70"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                  <div className="space-y-4 bg-charcoal px-5 py-6 text-cream">
+                    <p className="font-display text-2xl font-light leading-snug">
+                      {pickLocalized(dish.names, locale)}
+                    </p>
+                    {locale !== "ja" && (
+                      <p className="text-xs tracking-wide text-cream/55">{dish.names.ja}</p>
+                    )}
+                    <p className="text-sm leading-relaxed text-cream/75">
+                      {pickLocalized(dish.descriptions, locale)}
+                    </p>
+                    <p className="font-display text-lg text-amber-glow">
+                      {format(dish.price_cad)}
+                    </p>
+                    <div className="flex items-center justify-center gap-2 pt-2">
+                      {slides.map((_, i) => (
+                        <button
+                          key={i}
+                          aria-label={`Slide ${i + 1}`}
+                          onClick={() => go(i)}
+                          className={`h-1.5 rounded-full transition-all ${
+                            i === index
+                              ? "w-6 bg-amber-glow"
+                              : "w-1.5 border border-amber-glow/60 bg-transparent"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
           </div>
         </div>
     </>
