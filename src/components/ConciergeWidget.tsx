@@ -58,6 +58,16 @@ export function ConciergeWidget() {
     return () => window.removeEventListener("hinokami:open-concierge", onOpen);
   }, []);
 
+  // ESC closes the panel
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   // First-load tooltip after user scrolls past hero (~600px)
   useEffect(() => {
     if (typeof window === "undefined") return;
