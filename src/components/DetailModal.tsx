@@ -54,7 +54,30 @@ export function DetailModal() {
   if (!req) return null;
 
   const dish = req.kind === "dish" ? dishById(req.id) : undefined;
-  const drink = req.kind === "drink" ? drinkById(req.id) : undefined;
+  let drink: Drink | undefined;
+  if (req.kind === "drink") {
+    drink = drinkById(req.id);
+    if (!drink && req.id.startsWith("sake-")) {
+      const s = sakeById(req.id);
+      if (s) {
+        drink = {
+          id: s.id,
+          category: "sake",
+          names: s.names,
+          origin: {
+            en: `${s.prefecture_en}, Japan — ${s.brewery}`,
+            ja: `${s.prefecture_ja}、日本 — ${s.brewery}`,
+            cn: `${s.prefecture_ja}，日本 — ${s.brewery}`,
+          },
+          abv: s.abv,
+          flavor: s.flavor,
+          price_cad: s.price_glass_cad,
+          pairing_dishes: [],
+          is_featured: true,
+        };
+      }
+    }
+  }
   if (!dish && !drink) return null;
 
   const close = () => setReq(null);
