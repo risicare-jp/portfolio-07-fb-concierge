@@ -67,6 +67,8 @@ const en: Dict = {
 
   "spring.section_label": "02B — Spring 2027 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
+  "spring.heading_line1": "Three dishes,",
+  "spring.heading_line2": "only until the cherry blossoms fall.",
   "spring.image_coming_soon": "Image coming soon",
   "spring.prev": "Previous slide",
   "spring.next": "Next slide",
