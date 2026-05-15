@@ -535,7 +535,7 @@ function Room() {
                     onClick={() => setOpenSpace(key)}
                     className="group text-left transition"
                   >
-                    <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
+                    <dt className="font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums">{n}</dt>
                     <dd className="mt-2 flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50 transition group-hover:text-amber-glow">
                       <span>{label}</span>
                       <span aria-hidden className="opacity-0 transition group-hover:opacity-100">→</span>
