@@ -64,8 +64,8 @@ export function SpringSeasonal({ embedded = false }: { embedded?: boolean } = {}
         {t("spring.section_label")}
       </p>
       <h3 className="mb-10 max-w-3xl font-display text-2xl font-light leading-[1.1] text-cream md:text-4xl">
-        <span className="block md:inline">{t("spring.heading_line1")}</span>{" "}
-        <span className="block md:inline">{t("spring.heading_line2")}</span>
+        <span className="block whitespace-nowrap">{t("spring.heading_line1")}</span>
+        <span className="block whitespace-nowrap text-amber-glow/90">{t("spring.heading_line2")}</span>
       </h3>
 
         <div
