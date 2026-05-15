@@ -136,9 +136,8 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const setCurrency = useCallback((c: Currency) => {
-    setCurrencyState(c);
-    safeWriteString(CURRENCY_KEY, c);
+  const setCurrency = useCallback((_c: Currency) => {
+    /* deprecated: currency is now driven by locale */
   }, []);
 
   const format = useCallback(
