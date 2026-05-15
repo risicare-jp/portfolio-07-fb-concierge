@@ -297,7 +297,7 @@ function Hero() {
         </button>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[0.6rem] uppercase tracking-[0.4em] text-cream/50">
+      <div className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-[0.6rem] uppercase text-cream/60 md:bottom-8" style={{ letterSpacing: "0.15em" }}>
         {t("hero.scroll")}
       </div>
     </section>
