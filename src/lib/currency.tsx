@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useI18n, type Locale } from "@/lib/i18n";
 
 export type Currency = "CAD" | "USD" | "JPY" | "CNY" | "EUR";
 
