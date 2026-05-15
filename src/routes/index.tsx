@@ -32,11 +32,11 @@ const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ja: "日本語", cn: "
 function Nav() {
   const { locale, setLocale, t } = useI18n();
   return (
-    <nav className="fixed top-0 z-50 w-full">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-6 md:px-12 md:py-8">
-        <a href="#top" className="font-display text-xl tracking-[0.2em] text-cream md:text-2xl">
-          鎮座ヒノカミ
-          <span className="ml-3 hidden text-[0.7em] tracking-[0.4em] text-cream/70 md:inline">
+    <nav className="fixed top-0 z-[100] w-full border-b border-white/[0.08] bg-charcoal/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 py-6 md:px-12 md:py-8">
+        <a href="#top" className="flex shrink-0 items-center whitespace-nowrap font-display text-base tracking-[0.2em] text-cream md:text-xl">
+          <span className="whitespace-nowrap">鎮座ヒノカミ</span>
+          <span className="ml-3 hidden whitespace-nowrap text-[0.7em] tracking-[0.4em] text-cream/70 md:inline">
             HINOKAMI
           </span>
         </a>
