@@ -543,7 +543,7 @@ function Room() {
                   </button>
                 ) : (
                   <div key={label}>
-                    <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
+                    <dt className="font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums">{n}</dt>
                     <dd className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
                       {label}
                     </dd>
