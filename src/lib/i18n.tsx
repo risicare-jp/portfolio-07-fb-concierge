@@ -374,6 +374,7 @@ const ja: Dict = {
   "room.stats.seats": "席",
   "room.stats.counter": "カウンター",
   "room.stats.sake": "銘柄の酒",
+  "room.stats.private": "個室",
 
   "visit.section_label": "04 — お越しの方へ",
   "visit.heading_line1": "King West にて、",
