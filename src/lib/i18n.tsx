@@ -117,6 +117,7 @@ const en: Dict = {
   "room.stats.seats": "Seats",
   "room.stats.counter": "Counter",
   "room.stats.sake": "Sake labels",
+  "room.stats.private": "Private room",
 
   "visit.section_label": "04 — Visit",
   "visit.heading_line1": "On King West,",
@@ -373,6 +374,7 @@ const ja: Dict = {
   "room.stats.seats": "席",
   "room.stats.counter": "カウンター",
   "room.stats.sake": "銘柄の酒",
+  "room.stats.private": "個室",
 
   "visit.section_label": "04 — お越しの方へ",
   "visit.heading_line1": "King West にて、",
@@ -625,6 +627,7 @@ const cn: Dict = {
   "room.stats.seats": "座位",
   "room.stats.counter": "吧台",
   "room.stats.sake": "款清酒",
+  "room.stats.private": "私人榻榻米",
 
   "visit.section_label": "04 — 到访",
   "visit.heading_line1": "落户 King West，",

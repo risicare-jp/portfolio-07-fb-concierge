@@ -456,13 +456,62 @@ function Menu() {
   );
 }
 
+type RoomSpaceKey = "counter" | "private";
+
+const ROOM_SPACE_CONTENT: Record<
+  RoomSpaceKey,
+  {
+    heading: Record<Locale, string>;
+    body: Record<Locale, string>;
+    placeholder: Record<Locale, string>;
+  }
+> = {
+  counter: {
+    heading: {
+      en: "12-seat Counter",
+      ja: "12 席カウンター",
+      cn: "12 座吧台",
+    },
+    body: {
+      en: "Twelve counter seats facing the open robata. The straw flame, the chef's hands, the chū-toro arriving on a single palm. Books first; the rest of the room waits.",
+      ja: "オープン焚き火を真正面に見据える 12 席カウンター。わらの炎、職人の手、片手で運ばれてくる中トロ。最初に埋まる席です。",
+      cn: "面对开放式焚火炉的 12 个吧台座位。稻草烈焰、厨师之手、单手送上的中腹。最先订满的位置。",
+    },
+    placeholder: {
+      en: "Counter image coming soon",
+      ja: "カウンター写真 準備中",
+      cn: "吧台照片 即将上传",
+    },
+  },
+  private: {
+    heading: {
+      en: "8-seat Private Tatami Room",
+      ja: "8 人用個室の畳の間",
+      cn: "8 人私人榻榻米房间",
+    },
+    body: {
+      en: "An eight-seat private tatami room behind sliding shoji doors. A low table, a single hanging lantern, the same fire just on the other side of the wall. For your most important nights.",
+      ja: "障子の引き戸の向こうにある 8 人用個室の畳の間。低い座卓、一灯の提灯、壁の向こうには同じ炎。一番大切な夜のために。",
+      cn: "障子滑门后的 8 人私人榻榻米房间。一张矮桌、一盏提灯，墙的另一侧仍是那炉火。为您最重要的夜晚。",
+    },
+    placeholder: {
+      en: "Private room image coming soon",
+      ja: "個室写真 準備中",
+      cn: "私人房间照片 即将上传",
+    },
+  },
+};
+
 function Room() {
-  const { t } = useI18n();
-  const stats: Array<[string, string]> = [
-    ["64", t("room.stats.seats")],
-    ["12", t("room.stats.counter")],
-    ["24", t("room.stats.sake")],
+  const { t, locale } = useI18n();
+  const [openSpace, setOpenSpace] = useState<RoomSpaceKey | null>(null);
+
+  const stats: Array<{ n: string; label: string; key: RoomSpaceKey | null }> = [
+    { n: "64", label: t("room.stats.seats"), key: null },
+    { n: "12", label: t("room.stats.counter"), key: "counter" },
+    { n: "8", label: t("room.stats.private"), key: "private" },
   ];
+
   return (
     <section id="room" className="relative overflow-hidden bg-charcoal">
       <div className="grid md:grid-cols-2">
@@ -489,21 +538,109 @@ function Room() {
             </p>
 
             <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-10">
-              {stats.map(([n, l]) => (
-                <div key={l}>
-                  <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
-                  <dd className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
-                    {l}
-                  </dd>
-                </div>
-              ))}
+              {stats.map(({ n, label, key }) =>
+                key ? (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => setOpenSpace(key)}
+                    className="group text-left transition"
+                  >
+                    <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
+                    <dd className="mt-2 flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50 transition group-hover:text-amber-glow">
+                      <span>{label}</span>
+                      <span aria-hidden className="opacity-0 transition group-hover:opacity-100">→</span>
+                    </dd>
+                  </button>
+                ) : (
+                  <div key={label}>
+                    <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
+                    <dd className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
+                      {label}
+                    </dd>
+                  </div>
+                ),
+              )}
             </dl>
           </div>
         </div>
       </div>
+
+      {openSpace && (
+        <RoomSpaceModal
+          spaceKey={openSpace}
+          locale={locale}
+          closeLabel={t("modal.close")}
+          onClose={() => setOpenSpace(null)}
+        />
+      )}
     </section>
   );
 }
+
+function RoomSpaceModal({
+  spaceKey,
+  locale,
+  closeLabel,
+  onClose,
+}: {
+  spaceKey: RoomSpaceKey;
+  locale: Locale;
+  closeLabel: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const content = ROOM_SPACE_CONTENT[spaceKey];
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-[200] flex items-end justify-center bg-black/70 backdrop-blur-sm sm:items-center"
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-xl border border-amber-glow/25 bg-charcoal shadow-glow sm:rounded-xl"
+        style={{ animation: "fadeIn 200ms ease-out" }}
+      >
+        <button
+          type="button"
+          aria-label={closeLabel}
+          onClick={onClose}
+          className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-amber-glow/30 bg-charcoal/70 text-cream transition hover:text-amber-glow"
+        >
+          <span aria-hidden className="text-lg leading-none">×</span>
+        </button>
+        <div className="flex aspect-[16/10] w-full items-center justify-center bg-gradient-to-br from-amber-glow/20 via-charcoal to-charcoal">
+          <p className="px-6 text-center text-sm uppercase tracking-[0.3em] text-amber-glow/70">
+            {content.placeholder[locale]}
+          </p>
+        </div>
+        <div className="space-y-5 px-6 py-8 md:px-9 md:py-10">
+          <h2 className="font-display text-2xl font-light leading-tight text-cream md:text-3xl">
+            {content.heading[locale]}
+          </h2>
+          <p className="text-base leading-relaxed text-cream/80">
+            {content.body[locale]}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 function Visit() {
   const { t } = useI18n();
