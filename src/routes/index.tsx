@@ -35,9 +35,9 @@ function Nav() {
     <nav className="fixed top-0 z-50 w-full">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-6 md:px-12 md:py-8">
         <a href="#top" className="font-display text-xl tracking-[0.2em] text-cream md:text-2xl">
-          知子
+          鎮座ヒノカミ
           <span className="ml-3 hidden text-[0.7em] tracking-[0.4em] text-cream/70 md:inline">
-            TOMOKO&rsquo;S
+            HINOKAMI
           </span>
         </a>
         <div className="hidden items-center gap-10 text-xs uppercase tracking-[0.25em] text-cream/80 md:flex">
