@@ -152,15 +152,6 @@ export function ReservationAssistant({ onClose }: Props) {
     </div>
   );
 
-  const BackBtn = ({ to }: { to: number }) => (
-    <button
-      type="button"
-      onClick={() => goto(to)}
-      className="rounded-full border border-cream/20 px-3.5 py-1.5 text-xs text-cream/70 transition hover:border-amber-glow/60 hover:text-amber-glow"
-    >
-      {t("ra.back")}
-    </button>
-  );
 
   const PrimaryBtn = ({
     children, onClick, disabled, full,
