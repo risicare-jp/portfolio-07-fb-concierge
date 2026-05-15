@@ -30,6 +30,8 @@ type Mode = "chat" | "order" | "sake" | "chef";
 export function ConciergeWidget() {
   const { t, locale } = useI18n();
   const [open, setOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [showProactive, setShowProactive] = useState(false);
   const welcomeMsg = useMemo<Msg>(
     () => ({ role: "assistant", content: t("concierge.welcome"), isWelcome: true }),
     [t],
@@ -41,6 +43,49 @@ export function ConciergeWidget() {
   const [sakeDishId, setSakeDishId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const ask = useServerFn(askConcierge);
+
+  // Listen for external open requests (e.g., Hero CTA)
+  useEffect(() => {
+    const onOpen = () => {
+      setOpen(true);
+      setShowProactive(false);
+      setShowTooltip(false);
+    };
+    window.addEventListener("hinokami:open-concierge", onOpen);
+    return () => window.removeEventListener("hinokami:open-concierge", onOpen);
+  }, []);
+
+  // First-load tooltip after user scrolls past hero (~600px)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("concierge_tooltip_shown_v1")) return;
+    let shown = false;
+    const onScroll = () => {
+      if (shown || open) return;
+      if (window.scrollY > 600) {
+        shown = true;
+        setShowTooltip(true);
+        sessionStorage.setItem("concierge_tooltip_shown_v1", "1");
+        setTimeout(() => setShowTooltip(false), 3000);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
+  // Proactive bubble after 10s idle, once per session
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("concierge_proactive_shown_v1")) return;
+    const id = window.setTimeout(() => {
+      if (open) return;
+      setShowProactive(true);
+      sessionStorage.setItem("concierge_proactive_shown_v1", "1");
+      window.setTimeout(() => setShowProactive(false), 5000);
+    }, 10000);
+    return () => window.clearTimeout(id);
+  }, [open]);
 
   // Refresh welcome and follow-up bubbles when locale changes
   useEffect(() => {
