@@ -304,6 +304,11 @@ export function OrderAssistant({ onClose }: Props) {
                             ★
                           </span>
                         )}
+                        {d.is_seasonal && (
+                          <span className="text-pink-300" aria-label="Seasonal">
+                            🌸
+                          </span>
+                        )}
                         <span className="text-sm text-cream">
                           {pickLocalized(d.names, locale)}
                         </span>
