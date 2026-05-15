@@ -276,6 +276,9 @@ function Menu() {
             <h2 className="max-w-2xl font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
               {t("menu.heading_line1")} <em className="italic text-amber-glow/90">{t("menu.heading_line2")}</em>
             </h2>
+            <p className="mt-4 text-[0.7rem] tracking-[0.2em] text-cream/50">
+              {t("menu.legend")}
+            </p>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
             {t("menu.intro")}
