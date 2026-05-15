@@ -24,7 +24,9 @@ const en: Dict = {
   "nav.portfolio_note": "↓ Portfolio note",
 
   "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
+  "hero.wordmark": "Hinokami",
   "hero.brand_line": "Toronto",
+  "page.title": "Hinokami Toronto — A modern izakaya, opening Spring 2026",
   "hero.tagline":
     "A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of pouring sake for a friend.",
   "hero.scroll": "Scroll",
