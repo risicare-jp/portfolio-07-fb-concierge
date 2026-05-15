@@ -150,8 +150,6 @@ function Nav() {
             ))}
           </ul>
           <div className="mt-6 flex items-center gap-4 border-t border-white/[0.08] pt-6">
-            <CurrencySelector />
-            <span className="text-cream/30">·</span>
             <LocaleDropdown locale={locale} setLocale={setLocale} />
           </div>
           <a
