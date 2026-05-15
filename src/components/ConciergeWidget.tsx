@@ -120,6 +120,9 @@ export function ConciergeWidget() {
     } else if (ORDER_INTENT.test(raw)) {
       intent = { kind: "order" };
       text = text.replace(ORDER_INTENT, "").trim();
+    } else if (RESERVATION_INTENT.test(raw)) {
+      intent = { kind: "reservation" };
+      text = text.replace(RESERVATION_INTENT, "").trim();
     }
     return { text, intent };
   };
