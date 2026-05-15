@@ -93,3 +93,29 @@ export const MENU: Dish[] = [
 export function dishById(id: string): Dish | undefined {
   return MENU.find((d) => d.id === id);
 }
+
+export type LocalizedText = { en: string; ja: string; cn: string };
+
+export const DISH_ORIGINS: Record<string, LocalizedText> = {
+  "dish-001": { en: "Pacific bonito caught off the BC coast, seared at the counter over a pillar of locally-sourced rice straw.", ja: "BC沖の太平洋戻り鰹を、目の前で地元産わらの炎で炙る。", cn: "于BC沿岸捕获的太平洋秋鲣，于客席前以本地稻草烈焰瞬间炙烤。" },
+  "dish-002": { en: "Five spring vegetables foraged in Ontario, charred over white-oak binchotan imported from Wakayama.", ja: "オンタリオ産の春野菜五種を、和歌山産の白オーク備長炭で炙る。", cn: "五种产自安大略的春日野菜，以和歌山产白橡备长炭烤制。" },
+  "dish-003": { en: "Wild Alaskan black cod, marinated 72 hours in Kyoto white miso (Saikyo).", ja: "アラスカ産の天然銀ダラを、京都の白味噌(西京)で 72 時間漬け込む。", cn: "阿拉斯加野生银鳕鱼，京都白味噌(西京)腌渍72小时。" },
+  "dish-004": { en: "Tajima heritage chicken from Hyogo bloodline, salt-only.", ja: "兵庫血統の但馬鶏、塩のみで。", cn: "兵库血统的但马鸡，仅以盐调味。" },
+  "dish-005": { en: "Single large hotategai diver-caught off Hokkaido, straw-flamed.", ja: "北海道で潜水漁された大粒帆立を、わら焼きで。", cn: "北海道潜水捕捞的大颗扇贝，稻草炙烤。" },
+  "dish-006": { en: "Alberta-raised beef tongue, salt-aged 48 hours, charred over binchotan.", ja: "アルバータ産の牛タン、48時間塩熟成、備長炭で深く炙る。", cn: "阿尔伯塔产牛舌，盐渍48小时，备长炭深炙。" },
+  "dish-007": { en: "Three fish chosen at this morning's Pacific market: today, bluefin chu-toro, BC king salmon, hirame.", ja: "今朝の太平洋市場で選んだ三種: 本日は本鮪中トロ・BC産キングサーモン・平目。", cn: "今晨太平洋市场精选三种: 今日为蓝鳍中腹、BC帝王鲑、比目鱼。" },
+  "dish-008": { en: "Japanese mackerel cured in Kyoto-style kombu, torch-seared at the counter.", ja: "日本産の鯖を京都仕立ての昆布で締め、目の前で炙る。", cn: "日本鲭鱼以京都风昆布腌渍，于客席前炙烤。" },
+  "dish-009": { en: "Spring-spawning sea bream cured 4 hours between Hokkaido kombu, paired with Ontario fiddleheads.", ja: "産卵期の桜鯛を北海道産昆布で 4 時間締め、オンタリオ・フィドルヘッドと合わせる。", cn: "产卵期樱鲷以北海道昆布渍4小时，搭配安大略蕨菜。" },
+  "dish-010": { en: "Alberta sirloin, surface-seared, sliced thin.", ja: "アルバータ産サーロインを表面だけ炙り、薄切り。", cn: "阿尔伯塔产沙朗，表面炙烤后薄切。" },
+  "dish-011": { en: "BC Kusshi oysters, hand-shucked at the counter.", ja: "BC産Kusshi牡蠣を、目の前で殻剥き。", cn: "BC产Kusshi生蚝，于客席前现剥。" },
+  "dish-012": { en: "Niigata Koshihikari rice, cooked at your table in an Iga-ware donabe (clay pot).", ja: "新潟コシヒカリを、伊賀焼の土鍋で席にて炊き上げる。", cn: "新潟越光米，于客席现以伊贺烧土锅炊煮。" },
+  "dish-013": { en: "BC king salmon salt-cured in-house, donabe-cooked with rice, finished with house-cured ikura.", ja: "BC産キングサーモンを自家塩漬けし土鍋で炊き込み、自家製いくらで仕上げ。", cn: "BC帝王鲑自家盐渍后土锅炊饭，最后铺以自家鲑鱼籽。" },
+  "dish-014": { en: "Toyama Bay firefly squid (hotaru-ika) and nanohana in a dashi-egg custard.", ja: "富山湾のホタルイカと菜の花を、出汁玉子のカスタードで蒸す。", cn: "富山湾萤火鱿与油菜花，高汤蛋液炖制。" },
+  "dish-016": { en: "Yukon gold potatoes, cured egg yolk, smoked sausage, dill, fried potato strings.", ja: "ユーコンゴールド・じゃがいも、塩漬け卵黄、燻製ソーセージ、ディル、揚げポテト。", cn: "育空黄金土豆、盐渍蛋黄、烟熏香肠、莳萝、炸薯丝。" },
+  "dish-017": { en: "House-ground white fish, fried to order, fluffy interior.", ja: "自家擂りの白身魚を、注文ごとに揚げる。中はふわとろ。", cn: "自家研磨白身鱼，现点现炸，内里软嫩。" },
+  "dish-018": { en: "Roasted-green-tea custard, Okinawa kuromitsu syrup, kinako dust.", ja: "ほうじ茶のカスタード、沖縄黒蜜、きな粉。", cn: "焙茶卡仕达，冲绳黑糖蜜，黄豆粉。" },
+};
+
+export function dishOrigin(id: string): LocalizedText | undefined {
+  return DISH_ORIGINS[id];
+}

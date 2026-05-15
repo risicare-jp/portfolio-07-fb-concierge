@@ -72,6 +72,34 @@ const en: Dict = {
   "counter.donabe_sake.name": "Donabe & Sake",
   "counter.donabe_sake.tagline":
     "Clay pot rice, served one portion at a time. 24 bottles, breweries we know.",
+  "counter.drinks.name": "Drinks",
+  "counter.drinks.tagline":
+    "Sake, beer, highballs, Niagara wine, and tea — to match the fire.",
+
+  "modal.close": "Close",
+  "modal.counter_label": "Counter",
+  "modal.category_label": "Category",
+  "modal.origin_label": "Origin",
+  "modal.description_label": "Description",
+  "modal.flavor_label": "Flavor",
+  "modal.abv_label": "ABV",
+  "modal.allergens_label": "Allergens",
+  "modal.allergens_none": "No notable allergens.",
+  "modal.allergens_contains": "Contains",
+  "modal.allergens_trace": "Trace",
+  "modal.pairings_label": "Recommended pairings",
+  "modal.sake_label": "Sake",
+  "modal.other_drinks_label": "Other drinks",
+  "modal.best_with_label": "Best paired with",
+  "modal.glass_label": "Glass",
+
+  "drinks.cat.sake": "Sake",
+  "drinks.cat.beer": "Beer",
+  "drinks.cat.highball": "Highball",
+  "drinks.cat.wine": "Wine",
+  "drinks.cat.soft": "Soft & Tea",
+
+  "reserve.interior_caption": "Interior photo coming soon",
 
   "room.section_label": "03 — Room",
   "room.heading":
@@ -292,6 +320,34 @@ const ja: Dict = {
   "counter.donabe_sake.name": "土鍋と酒",
   "counter.donabe_sake.tagline":
     "土鍋ご飯、1 人前ずつお炊き上げ。24 銘柄、私たちの知る蔵元から。",
+  "counter.drinks.name": "お飲み物",
+  "counter.drinks.tagline":
+    "日本酒・ビール・ハイボール・ナイアガラワイン・お茶 — 炎に寄り添う一杯を。",
+
+  "modal.close": "閉じる",
+  "modal.counter_label": "カウンター",
+  "modal.category_label": "カテゴリー",
+  "modal.origin_label": "産地",
+  "modal.description_label": "説明",
+  "modal.flavor_label": "風味",
+  "modal.abv_label": "アルコール度数",
+  "modal.allergens_label": "アレルゲン",
+  "modal.allergens_none": "目立ったアレルゲンなし。",
+  "modal.allergens_contains": "含有",
+  "modal.allergens_trace": "微量",
+  "modal.pairings_label": "おすすめペアリング",
+  "modal.sake_label": "日本酒",
+  "modal.other_drinks_label": "その他のドリンク",
+  "modal.best_with_label": "相性の良い料理",
+  "modal.glass_label": "グラス",
+
+  "drinks.cat.sake": "日本酒",
+  "drinks.cat.beer": "ビール",
+  "drinks.cat.highball": "ハイボール",
+  "drinks.cat.wine": "ワイン",
+  "drinks.cat.soft": "ソフト & 茶",
+
+  "reserve.interior_caption": "店内写真 準備中",
 
   "room.section_label": "03 — 室",
   "room.heading":
@@ -509,6 +565,34 @@ const cn: Dict = {
   "counter.donabe_sake.name": "土锅与清酒",
   "counter.donabe_sake.tagline":
     "土锅米饭，每次只为一位炊煮。24 款，皆来自我们熟识的酒造。",
+  "counter.drinks.name": "饮品",
+  "counter.drinks.tagline":
+    "清酒、啤酒、Highball、尼亚加拉葡萄酒、茶 — 与炉火相伴的一杯。",
+
+  "modal.close": "关闭",
+  "modal.counter_label": "吧台",
+  "modal.category_label": "类别",
+  "modal.origin_label": "产地",
+  "modal.description_label": "描述",
+  "modal.flavor_label": "风味",
+  "modal.abv_label": "酒精度",
+  "modal.allergens_label": "过敏原",
+  "modal.allergens_none": "无显著过敏原。",
+  "modal.allergens_contains": "含",
+  "modal.allergens_trace": "微量",
+  "modal.pairings_label": "推荐搭配",
+  "modal.sake_label": "清酒",
+  "modal.other_drinks_label": "其他饮品",
+  "modal.best_with_label": "最佳搭配",
+  "modal.glass_label": "单杯",
+
+  "drinks.cat.sake": "清酒",
+  "drinks.cat.beer": "啤酒",
+  "drinks.cat.highball": "Highball",
+  "drinks.cat.wine": "葡萄酒",
+  "drinks.cat.soft": "软饮 & 茶",
+
+  "reserve.interior_caption": "店内照片 即将上传",
 
   "room.section_label": "03 — 室内",
   "room.heading": "灯笼之光、烟熏橡木，与一座做过同样工作的铜烟罩。",
