@@ -686,7 +686,7 @@ function Index() {
       <Reserve />
       <AboutThisSite />
       <Footer />
-      <PortfolioNotePill />
+      <BackToTopButton />
     </main>
   );
 }
