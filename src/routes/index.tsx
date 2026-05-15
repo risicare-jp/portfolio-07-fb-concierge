@@ -29,6 +29,55 @@ export const Route = createFileRoute("/")({
 
 const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ja: "日本語", cn: "中文" };
 
+function LocaleDropdown({
+  locale,
+  setLocale,
+  className = "",
+}: {
+  locale: Locale;
+  setLocale: (l: Locale) => void;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+  return (
+    <div ref={ref} className={`relative ${className}`}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 transition hover:text-amber-glow md:text-xs"
+      >
+        {LOCALE_LABELS[locale]} <span aria-hidden>▾</span>
+      </button>
+      {open && (
+        <ul className="absolute right-0 top-full z-50 mt-2 min-w-[6rem] rounded-sm border border-amber-glow/30 bg-charcoal/95 py-1 text-[0.7rem] uppercase tracking-[0.25em] shadow-glow backdrop-blur">
+          {LOCALES.map((l) => (
+            <li key={l}>
+              <button
+                type="button"
+                onClick={() => { setLocale(l); setOpen(false); }}
+                className={`block w-full px-4 py-1.5 text-left transition hover:text-amber-glow ${
+                  locale === l ? "font-semibold text-amber-glow" : "text-cream/70"
+                }`}
+              >
+                {LOCALE_LABELS[l]}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 function Nav() {
   const { locale, setLocale, t } = useI18n();
   return (
