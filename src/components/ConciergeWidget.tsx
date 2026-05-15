@@ -260,7 +260,7 @@ export function ConciergeWidget() {
         } inset-0 md:inset-auto md:bottom-24 md:right-6 md:h-[560px] md:w-[380px]`}
       >
         <div className="flex h-full w-full flex-col overflow-hidden border border-cream/10 bg-background shadow-2xl shadow-black/60 md:rounded-2xl">
-          <div className="flex items-start justify-between border-b border-cream/10 bg-background/80 px-5 py-4 backdrop-blur">
+          <div className="flex items-start border-b border-cream/10 bg-background/80 px-5 py-4 backdrop-blur">
             <div>
               <div className="font-display text-lg tracking-wide text-cream">
                 {t("concierge.header_title")}
@@ -269,13 +269,6 @@ export function ConciergeWidget() {
                 {t("concierge.header_subtitle")}
               </div>
             </div>
-            <button
-              onClick={() => setOpen(false)}
-              aria-label="Close"
-              className="rounded-full p-1 text-cream/60 transition hover:bg-cream/5 hover:text-cream"
-            >
-              <X className="h-5 w-5" />
-            </button>
           </div>
 
           {mode === "order" && <OrderAssistant onClose={returnToChat} />}
