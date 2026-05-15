@@ -117,6 +117,7 @@ const en: Dict = {
   "room.stats.seats": "Seats",
   "room.stats.counter": "Counter",
   "room.stats.sake": "Sake labels",
+  "room.stats.private": "Private room",
 
   "visit.section_label": "04 — Visit",
   "visit.heading_line1": "On King West,",
