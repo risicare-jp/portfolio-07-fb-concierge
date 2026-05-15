@@ -354,6 +354,7 @@ const ja: Dict = {
   "nav.portfolio_note": "↓ ポートフォリオ note",
   "nav.back_to_top": "↑ トップへ",
   "nav.back": "← 戻る",
+  "gallery.back_button": "← 戻る",
 
   "fullmenu.title": "お品書き",
   "fullmenu.tab_all": "すべて",
