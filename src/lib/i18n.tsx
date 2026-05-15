@@ -567,10 +567,11 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
-  "menu.view_robata": "查看全部焚火炉菜品 (6 道) →",
-  "menu.view_sashimi": "查看全部刺身菜品 (5 道) →",
-  "menu.view_donabe_sake": "查看全部土锅与清酒菜品 (6 道) →",
-  "menu.view_drinks": "查看全部 24 种饮品 →",
+  "menu.view_robata": "查看焚火炉全部菜品 →",
+  "menu.view_sashimi": "查看刺身全部菜品 →",
+  "menu.view_donabe": "查看土锅全部菜品 →",
+  "menu.view_sides_sweets": "查看小菜与甜品全部 →",
+  "menu.view_drinks": "查看饮品全部 →",
 
   "spring.section_label": "02B — 2026 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
@@ -582,9 +583,12 @@ const cn: Dict = {
   "counter.robata.tagline": "炉火即对话。稻草烈焰、白橡备长炭，火之剧场。",
   "counter.sashimi.name": "季节刺身",
   "counter.sashimi.tagline": "刺身现点现切。今日太平洋渔获，以刀工完成。",
-  "counter.donabe_sake.name": "土锅与清酒",
-  "counter.donabe_sake.tagline":
-    "土锅米饭，每次只为一位炊煮。24 款，皆来自我们熟识的酒造。",
+  "counter.donabe.name": "土锅",
+  "counter.donabe.tagline":
+    "客席现炊土锅米饭。每次一人份，二十五分钟的等待。",
+  "counter.sides_sweets.name": "小菜 与 甜品",
+  "counter.sides_sweets.tagline":
+    "小菜、招牌一品、人人都点的焙茶布丁。",
   "counter.drinks.name": "饮品",
   "counter.drinks.tagline":
     "清酒、啤酒、Highball、尼亚加拉葡萄酒、茶 — 与炉火相伴的一杯。",
