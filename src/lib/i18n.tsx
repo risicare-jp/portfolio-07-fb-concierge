@@ -72,6 +72,34 @@ const en: Dict = {
   "counter.donabe_sake.name": "Donabe & Sake",
   "counter.donabe_sake.tagline":
     "Clay pot rice, served one portion at a time. 24 bottles, breweries we know.",
+  "counter.drinks.name": "Drinks",
+  "counter.drinks.tagline":
+    "Sake, beer, highballs, Niagara wine, and tea — to match the fire.",
+
+  "modal.close": "Close",
+  "modal.counter_label": "Counter",
+  "modal.category_label": "Category",
+  "modal.origin_label": "Origin",
+  "modal.description_label": "Description",
+  "modal.flavor_label": "Flavor",
+  "modal.abv_label": "ABV",
+  "modal.allergens_label": "Allergens",
+  "modal.allergens_none": "No notable allergens.",
+  "modal.allergens_contains": "Contains",
+  "modal.allergens_trace": "Trace",
+  "modal.pairings_label": "Recommended pairings",
+  "modal.sake_label": "Sake",
+  "modal.other_drinks_label": "Other drinks",
+  "modal.best_with_label": "Best paired with",
+  "modal.glass_label": "Glass",
+
+  "drinks.cat.sake": "Sake",
+  "drinks.cat.beer": "Beer",
+  "drinks.cat.highball": "Highball",
+  "drinks.cat.wine": "Wine",
+  "drinks.cat.soft": "Soft & Tea",
+
+  "reserve.interior_caption": "Interior photo coming soon",
 
   "room.section_label": "03 — Room",
   "room.heading":
