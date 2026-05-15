@@ -424,6 +424,7 @@ const cn: Dict = {
   "nav.menu": "菜单",
   "nav.room": "室内",
   "nav.visit": "到访",
+  "nav.portfolio_note": "↓ 作品介绍",
 
   "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2026 春",
   "hero.brand_line": "多伦多",
