@@ -536,7 +536,7 @@ const cn: Dict = {
   "reserve.guest_many": "{n} 位",
 
   "about.section_label": "05 — 关于本站",
-  "about.heading": "由 AI 在 7 天内打造。",
+  "about.heading": "由 AI 在 1 天内打造。",
   "about.stack_label": "技术栈",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
