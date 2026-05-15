@@ -202,6 +202,15 @@ function Hero() {
         >
           {t("hero.tagline")}
         </p>
+        <button
+          type="button"
+          onClick={openConcierge}
+          className="animate-fade-up mt-6 inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.3em] text-amber-glow transition hover:text-cream"
+          style={{ animationDelay: "0.6s" }}
+        >
+          <MessageCircle className="h-3.5 w-3.5" />
+          {t("hero.try_concierge")}
+        </button>
       </div>
 
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[0.6rem] uppercase tracking-[0.4em] text-cream/50">
