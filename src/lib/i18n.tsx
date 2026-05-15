@@ -237,6 +237,16 @@ const ja: Dict = {
   "nav.room": "室",
   "nav.visit": "お越しの方へ",
   "nav.portfolio_note": "↓ ポートフォリオ note",
+  "nav.back_to_top": "↑ トップへ",
+  "nav.back": "← 戻る",
+
+  "menu.legend": "⭐ 看板 · 🌸 季節限定",
+  "fullmenu.title": "お品書き",
+  "fullmenu.tab_all": "すべて",
+
+  "hero.try_concierge": "AI コンシェルジュを試す ↓",
+  "concierge.tooltip_hint": "AI コンシェルジュを試す",
+  "concierge.proactive": "アレルゲン・メニュー・酒のおすすめなど、お気軽にどうぞ。",
 
   "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2026 春",
   "hero.wordmark": "鎮座ヒノカミ",
