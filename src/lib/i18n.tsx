@@ -56,10 +56,11 @@ const en: Dict = {
   "menu.intro":
     "Choose a stool at the robata, the sashimi counter, or the donabe bar. The menu unfolds differently from each.",
   "menu.view_full": "View Full Menu →",
-  "menu.view_robata": "View all Robata dishes (6) →",
-  "menu.view_sashimi": "View all sashimi dishes (5) →",
-  "menu.view_donabe_sake": "View all Donabe & Sake (6) →",
-  "menu.view_drinks": "View all drinks (24) →",
+  "menu.view_robata": "View all Robata dishes →",
+  "menu.view_sashimi": "View all sashimi dishes →",
+  "menu.view_donabe": "View all Donabe dishes →",
+  "menu.view_sides_sweets": "View all sides & sweets →",
+  "menu.view_drinks": "View all drinks →",
 
   "spring.section_label": "02B — Spring 2026 Seasonal",
   "spring.heading": "Three dishes, only until the cherry blossoms fall.",
@@ -73,9 +74,12 @@ const en: Dict = {
   "counter.sashimi.name": "The Counter",
   "counter.sashimi.tagline":
     "Sashimi cut to order. Today's catch from Pacific suppliers, finished by knife.",
-  "counter.donabe_sake.name": "Donabe & Sake",
-  "counter.donabe_sake.tagline":
-    "Clay pot rice, served one portion at a time. 24 bottles, breweries we know.",
+  "counter.donabe.name": "The Donabe",
+  "counter.donabe.tagline":
+    "Clay pot rice, cooked at your table — one portion at a time, twenty-five minutes of patience.",
+  "counter.sides_sweets.name": "Sides & Sweets",
+  "counter.sides_sweets.tagline":
+    "Small plates, our most-told sides, and the hojicha pudding everyone asks for.",
   "counter.drinks.name": "Drinks",
   "counter.drinks.tagline":
     "Sake, beer, highballs, Niagara wine, and tea — to match the fire.",
