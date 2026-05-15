@@ -325,7 +325,7 @@ const ja: Dict = {
   "reserve.guest_many": "{n} 名",
 
   "about.section_label": "05 — このサイトについて",
-  "about.heading": "AI で 7 日間で制作。",
+  "about.heading": "AI で 1 日で制作。",
   "about.stack_label": "スタック",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
