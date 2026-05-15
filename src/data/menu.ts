@@ -18,7 +18,7 @@ export type Verdict = "safe" | "contains" | "trace";
 
 export type Dish = {
   id: string;
-  counter: "robata" | "sashimi" | "donabe_sake";
+  counter: "robata" | "sashimi" | "donabe" | "sides_sweets";
   names: { en: string; ja: string; cn: string };
   price_cad: number;
   descriptions: { en: string; ja: string; cn: string };
