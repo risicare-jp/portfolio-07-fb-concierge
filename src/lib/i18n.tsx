@@ -396,11 +396,12 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
-  "menu.view_robata": "焚き火 全メニュー →",
-  "menu.view_sashimi": "刺身 全メニュー →",
-  "menu.view_donabe": "土鍋 全メニュー →",
+  "menu.view_robata": "焚き火の全メニューを見る →",
+  "menu.view_sashimi": "刺身の全メニューを見る →",
+  "menu.view_donabe": "土鍋と酒の全メニューを見る →",
   "menu.view_sides_sweets": "小料理 全メニュー →",
-  "menu.view_drinks": "お飲み物 全メニュー →",
+  "menu.view_drinks": "全ドリンクメニューを見る →",
+  "menu.counter_photo_placeholder": "カウンター写真準備中",
 
   "spring.section_label": "02B — 2026 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
@@ -411,18 +412,26 @@ const ja: Dict = {
   "counter.robata.name": "焚き火",
   "counter.robata.tagline":
     "炭火が会話。わらの炎、白オーク備長炭、火の劇場。",
+  "counter.robata.description":
+    "わらの炎が会話。目の前で立ち上るわらの炎で鰹を炙り、銀ダラを照り焼きに、北海道帆立を一瞬でキャラメリゼに。その下では京都の三ツ星店と同じ白オーク備長炭が800°Cで赤く熱を保つ。気になる一皿をご注文ください、目の前で焼き上げます。",
   "counter.sashimi.name": "季節の刺身",
   "counter.sashimi.tagline":
     "刺身は注文ごとにお切りつけ。本日の太平洋産、包丁で仕上げます。",
+  "counter.sashimi.description":
+    "刺身は切りつけ。朝の市場から届く本日の三種 — 本鮪中トロ、キングサーモン、平目。本わさびはカウンターで擦り下ろし、醤油は土佐杉の升から注ぐ。包丁とシャリの話を職人と交わす席です。",
   "counter.donabe.name": "土鍋",
   "counter.donabe.tagline":
     "客席で炊き上げる土鍋ご飯。一人前ずつ、二十五分の待ち時間。",
+  "counter.donabe.description":
+    "土鍋ご飯は席にて炊く — 伊賀焼の土鍋に新潟コシヒカリ、洗米から蓋開けまで25分。粒が立ったその瞬間に蓋を開ける。自家製サーモンいくら、炭火焼鯖、そして名物ポテトサラダと合わせて。ご注文は最初に。",
   "counter.sides_sweets.name": "小料理 & デザート",
   "counter.sides_sweets.tagline":
     "小料理、看板の一品、皆が頼むほうじ茶プリン。",
   "counter.drinks.name": "お飲み物",
   "counter.drinks.tagline":
     "日本酒・ビール・ハイボール・ナイアガラワイン・お茶 — 炎に寄り添う一杯を。",
+  "counter.drinks.description":
+    "全国の少量生産蔵から24銘柄の日本酒 — 山形・新潟・高知。手応えのあるハイボール5種 (備長炭スモークは料理長の自信作)。火の料理を邪魔しないワイン3種。飲まない夜のためのソフト・お茶6種。料理に合わせた一杯、職人にお尋ねください。",
 
   "modal.close": "閉じる",
   "modal.counter_label": "カウンター",
