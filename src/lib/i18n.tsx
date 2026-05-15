@@ -24,6 +24,7 @@ const en: Dict = {
   "nav.portfolio_note": "↓ Portfolio note",
   "nav.back_to_top": "↑ Back to top",
   "nav.back": "← Back",
+  "gallery.back_button": "← Back",
 
   "fullmenu.title": "Full Menu",
   "fullmenu.tab_all": "All",
