@@ -328,19 +328,20 @@ const ja: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "バンクーバー",
   "footer.press": "プレス",
-  "footer.copyright": "© 2026 知子レストラングループ",
+  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.copyright": "© 2026 鎮座ヒノカミ レストラングループ",
 
   "concierge.button_tooltip": "コンシェルジュに聞く",
   "concierge.header_title": "AI コンシェルジュ",
   "concierge.header_subtitle": "営業時間 · メニュー · アレルゲン · ペアリング",
   "concierge.welcome":
-    "こんにちは。知子トロントのコンシェルジュです。営業時間、所在地、メニュー、アレルゲン、おすすめなど、何でもお尋ねください。English / 日本語 / 中文 対応。",
+    "こんにちは。鎮座ヒノカミ トロントのコンシェルジュです。営業時間、所在地、メニュー、アレルゲン、おすすめなど、何でもお尋ねください。English / 日本語 / 中文 対応。",
   "concierge.input_placeholder": "コンシェルジュに尋ねる…",
   "concierge.typing": "コンシェルジュが入力中…",
   "concierge.error_network":
-    "ただいま情報源に接続できません。reserve@tomokos.to までご連絡いただければ、数時間以内にお返事いたします。",
+    "ただいま情報源に接続できません。reserve@hinokami.to までご連絡いただければ、数時間以内にお返事いたします。",
   "concierge.error_unauthorized":
-    "コンシェルジュは現在メンテナンス中です。reserve@tomokos.to まで直接ご連絡ください。",
+    "コンシェルジュは現在メンテナンス中です。reserve@hinokami.to まで直接ご連絡ください。",
   "concierge.continue_order_assistant": "アレルゲンチェックへ →",
   "concierge.continue_sake_pairing": "おすすめの酒を見る →",
   "concierge.continue_chefs_rec": "シェフのおすすめへ →",
