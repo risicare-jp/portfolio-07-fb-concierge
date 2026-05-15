@@ -97,7 +97,7 @@ function Hero() {
           className="animate-fade-up font-display text-[clamp(3rem,10vw,8.5rem)] font-light leading-[0.95] text-cream"
           style={{ animationDelay: "0.15s" }}
         >
-          Tomoko&rsquo;s
+          {t("hero.wordmark")}
         </h1>
         <div
           className="animate-fade-up mt-6 flex items-center gap-4 text-[0.7rem] uppercase tracking-[0.45em] text-cream/70"
