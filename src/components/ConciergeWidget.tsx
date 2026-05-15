@@ -225,8 +225,7 @@ export function ConciergeWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label={t("concierge.button_tooltip")}
         title={t("concierge.button_tooltip")}
-        className="group fixed bottom-5 right-5 z-[100] flex h-12 w-12 items-center justify-center rounded-full bg-accent text-cream shadow-md shadow-black/30 transition-all hover:scale-105 hover:brightness-110 md:bottom-6 md:right-6 md:h-14 md:w-14"
-        style={{ backgroundColor: "hsl(var(--accent, 25 50% 40%))" }}
+        className="group fixed bottom-5 right-5 z-[100] flex h-12 w-12 items-center justify-center rounded-full border-[1.5px] border-amber-glow/80 bg-charcoal/90 text-amber-glow shadow-md shadow-black/40 backdrop-blur transition-all hover:scale-105 hover:brightness-110 md:bottom-6 md:right-6 md:h-14 md:w-14"
       >
         {open ? (
           <X className="h-5 w-5 md:h-6 md:w-6" />
