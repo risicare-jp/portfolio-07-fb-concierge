@@ -245,8 +245,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 </button>
               ))}
             </div>
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={1} />
+            <div className="flex items-center justify-end gap-2">
               <PrimaryBtn onClick={() => goto(3)}>{t("ra.continue")}</PrimaryBtn>
             </div>
           </>
