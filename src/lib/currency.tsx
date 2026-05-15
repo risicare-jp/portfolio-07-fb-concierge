@@ -82,16 +82,19 @@ type Ctx = {
 
 const CurrencyCtx = createContext<Ctx | null>(null);
 
+const LOCALE_TO_CURRENCY: Record<Locale, Currency> = {
+  en: "CAD",
+  ja: "JPY",
+  cn: "CNY",
+};
+
 export function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>("CAD");
+  const { locale } = useI18n();
+  const currency: Currency = LOCALE_TO_CURRENCY[locale] ?? "CAD";
   const [rates, setRates] = useState<Rates>(FALLBACK_RATES);
 
-  // Load persisted currency + cached rates after mount
+  // Load cached rates after mount; fetch if stale
   useEffect(() => {
-    const stored = safeReadString(CURRENCY_KEY);
-    if (stored && (CURRENCIES as string[]).includes(stored)) {
-      setCurrencyState(stored as Currency);
-    }
     const cached = safeRead<CachedFx>(CACHE_KEY);
     const fresh =
       cached &&
