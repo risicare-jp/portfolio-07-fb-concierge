@@ -42,11 +42,10 @@ function MenuPage() {
     { key: "robata", label: t("counter.robata.name") },
     { key: "sashimi", label: t("counter.sashimi.name") },
     { key: "donabe", label: t("counter.donabe.name") },
-    { key: "sides_sweets", label: t("counter.sides_sweets.name") },
     { key: "drinks", label: t("counter.drinks.name") },
   ];
 
-  const showDishes = tab === "all" || tab === "robata" || tab === "sashimi" || tab === "donabe" || tab === "sides_sweets";
+  const showDishes = tab === "all" || tab === "robata" || tab === "sashimi" || tab === "donabe";
   const showDrinks = tab === "all" || tab === "drinks";
 
   const dishes: Dish[] = tab === "all" || tab === "drinks"
