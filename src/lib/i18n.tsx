@@ -21,6 +21,7 @@ const en: Dict = {
   "nav.menu": "Menu",
   "nav.room": "The Room",
   "nav.visit": "Visit",
+  "nav.portfolio_note": "↓ Portfolio note",
 
   "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
   "hero.brand_line": "Toronto",
