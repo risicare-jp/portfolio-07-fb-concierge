@@ -307,8 +307,8 @@ function Story() {
             {t("story.section_label")}
           </p>
           <h2 className="font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-            <span className="block">{t("story.heading_line1")}</span>
-            <em className="block italic text-amber-glow/90">{t("story.heading_line2")}</em>
+            <span className="block whitespace-nowrap">{t("story.heading_line1")}</span>
+            <em className="block whitespace-nowrap italic text-amber-glow/90">{t("story.heading_line2")}</em>
           </h2>
         </div>
         <div className="space-y-6 text-base leading-relaxed text-cream/75 md:col-span-6 md:col-start-7 md:text-lg">
