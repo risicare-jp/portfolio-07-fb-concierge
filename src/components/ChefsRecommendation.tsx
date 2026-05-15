@@ -102,7 +102,7 @@ function buildCourse(
   } else if (vibe === "sake") {
     dishes = pickFrom(safe, 5);
   } else {
-    dishes = pickFrom(safe, 6, ["robata", "sashimi", "donabe_sake"]);
+    dishes = pickFrom(safe, 6, ["robata", "sashimi", "donabe", "sides_sweets"]);
     const dessert = safe.find((d) => d.is_dessert && within(d));
     if (dessert && !dishes.some((d) => d.id === dessert.id)) {
       dishes.pop();
