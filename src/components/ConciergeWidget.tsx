@@ -28,7 +28,7 @@ type Msg = {
   isFollowup?: boolean;
 };
 
-type Mode = "chat" | "order" | "sake" | "chef";
+type Mode = "chat" | "order" | "sake" | "chef" | "reservation";
 
 export function ConciergeWidget() {
   const { t, locale } = useI18n();
