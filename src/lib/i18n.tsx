@@ -24,7 +24,9 @@ const en: Dict = {
   "nav.portfolio_note": "↓ Portfolio note",
 
   "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
+  "hero.wordmark": "Hinokami",
   "hero.brand_line": "Toronto",
+  "page.title": "Hinokami Toronto — A modern izakaya, opening Spring 2026",
   "hero.tagline":
     "A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of pouring sake for a friend.",
   "hero.scroll": "Scroll",
@@ -33,9 +35,9 @@ const en: Dict = {
   "story.heading_line1": "Sixteen years of fire,",
   "story.heading_line2": "now arriving east.",
   "story.body1":
-    "Tomoko Watanabe opened her first izakaya on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
+    "Tomoko Watanabe opened the first Hinokami on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
   "story.body2":
-    "In 2026, Tomoko's arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
+    "In 2026, Hinokami arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
   "story.quote": "\u201CThe grill is the conversation. Everything else is hospitality.\u201D",
   "story.quote_attribution": "— Tomoko Watanabe, Chef & Owner",
 
@@ -121,19 +123,20 @@ const en: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "Vancouver",
   "footer.press": "Press",
-  "footer.copyright": "© 2026 Tomoko's Restaurant Group",
+  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.copyright": "© 2026 HINOKAMI RESTAURANT GROUP",
 
   "concierge.button_tooltip": "Ask the Concierge",
   "concierge.header_title": "AI Concierge",
   "concierge.header_subtitle": "Hours · Menu · Allergens · Pairings",
   "concierge.welcome":
-    "Hi — I'm the Concierge for Tomoko's Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
+    "Hi — I'm the Concierge for Hinokami Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
   "concierge.input_placeholder": "Ask the Concierge…",
   "concierge.typing": "Concierge is typing…",
   "concierge.error_network":
-    "I'm having trouble reaching my notes right now — please email us at reserve@tomokos.to and we'll get back to you within a few hours.",
+    "I'm having trouble reaching my notes right now — please email us at reserve@hinokami.to and we'll get back to you within a few hours.",
   "concierge.error_unauthorized":
-    "Concierge is offline for maintenance — please contact reserve@tomokos.to directly.",
+    "Concierge is offline for maintenance — please contact reserve@hinokami.to directly.",
   "concierge.continue_order_assistant": "Continue to Order Assistant →",
   "concierge.continue_sake_pairing": "View Sake Pairing →",
   "concierge.continue_chefs_rec": "Continue to Chef's Recommendation →",
@@ -226,7 +229,9 @@ const ja: Dict = {
   "nav.portfolio_note": "↓ ポートフォリオ note",
 
   "hero.subhead": "バンクーバー · 2009 創業 — トロント · 2026 春",
+  "hero.wordmark": "鎮座ヒノカミ",
   "hero.brand_line": "トロント",
+  "page.title": "鎮座ヒノカミ トロント — 2026 春オープンの現代居酒屋",
   "hero.tagline":
     "焚き火の炎、季節の刺身、そして友のために酒を注ぐ静かな儀式に根ざした、現代の居酒屋。",
   "hero.scroll": "スクロール",
@@ -235,9 +240,9 @@ const ja: Dict = {
   "story.heading_line1": "16 年の炎、",
   "story.heading_line2": "いま東へ。",
   "story.body1":
-    "渡邊知子は 2009 年、バンクーバーの静かな脇道に最初の居酒屋を開きました。8 席、炭火コンロ、酒の棚 1 つから。3 店舗を経てミシュランに名を連ねた今も、哲学は 1 ミリも動いていません。",
+    "渡邊知子は 2009 年、バンクーバーの静かな脇道に最初の鎮座ヒノカミを開きました。8 席、炭火コンロ、酒の棚 1 つから。3 店舗を経てミシュランに名を連ねた今も、哲学は 1 ミリも動いていません。",
   "story.body2":
-    "2026 年、知子は King West にやってきます。64 席、同じカウンター、同じ炎、そして居酒屋とは何よりもまず「予定より少し長く居たくなる場所」だという同じ信念。",
+    "2026 年、鎮座ヒノカミは King West にやってきます。64 席、同じカウンター、同じ炎、そして居酒屋とは何よりもまず「予定より少し長く居たくなる場所」だという同じ信念。",
   "story.quote": "「炭火が会話。それ以外はすべておもてなし。」",
   "story.quote_attribution": "— 渡邊知子、料理長兼オーナー",
 
@@ -323,19 +328,20 @@ const ja: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "バンクーバー",
   "footer.press": "プレス",
-  "footer.copyright": "© 2026 知子レストラングループ",
+  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.copyright": "© 2026 鎮座ヒノカミ レストラングループ",
 
   "concierge.button_tooltip": "コンシェルジュに聞く",
   "concierge.header_title": "AI コンシェルジュ",
   "concierge.header_subtitle": "営業時間 · メニュー · アレルゲン · ペアリング",
   "concierge.welcome":
-    "こんにちは。知子トロントのコンシェルジュです。営業時間、所在地、メニュー、アレルゲン、おすすめなど、何でもお尋ねください。English / 日本語 / 中文 対応。",
+    "こんにちは。鎮座ヒノカミ トロントのコンシェルジュです。営業時間、所在地、メニュー、アレルゲン、おすすめなど、何でもお尋ねください。English / 日本語 / 中文 対応。",
   "concierge.input_placeholder": "コンシェルジュに尋ねる…",
   "concierge.typing": "コンシェルジュが入力中…",
   "concierge.error_network":
-    "ただいま情報源に接続できません。reserve@tomokos.to までご連絡いただければ、数時間以内にお返事いたします。",
+    "ただいま情報源に接続できません。reserve@hinokami.to までご連絡いただければ、数時間以内にお返事いたします。",
   "concierge.error_unauthorized":
-    "コンシェルジュは現在メンテナンス中です。reserve@tomokos.to まで直接ご連絡ください。",
+    "コンシェルジュは現在メンテナンス中です。reserve@hinokami.to まで直接ご連絡ください。",
   "concierge.continue_order_assistant": "アレルゲンチェックへ →",
   "concierge.continue_sake_pairing": "おすすめの酒を見る →",
   "concierge.continue_chefs_rec": "シェフのおすすめへ →",
@@ -427,7 +433,9 @@ const cn: Dict = {
   "nav.portfolio_note": "↓ 作品介绍",
 
   "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2026 春",
+  "hero.wordmark": "镇座火神",
   "hero.brand_line": "多伦多",
+  "page.title": "镇座火神 多伦多 — 2026 春开业的现代居酒屋",
   "hero.tagline":
     "扎根于焚火炉、当季刺身，与为友人斟酒之静谧仪式的现代居酒屋。",
   "hero.scroll": "向下滚动",
@@ -436,9 +444,9 @@ const cn: Dict = {
   "story.heading_line1": "十六年炉火，",
   "story.heading_line2": "东渡而来。",
   "story.body1":
-    "渡边知子于2009年在温哥华一条静谧的小巷开设了第一家居酒屋——8个座位、一座炭火炉、一柜清酒。三家分店与米其林推荐之后，理念未曾偏移分毫。",
+    "渡边知子于2009年在温哥华一条静谧的小巷开设了第一家镇座火神——8个座位、一座炭火炉、一柜清酒。三家分店与米其林推荐之后，理念未曾偏移分毫。",
   "story.body2":
-    "2026年，知子来到King West街——64个座位，同样的吧台，同样的炉火，同样坚信：居酒屋首先是一处让你不知不觉多待片刻的所在。",
+    "2026年，镇座火神来到King West街——64个座位，同样的吧台，同样的炉火，同样坚信：居酒屋首先是一处让你不知不觉多待片刻的所在。",
   "story.quote": "\u201C炉火即对话。其余皆是款待。\u201D",
   "story.quote_attribution": "—— 渡边知子，主厨兼店主",
 
@@ -521,19 +529,20 @@ const cn: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "温哥华",
   "footer.press": "媒体",
-  "footer.copyright": "© 2026 知子餐饮集团",
+  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.copyright": "© 2026 镇座火神 餐饮集团",
 
   "concierge.button_tooltip": "询问礼宾",
   "concierge.header_title": "AI 礼宾",
   "concierge.header_subtitle": "营业时间 · 菜单 · 过敏原 · 搭配",
   "concierge.welcome":
-    "您好，我是知子多伦多的礼宾。营业时间、地址、菜单、过敏原或推荐，请随时询问。我能以 English / 日本語 / 中文 回应。",
+    "您好，我是镇座火神 多伦多的礼宾。营业时间、地址、菜单、过敏原或推荐，请随时询问。我能以 English / 日本語 / 中文 回应。",
   "concierge.input_placeholder": "询问礼宾…",
   "concierge.typing": "礼宾正在输入…",
   "concierge.error_network":
-    "我现在无法访问资料库。请发邮件至 reserve@tomokos.to，我们将在数小时内回复您。",
+    "我现在无法访问资料库。请发邮件至 reserve@hinokami.to，我们将在数小时内回复您。",
   "concierge.error_unauthorized":
-    "礼宾正在维护中。请直接联系 reserve@tomokos.to。",
+    "礼宾正在维护中。请直接联系 reserve@hinokami.to。",
   "concierge.continue_order_assistant": "继续至点单助手 →",
   "concierge.continue_sake_pairing": "查看推荐清酒 →",
   "concierge.continue_chefs_rec": "继续至主厨推荐 →",
@@ -667,6 +676,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       /* noop */
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const title = TABLE[locale]["page.title"] ?? TABLE.en["page.title"];
+    if (title) document.title = title;
+  }, [locale]);
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);

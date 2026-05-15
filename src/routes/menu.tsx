@@ -4,7 +4,7 @@ export const Route = createFileRoute("/menu")({
   component: MenuPage,
   head: () => ({
     meta: [
-      { title: "Menu — Tomoko's Toronto" },
+      { title: "Menu — Hinokami Toronto" },
       { name: "description", content: "Full menu coming soon." },
     ],
   }),

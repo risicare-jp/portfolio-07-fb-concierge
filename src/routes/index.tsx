@@ -13,13 +13,14 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Tomoko's Toronto — Modern Japanese Izakaya" },
+      { title: "Hinokami Toronto — A modern izakaya, opening Spring 2026" },
       {
         name: "description",
         content:
-          "From Vancouver to Toronto. Tomoko's brings its acclaimed izakaya — robata grill, sushi counter, and rare sake — to King West. Reservations open Spring 2026.",
+          "From Vancouver to Toronto. Hinokami brings its acclaimed izakaya — robata grill, sushi counter, and rare sake — to King West. Reservations open Spring 2026.",
       },
-      { property: "og:title", content: "Tomoko's Toronto — Modern Japanese Izakaya" },
+      { property: "og:title", content: "Hinokami Toronto — A modern izakaya, opening Spring 2026" },
+      { property: "og:site_name", content: "Hinokami Toronto" },
       { property: "og:description", content: "Vancouver's beloved izakaya arrives in Toronto." },
       { property: "og:image", content: heroImg },
     ],
@@ -34,9 +35,9 @@ function Nav() {
     <nav className="fixed top-0 z-50 w-full">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-6 md:px-12 md:py-8">
         <a href="#top" className="font-display text-xl tracking-[0.2em] text-cream md:text-2xl">
-          知子
+          鎮座ヒノカミ
           <span className="ml-3 hidden text-[0.7em] tracking-[0.4em] text-cream/70 md:inline">
-            TOMOKO&rsquo;S
+            HINOKAMI
           </span>
         </a>
         <div className="hidden items-center gap-10 text-xs uppercase tracking-[0.25em] text-cream/80 md:flex">
@@ -96,7 +97,7 @@ function Hero() {
           className="animate-fade-up font-display text-[clamp(3rem,10vw,8.5rem)] font-light leading-[0.95] text-cream"
           style={{ animationDelay: "0.15s" }}
         >
-          Tomoko&rsquo;s
+          {t("hero.wordmark")}
         </h1>
         <div
           className="animate-fade-up mt-6 flex items-center gap-4 text-[0.7rem] uppercase tracking-[0.45em] text-cream/70"
@@ -312,7 +313,7 @@ function Visit() {
       h: t("visit.hours_label"),
       b: [t("visit.hours_tuesat"), t("visit.hours_sun"), t("visit.hours_closed")],
     },
-    { h: t("visit.contact_label"), b: ["reserve@tomokos.to", "+1 416 555 0188"] },
+    { h: t("visit.contact_label"), b: ["reserve@hinokami.to", "+1 416 555 0188"] },
   ];
   return (
     <section id="visit" className="bg-gradient-warm px-6 py-32 md:px-12 md:py-48">
@@ -545,7 +546,7 @@ function Footer() {
     <footer className="border-t border-border/60 bg-charcoal px-6 py-16 md:px-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
         <div className="flex items-center gap-4 font-display text-lg tracking-[0.2em] text-cream">
-          知子 <span className="text-amber-glow/70">·</span> Tomoko&rsquo;s
+          {t("footer.brand_line")}
         </div>
         <div className="flex gap-8 text-[0.65rem] uppercase tracking-[0.35em] text-cream/50">
           <a href="#" className="transition hover:text-amber-glow">{t("footer.instagram")}</a>
