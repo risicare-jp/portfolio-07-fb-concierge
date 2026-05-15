@@ -4,8 +4,9 @@ import { MENU, type Dish } from "@/data/menu";
 import { DRINKS, type Drink } from "@/data/drinks";
 import { SAKE, type Sake } from "@/data/sake";
 import { useCurrency } from "@/lib/currency";
-import { useI18n, pickLocalized, LOCALES, type Locale } from "@/lib/i18n";
+import { useI18n, pickLocalized } from "@/lib/i18n";
 import { DetailModal, openDetail } from "@/components/DetailModal";
+import { Nav } from "@/routes/index";
 
 type TabKey = "all" | "robata" | "sashimi" | "donabe" | "drinks";
 
