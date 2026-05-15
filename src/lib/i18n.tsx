@@ -308,6 +308,10 @@ const ja: Dict = {
   "menu.intro":
     "焚き火、刺身、土鍋。どのカウンターに腰掛けるかで、お品書きはそれぞれ違って広がります。",
   "menu.view_full": "お品書き全文 →",
+  "menu.view_robata": "焚き火の全料理を見る (6 品) →",
+  "menu.view_sashimi": "刺身の全料理を見る (5 品) →",
+  "menu.view_donabe_sake": "土鍋と酒の全料理を見る (6 品) →",
+  "menu.view_drinks": "お飲み物 全 24 種を見る →",
 
   "spring.section_label": "02B — 2026 春 季節限定",
   "spring.heading": "桜が散るまで、たった三品。",
