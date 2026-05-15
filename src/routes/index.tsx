@@ -321,6 +321,11 @@ function Menu() {
                                 aria-label="Signature"
                               />
                             )}
+                            {d.is_seasonal && (
+                              <span aria-label="Seasonal" className="text-base text-pink-300">
+                                🌸
+                              </span>
+                            )}
                             <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
                               {pickLocalized(d.names, locale)}
                             </h4>
