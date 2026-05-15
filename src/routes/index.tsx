@@ -306,7 +306,7 @@ function Story() {
           <p className="mb-8 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
             {t("story.section_label")}
           </p>
-          <h2 className="font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
+          <h2 className="font-display text-[2.1rem] font-light leading-[1.05] text-cream md:text-[3.25rem]">
             <span className="block whitespace-nowrap">{t("story.heading_line1")}</span>
             <em className="block whitespace-nowrap italic text-amber-glow/90">{t("story.heading_line2")}</em>
           </h2>
@@ -535,7 +535,7 @@ function Room() {
                     onClick={() => setOpenSpace(key)}
                     className="group text-left transition"
                   >
-                    <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
+                    <dt className="font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums">{n}</dt>
                     <dd className="mt-2 flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50 transition group-hover:text-amber-glow">
                       <span>{label}</span>
                       <span aria-hidden className="opacity-0 transition group-hover:opacity-100">→</span>
@@ -543,7 +543,7 @@ function Room() {
                   </button>
                 ) : (
                   <div key={label}>
-                    <dt className="font-display text-3xl text-amber-glow md:text-4xl">{n}</dt>
+                    <dt className="font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums">{n}</dt>
                     <dd className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
                       {label}
                     </dd>
