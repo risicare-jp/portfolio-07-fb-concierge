@@ -3,6 +3,7 @@ import { ExternalLink, MessageCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
+import interiorImg from "@/assets/reserve/interior-dining.jpg";
 import { ReservationWidget } from "@/components/ReservationWidget";
 import { SpringSeasonal } from "@/components/SpringSeasonal";
 import { DetailModal, openDetail } from "@/components/DetailModal";
@@ -534,21 +535,17 @@ function Reserve() {
 
   return (
     <section id="reserve" className="bg-gradient-warm px-6 pb-32 md:px-12 md:pb-48">
-      {/* Interior photo — full-width hero. Replace with /src/assets/reserve/interior-dining.jpg when uploaded. */}
+      {/* Interior photo — full-width hero. */}
       <div className="-mx-6 mb-16 md:-mx-12 md:mb-20">
-        <div
-          className="relative aspect-[21/9] w-full overflow-hidden"
-          style={{
-            backgroundImage:
-              "linear-gradient(135deg, hsl(28 50% 18%) 0%, hsl(20 60% 10%) 50%, hsl(0 0% 4%) 100%)",
-          }}
-        >
+        <div className="relative aspect-[21/9] w-full overflow-hidden">
+          <img
+            src={interiorImg}
+            alt={t("reserve.interior_caption")}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
           <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-charcoal/80 to-transparent" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-[0.65rem] uppercase tracking-[0.4em] text-cream/40">
-              {t("reserve.interior_caption")}
-            </p>
-          </div>
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal/60 to-transparent" />
         </div>
       </div>
 
