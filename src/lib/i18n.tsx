@@ -206,6 +206,8 @@ const en: Dict = {
   "concierge.followup": "Anything else I can help with?",
 
   "oa.exit": "Exit",
+  "flow.back": "← Back",
+  "flow.exit": "EXIT",
   "oa.step_label": "Step {n} of 4 — {step_name}",
   "oa.step1.name": "Party size",
   "oa.step1.prompt": "How many people will be dining? (1–8)",
