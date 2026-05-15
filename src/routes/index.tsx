@@ -266,13 +266,45 @@ const COUNTERS_HOME: CounterDef[] = [
   { num: "iii", key: "donabe_sake", dishIds: ["dish-012", "dish-016"] },
 ];
 
+const FEATURED_DRINK_IDS = [
+  "sake-005",
+  "beer-003",
+  "highball-001",
+  "wine-002",
+  "soft-002",
+];
+
 function Menu() {
   const { format } = useCurrency();
   const { t, locale } = useI18n();
+  const featuredDrinks = FEATURED_DRINK_IDS.map((id) => {
+    if (id.startsWith("sake-")) {
+      const s = sakeById(id);
+      if (!s) return null;
+      const drink: Drink = {
+        id: s.id,
+        category: "sake",
+        names: s.names,
+        origin: {
+          en: `${s.prefecture_en}, Japan — ${s.brewery}`,
+          ja: `${s.prefecture_ja}、日本 — ${s.brewery}`,
+          cn: `${s.prefecture_ja}，日本 — ${s.brewery}`,
+        },
+        abv: s.abv,
+        flavor: s.flavor,
+        price_cad: s.price_glass_cad,
+        pairing_dishes: [],
+        is_featured: true,
+      };
+      return drink;
+    }
+    return drinkById(id) ?? null;
+  }).filter((d): d is Drink => !!d);
+
   return (
     <section id="menu" className="bg-charcoal px-6 py-32 md:px-12 md:py-48">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-20 flex flex-col items-start justify-between gap-6 md:mb-24 md:flex-row md:items-end">
+        <div className="mb-16 flex flex-col items-start justify-between gap-6 md:mb-20 md:flex-row md:items-end">
           <div>
             <p className="mb-6 text-[0.65rem] uppercase tracking-[0.45em] text-amber-glow">
               {t("menu.section_label")}
@@ -284,6 +316,11 @@ function Menu() {
           <p className="max-w-sm text-sm leading-relaxed text-cream/60">
             {t("menu.intro")}
           </p>
+        </div>
+
+        {/* Seasonal carousel — visual hook for the menu */}
+        <div className="mb-24 md:mb-32">
+          <SpringSeasonal embedded />
         </div>
 
         <div className="space-y-24 md:space-y-32">
@@ -309,13 +346,15 @@ function Menu() {
 
                 <div className="grid gap-6 md:grid-cols-2 md:gap-8">
                   {dishes.map((d) => (
-                    <article
+                    <button
                       key={d.id}
-                      className="group border border-border/60 bg-card/40 p-8 transition duration-500 hover:border-amber-glow/50 md:p-10"
+                      type="button"
+                      onClick={() => openDetail({ kind: "dish", id: d.id })}
+                      className="group block w-full text-left border border-border/60 bg-card/40 p-8 transition duration-500 hover:border-amber-glow/50 md:p-10"
                     >
                       <div className="flex items-start justify-between gap-6">
                         <div className="flex-1">
-                          <h4 className="font-display text-2xl font-light text-cream md:text-3xl">
+                          <h4 className="font-display text-2xl font-light text-cream group-hover:text-amber-glow md:text-3xl">
                             {pickLocalized(d.names, locale)}
                           </h4>
                           {locale !== "ja" && (
@@ -329,21 +368,65 @@ function Menu() {
                       <p className="mt-5 text-sm leading-relaxed text-cream/70">
                         {pickLocalized(d.descriptions, locale)}
                       </p>
-                    </article>
+                    </button>
                   ))}
-                </div>
-
-                <div className="mt-8 md:mt-10">
-                  <Link
-                    to="/menu"
-                    className="text-[0.7rem] uppercase tracking-[0.35em] text-amber-glow transition hover:text-cream"
-                  >
-                    {t("menu.view_full")}
-                  </Link>
                 </div>
               </div>
             );
           })}
+
+          {/* IV — Drinks */}
+          <div>
+            <div className="mb-10 flex flex-col gap-4 md:mb-12">
+              <div className="flex items-baseline gap-5">
+                <span className="font-display text-sm uppercase tracking-[0.4em] text-amber-glow/70">
+                  iv
+                </span>
+                <h3 className="font-display text-3xl font-light text-cream md:text-5xl">
+                  {t("counter.drinks.name")}
+                </h3>
+              </div>
+              <p className="max-w-2xl text-sm leading-relaxed text-cream/65 md:text-base">
+                {t("counter.drinks.tagline")}
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+              {featuredDrinks.map((d) => (
+                <button
+                  key={d.id}
+                  type="button"
+                  onClick={() => openDetail({ kind: "drink", id: d.id })}
+                  className="group block w-full text-left border border-border/60 bg-card/40 p-6 transition duration-500 hover:border-amber-glow/50"
+                >
+                  <p className="text-[0.6rem] uppercase tracking-[0.35em] text-amber-glow/70">
+                    {t(`drinks.cat.${d.category}`)}
+                  </p>
+                  <div className="mt-3 flex items-start justify-between gap-4">
+                    <h4 className="flex-1 font-display text-lg font-light text-cream group-hover:text-amber-glow md:text-xl">
+                      {pickLocalized(d.names, locale)}
+                    </h4>
+                    <span className="font-display text-sm text-amber-glow md:text-base">
+                      {format(d.price_cad)}
+                    </span>
+                  </div>
+                  {locale !== "ja" && (
+                    <p className="mt-1 text-[11px] tracking-wide text-cream/45">{d.names.ja}</p>
+                  )}
+                  <p className="mt-3 text-xs leading-relaxed text-cream/65">{d.flavor}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 md:mt-20">
+          <Link
+            to="/menu"
+            className="text-[0.7rem] uppercase tracking-[0.35em] text-amber-glow transition hover:text-cream"
+          >
+            {t("menu.view_full")}
+          </Link>
         </div>
       </div>
     </section>
