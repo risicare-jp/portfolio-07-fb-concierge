@@ -186,6 +186,7 @@ export function ConciergeWidget() {
   const launchIntent = (intent: Intent) => {
     if (intent.kind === "order") setMode("order");
     else if (intent.kind === "chef") setMode("chef");
+    else if (intent.kind === "reservation") setMode("reservation");
     else if (intent.kind === "sake") {
       setSakeDishId(intent.dishId);
       setMode("sake");
@@ -206,6 +207,7 @@ export function ConciergeWidget() {
     if (intent.kind === "order") return t("concierge.continue_order_assistant");
     if (intent.kind === "sake") return t("concierge.continue_sake_pairing");
     if (intent.kind === "chef") return t("concierge.continue_chefs_rec");
+    if (intent.kind === "reservation") return t("concierge.continue_reservation_assistant");
     return null;
   };
 
