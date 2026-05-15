@@ -734,11 +734,12 @@ const cn: Dict = {
   "menu.intro":
     "在焚火炉、刺身吧台或土锅吧台之间择一落座。从每一处展开的菜单，皆有不同的风景。",
   "menu.view_full": "完整菜单 →",
-  "menu.view_robata": "查看焚火炉全部菜品 →",
-  "menu.view_sashimi": "查看刺身全部菜品 →",
-  "menu.view_donabe": "查看土锅全部菜品 →",
+  "menu.view_robata": "查看炉端全菜单 →",
+  "menu.view_sashimi": "查看刺身全菜单 →",
+  "menu.view_donabe": "查看土锅与酒全菜单 →",
   "menu.view_sides_sweets": "查看小菜与甜品全部 →",
-  "menu.view_drinks": "查看饮品全部 →",
+  "menu.view_drinks": "查看全饮品菜单 →",
+  "menu.counter_photo_placeholder": "吧台照片即将上传",
 
   "spring.section_label": "02B — 2026 春 季节限定",
   "spring.heading": "仅至樱花飘落之时，三道菜。",
@@ -748,17 +749,25 @@ const cn: Dict = {
 
   "counter.robata.name": "焚火炉",
   "counter.robata.tagline": "炉火即对话。稻草烈焰、白橡备长炭，火之剧场。",
+  "counter.robata.description":
+    "稻草烈焰即是对话。鲣鱼以咫尺之间的稻草火焰炙烤，银鳕鱼覆以稻草火光泽，北海道扇贝瞬间焦糖化。其下，京都三星店同源的白橡备长炭赤红炭温稳保800°C。请挑选您心仪的一品，我们将于您面前烹制。",
   "counter.sashimi.name": "季节刺身",
   "counter.sashimi.tagline": "刺身现点现切。今日太平洋渔获，以刀工完成。",
+  "counter.sashimi.description":
+    "刺身现点现切。今晨市场精选三种 — 蓝鳍中腹、帝王鲑、比目鱼。山葵于吧台现磨，酱油由土佐杉木升斟出。此席为愿与厨师畅谈刀工与寿司饭者所设。",
   "counter.donabe.name": "土锅",
   "counter.donabe.tagline":
     "客席现炊土锅米饭。每次一人份，二十五分钟的等待。",
+  "counter.donabe.description":
+    "土锅米饭于客席现炊 — 伊贺烧土锅，新潟越光米，洗米至开盖共25分。米粒挺立的瞬间揭盖。佐自制鲑鱼籽、炭火烤鲭鱼，与我们最热销的配菜 — 招牌土豆沙拉。请于用餐开始时点选土锅。",
   "counter.sides_sweets.name": "小菜 与 甜品",
   "counter.sides_sweets.tagline":
     "小菜、招牌一品、人人都点的焙茶布丁。",
   "counter.drinks.name": "饮品",
   "counter.drinks.tagline":
     "清酒、啤酒、Highball、尼亚加拉葡萄酒、茶 — 与炉火相伴的一杯。",
+  "counter.drinks.description":
+    "全国小量生产酒造24款清酒 — 山形、新潟、高知。我们调出的5款Highball (备长炭烟熏款是主厨自信作)。不与炉火相争的3款葡萄酒。不饮的夜晚6款软饮与茶。请向厨师询问搭配，我们会找到契合您菜品的那一杯。",
 
   "modal.close": "关闭",
   "modal.counter_label": "吧台",
