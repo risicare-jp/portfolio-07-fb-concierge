@@ -650,7 +650,8 @@ function Visit() {
             {t("visit.section_label")}
           </p>
           <h2 className="font-display text-4xl font-light leading-[1.05] text-cream md:text-6xl">
-            {t("visit.heading_line1")} <em className="italic text-amber-glow/90">{t("visit.heading_line2")}</em>
+            <span className="block md:inline">{t("visit.heading_line1")}</span>{" "}
+            <em className="block italic text-amber-glow/90 md:inline">{t("visit.heading_line2")}</em>
           </h2>
         </div>
 
