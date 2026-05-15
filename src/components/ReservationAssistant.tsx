@@ -333,8 +333,7 @@ export function ReservationAssistant({ onClose }: Props) {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={4} />
+            <div className="flex items-center justify-end gap-2">
               <PrimaryBtn
                 onClick={() => goto(6)}
                 disabled={!state.name.trim() || !isValidEmail(state.email.trim())}
