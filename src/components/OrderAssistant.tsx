@@ -298,21 +298,9 @@ export function OrderAssistant({ onClose }: Props) {
                       className="mt-1 h-4 w-4 accent-amber-glow"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-1.5">
-                        {d.is_signature && (
-                          <span className="text-amber-glow" aria-label="Signature">
-                            ★
-                          </span>
-                        )}
-                        {d.is_seasonal && (
-                          <span className="text-pink-300" aria-label="Seasonal">
-                            🌸
-                          </span>
-                        )}
-                        <span className="text-sm text-cream">
-                          {pickLocalized(d.names, locale)}
-                        </span>
-                      </div>
+                      <span className="text-sm text-cream">
+                        {pickLocalized(d.names, locale)}
+                      </span>
                       {locale !== "ja" && (
                         <div className="text-[0.7rem] text-cream/40">{d.names.ja}</div>
                       )}
@@ -378,12 +366,6 @@ export function OrderAssistant({ onClose }: Props) {
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
                         <div className="text-sm text-cream">
-                          {dish.is_signature && (
-                            <span className="mr-1 text-amber-glow">★</span>
-                          )}
-                          {dish.is_seasonal && (
-                            <span className="mr-1 text-pink-300">🌸</span>
-                          )}
                           {pickLocalized(dish.names, locale)}
                         </div>
                       </div>

@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { MENU, type Dish } from "@/data/menu";
 import { useCurrency } from "@/lib/currency";
@@ -47,9 +46,8 @@ function MenuPage() {
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-3 px-4 py-4 md:px-8 md:py-5">
           <button
             onClick={goBack}
-            className="inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.25em] text-amber-glow transition hover:text-cream"
+            className="text-[0.7rem] uppercase tracking-[0.25em] text-amber-glow transition hover:text-cream"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
             {t("nav.back")}
           </button>
           <div className="flex flex-col items-center font-display text-cream">
