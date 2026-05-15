@@ -103,7 +103,7 @@ function Nav() {
           </span>
         </a>
         <div className="flex items-center gap-3 md:gap-4">
-          <div className="hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-cream/80 lg:flex">
+          <div className="hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-cream/80 md:flex">
             {sections.map((s, i) => (
               <span key={s.href} className="flex items-center gap-3">
                 <a href={s.href} className="transition hover:text-amber-glow">{s.label}</a>
@@ -111,15 +111,15 @@ function Nav() {
               </span>
             ))}
           </div>
-          <span className="hidden text-cream/30 lg:inline">·</span>
-          <div className="hidden items-center gap-3 lg:flex md:gap-4">
+          <span className="hidden text-cream/30 md:inline">·</span>
+          <div className="hidden items-center gap-3 md:flex md:gap-4">
             <CurrencySelector />
             <span className="text-cream/30">·</span>
             <LocaleDropdown locale={locale} setLocale={setLocale} />
           </div>
           <a
             href="#reserve"
-            className="hidden shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs lg:inline-block"
+            className="hidden shrink-0 whitespace-nowrap rounded-none border border-amber-glow/60 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-amber-glow transition hover:bg-amber-glow hover:text-charcoal md:px-5 md:py-2.5 md:text-xs md:inline-block"
           >
             {t("nav.reserve")}
           </a>
@@ -128,7 +128,7 @@ function Nav() {
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((o) => !o)}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-amber-glow/40 text-cream transition hover:text-amber-glow lg:hidden"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-amber-glow/40 text-cream transition hover:text-amber-glow md:hidden"
           >
             <span className="sr-only">Menu</span>
             <span aria-hidden className="text-lg leading-none">{mobileOpen ? "✕" : "☰"}</span>
@@ -136,7 +136,7 @@ function Nav() {
         </div>
       </div>
       {mobileOpen && (
-        <div className="border-t border-white/[0.08] bg-charcoal/95 px-6 py-6 backdrop-blur-md lg:hidden">
+        <div className="border-t border-white/[0.08] bg-charcoal/95 px-6 py-6 backdrop-blur-md md:hidden">
           <ul className="flex flex-col gap-4 text-sm uppercase tracking-[0.25em] text-cream/85">
             {sections.map((s) => (
               <li key={s.href}>
