@@ -118,8 +118,6 @@ function Nav() {
           </div>
           <span className="hidden text-cream/30 md:inline">·</span>
           <div className="hidden items-center gap-3 md:flex md:gap-4">
-            <CurrencySelector />
-            <span className="text-cream/30">·</span>
             <LocaleDropdown locale={locale} setLocale={setLocale} />
           </div>
           <a
