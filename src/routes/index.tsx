@@ -772,13 +772,13 @@ function Index() {
       <Hero />
       <Story />
       <Menu />
-      <SpringSeasonal />
       <Room />
       <Visit />
       <Reserve />
       <AboutThisSite />
       <Footer />
       <BackToTopButton />
+      <DetailModal />
     </main>
   );
 }
