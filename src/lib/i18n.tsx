@@ -433,7 +433,9 @@ const cn: Dict = {
   "nav.portfolio_note": "↓ 作品介绍",
 
   "hero.subhead": "温哥华 · 2009 创立 — 多伦多 · 2026 春",
+  "hero.wordmark": "镇座火神",
   "hero.brand_line": "多伦多",
+  "page.title": "镇座火神 多伦多 — 2026 春开业的现代居酒屋",
   "hero.tagline":
     "扎根于焚火炉、当季刺身，与为友人斟酒之静谧仪式的现代居酒屋。",
   "hero.scroll": "向下滚动",
