@@ -320,6 +320,34 @@ const ja: Dict = {
   "counter.donabe_sake.name": "土鍋と酒",
   "counter.donabe_sake.tagline":
     "土鍋ご飯、1 人前ずつお炊き上げ。24 銘柄、私たちの知る蔵元から。",
+  "counter.drinks.name": "お飲み物",
+  "counter.drinks.tagline":
+    "日本酒・ビール・ハイボール・ナイアガラワイン・お茶 — 炎に寄り添う一杯を。",
+
+  "modal.close": "閉じる",
+  "modal.counter_label": "カウンター",
+  "modal.category_label": "カテゴリー",
+  "modal.origin_label": "産地",
+  "modal.description_label": "説明",
+  "modal.flavor_label": "風味",
+  "modal.abv_label": "アルコール度数",
+  "modal.allergens_label": "アレルゲン",
+  "modal.allergens_none": "目立ったアレルゲンなし。",
+  "modal.allergens_contains": "含有",
+  "modal.allergens_trace": "微量",
+  "modal.pairings_label": "おすすめペアリング",
+  "modal.sake_label": "日本酒",
+  "modal.other_drinks_label": "その他のドリンク",
+  "modal.best_with_label": "相性の良い料理",
+  "modal.glass_label": "グラス",
+
+  "drinks.cat.sake": "日本酒",
+  "drinks.cat.beer": "ビール",
+  "drinks.cat.highball": "ハイボール",
+  "drinks.cat.wine": "ワイン",
+  "drinks.cat.soft": "ソフト & 茶",
+
+  "reserve.interior_caption": "店内写真 準備中",
 
   "room.section_label": "03 — 室",
   "room.heading":
