@@ -381,8 +381,7 @@ export function ReservationAssistant({ onClose }: Props) {
               {state.requests && <SummaryRow label={t("ra.summary.requests")} value={state.requests} />}
             </div>
             <p className="text-[0.65rem] italic text-cream/50">{cancelNote}</p>
-            <div className="flex items-center justify-between gap-2">
-              <BackBtn to={6} />
+            <div className="flex items-center justify-end gap-2">
               <PrimaryBtn onClick={handleConfirm} disabled={confirming}>
                 {confirming ? t("ra.confirming") : t("ra.confirm")}
               </PrimaryBtn>
