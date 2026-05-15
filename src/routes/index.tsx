@@ -333,13 +333,14 @@ type CounterDef = {
   num: string;
   key: CounterKey;
   imageFile: string;
+  reversed?: boolean;
 };
 
 const COUNTERS_HOME: CounterDef[] = [
   { num: "i", key: "robata", imageFile: "robata-counter.jpg" },
-  { num: "ii", key: "sashimi", imageFile: "counter-sashimi.jpg" },
+  { num: "ii", key: "sashimi", imageFile: "counter-sashimi.jpg", reversed: true },
   { num: "iii", key: "donabe", imageFile: "donabe-counter.jpg" },
-  { num: "iv", key: "drinks", imageFile: "drinks-counter.jpg" },
+  { num: "iv", key: "drinks", imageFile: "drinks-counter.jpg", reversed: true },
 ];
 
 // Auto-discover counter photos. Files appear automatically when uploaded.
