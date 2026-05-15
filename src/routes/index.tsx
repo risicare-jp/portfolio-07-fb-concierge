@@ -40,13 +40,17 @@ function Nav() {
             HINOKAMI
           </span>
         </a>
-        <div className="hidden items-center gap-10 text-xs uppercase tracking-[0.25em] text-cream/80 md:flex">
-          <a href="#story" className="transition hover:text-amber-glow">{t("nav.story")}</a>
-          <a href="#menu" className="transition hover:text-amber-glow">{t("nav.menu")}</a>
-          <a href="#room" className="transition hover:text-amber-glow">{t("nav.room")}</a>
-          <a href="#visit" className="transition hover:text-amber-glow">{t("nav.visit")}</a>
-        </div>
         <div className="flex items-center gap-3 md:gap-5">
+          <div className="hidden items-center gap-5 text-xs uppercase tracking-[0.25em] text-cream/80 md:flex">
+            <a href="#story" className="transition hover:text-amber-glow">{t("nav.story")}</a>
+            <span className="text-cream/30">·</span>
+            <a href="#menu" className="transition hover:text-amber-glow">{t("nav.menu")}</a>
+            <span className="text-cream/30">·</span>
+            <a href="#room" className="transition hover:text-amber-glow">{t("nav.room")}</a>
+            <span className="text-cream/30">·</span>
+            <a href="#visit" className="transition hover:text-amber-glow">{t("nav.visit")}</a>
+            <span className="text-cream/30">·</span>
+          </div>
           <CurrencySelector />
           <span className="hidden text-cream/30 md:inline">·</span>
           <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-cream/60 md:text-xs">
