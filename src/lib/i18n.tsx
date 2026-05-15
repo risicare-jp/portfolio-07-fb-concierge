@@ -24,9 +24,9 @@ const en: Dict = {
   "nav.portfolio_note": "↓ Portfolio note",
 
   "hero.subhead": "Vancouver · est. 2009 — Toronto · Spring 2026",
-  "hero.wordmark": "Hinokami",
+  "hero.wordmark": "HINOKAMI",
   "hero.brand_line": "Toronto",
-  "page.title": "Hinokami Toronto — A modern izakaya, opening Spring 2026",
+  "page.title": "HINOKAMI Toronto — A modern izakaya, opening Spring 2026",
   "hero.tagline":
     "A modern izakaya rooted in robata fire, the season's sashimi, and the quiet ritual of pouring sake for a friend.",
   "hero.scroll": "Scroll",
@@ -35,9 +35,9 @@ const en: Dict = {
   "story.heading_line1": "Sixteen years of fire,",
   "story.heading_line2": "now arriving east.",
   "story.body1":
-    "Tomoko Watanabe opened the first Hinokami on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
+    "Tomoko Watanabe opened the first HINOKAMI on a quiet Vancouver side street in 2009 with eight seats, a charcoal grill, and a single shelf of sake. Three rooms and a Michelin recommendation later, the philosophy hasn't moved an inch.",
   "story.body2":
-    "In 2026, Hinokami arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
+    "In 2026, HINOKAMI arrives on King West — a 64-seat room built around the same counter, the same fire, the same insistence that an izakaya is, before anything else, a place to stay a little longer than you planned.",
   "story.quote": "\u201CThe grill is the conversation. Everything else is hospitality.\u201D",
   "story.quote_attribution": "— Tomoko Watanabe, Chef & Owner",
 
@@ -123,14 +123,14 @@ const en: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "Vancouver",
   "footer.press": "Press",
-  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.brand_line": "鎮座ヒノカミ · HINOKAMI",
   "footer.copyright": "© 2026 HINOKAMI RESTAURANT GROUP",
 
   "concierge.button_tooltip": "Ask the Concierge",
   "concierge.header_title": "AI Concierge",
   "concierge.header_subtitle": "Hours · Menu · Allergens · Pairings",
   "concierge.welcome":
-    "Hi — I'm the Concierge for Hinokami Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
+    "Hi — I'm the Concierge for HINOKAMI Toronto. Ask me anything about hours, location, our menu, allergens, or recommendations. I speak English, 日本語, and 中文.",
   "concierge.input_placeholder": "Ask the Concierge…",
   "concierge.typing": "Concierge is typing…",
   "concierge.error_network":
@@ -328,7 +328,7 @@ const ja: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "バンクーバー",
   "footer.press": "プレス",
-  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.brand_line": "鎮座ヒノカミ · HINOKAMI",
   "footer.copyright": "© 2026 鎮座ヒノカミ レストラングループ",
 
   "concierge.button_tooltip": "コンシェルジュに聞く",
@@ -529,7 +529,7 @@ const cn: Dict = {
   "footer.instagram": "Instagram",
   "footer.vancouver": "温哥华",
   "footer.press": "媒体",
-  "footer.brand_line": "鎮座ヒノカミ · Hinokami",
+  "footer.brand_line": "鎮座ヒノカミ · HINOKAMI",
   "footer.copyright": "© 2026 镇座火神 餐饮集团",
 
   "concierge.button_tooltip": "询问礼宾",
