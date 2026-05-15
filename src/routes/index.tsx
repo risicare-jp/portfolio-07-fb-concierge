@@ -334,54 +334,34 @@ function Story() {
   );
 }
 
-type CounterKey = "robata" | "sashimi" | "donabe";
+type CounterKey = "robata" | "sashimi" | "donabe" | "drinks";
 
 type CounterDef = {
   num: string;
   key: CounterKey;
-  dishIds: string[];
+  imageFile: string;
 };
 
 const COUNTERS_HOME: CounterDef[] = [
-  { num: "i", key: "robata", dishIds: ["dish-001", "dish-003"] },
-  { num: "ii", key: "sashimi", dishIds: ["dish-007", "dish-008"] },
-  { num: "iii", key: "donabe", dishIds: ["dish-012", "dish-013"] },
+  { num: "i", key: "robata", imageFile: "robata-counter.jpg" },
+  { num: "ii", key: "sashimi", imageFile: "counter-sashimi.jpg" },
+  { num: "iii", key: "donabe", imageFile: "donabe-counter.jpg" },
+  { num: "iv", key: "drinks", imageFile: "drinks-counter.jpg" },
 ];
 
-const FEATURED_DRINK_IDS = [
-  "sake-005",
-  "beer-003",
-  "highball-001",
-  "wine-002",
-  "soft-002",
-];
+// Auto-discover counter photos. Files appear automatically when uploaded.
+const COUNTER_IMAGES = import.meta.glob<string>(
+  "@/assets/menu/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default", query: "?url" },
+) as Record<string, string>;
+
+function getCounterImage(file: string): string | undefined {
+  const entry = Object.entries(COUNTER_IMAGES).find(([path]) => path.endsWith(`/${file}`));
+  return entry?.[1];
+}
 
 function Menu() {
-  const { format } = useCurrency();
-  const { t, locale } = useI18n();
-  const featuredDrinks = FEATURED_DRINK_IDS.map((id) => {
-    if (id.startsWith("sake-")) {
-      const s = sakeById(id);
-      if (!s) return null;
-      const drink: Drink = {
-        id: s.id,
-        category: "sake",
-        names: s.names,
-        origin: {
-          en: `${s.prefecture_en}, Japan — ${s.brewery}`,
-          ja: `${s.prefecture_ja}、日本 — ${s.brewery}`,
-          cn: `${s.prefecture_ja}，日本 — ${s.brewery}`,
-        },
-        abv: s.abv,
-        flavor: s.flavor,
-        price_cad: s.price_glass_cad,
-        pairing_dishes: [],
-        is_featured: true,
-      };
-      return drink;
-    }
-    return drinkById(id) ?? null;
-  }).filter((d): d is Drink => !!d);
+  const { t } = useI18n();
 
   return (
     <section id="menu" className="bg-charcoal px-6 py-32 md:px-12 md:py-48">
@@ -407,9 +387,7 @@ function Menu() {
 
         <div className="space-y-24 md:space-y-32">
           {COUNTERS_HOME.map((c) => {
-            const dishes = c.dishIds
-              .map((id) => dishById(id))
-              .filter((d): d is Dish => !!d);
+            const imgSrc = getCounterImage(c.imageFile);
             return (
               <div key={c.key}>
                 <div className="mb-10 flex flex-col gap-4 md:mb-12">
@@ -426,39 +404,36 @@ function Menu() {
                   </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 md:gap-8">
-                  {dishes.map((d) => (
-                    <button
-                      key={d.id}
-                      type="button"
-                      onClick={() => openDetail({ kind: "dish", id: d.id })}
-                      className="group block w-full text-left border border-border/60 bg-card/40 p-8 transition duration-500 hover:border-amber-glow/50 md:p-10"
-                    >
-                      <div className="flex items-start justify-between gap-6">
-                        <div className="flex-1">
-                          <h4 className="font-display text-2xl font-light text-cream group-hover:text-amber-glow md:text-3xl">
-                            {pickLocalized(d.names, locale)}
-                          </h4>
-                          {locale !== "ja" && (
-                            <p className="mt-1 text-xs tracking-wide text-cream/45">{d.names.ja}</p>
-                          )}
-                        </div>
-                        <span className="font-display text-base text-amber-glow md:text-lg">
-                          {format(d.price_cad)}
+                <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+                  <div className="overflow-hidden rounded-[4px] aspect-[4/3] md:aspect-[3/2]">
+                    {imgSrc ? (
+                      <img
+                        src={imgSrc}
+                        alt={t(`counter.${c.key}.name`)}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-amber-glow/20 via-charcoal to-charcoal text-cream/50">
+                        <ImageIcon className="h-8 w-8 text-amber-glow/60" />
+                        <span className="text-[0.65rem] uppercase tracking-[0.3em]">
+                          {t("menu.counter_photo_placeholder")}
                         </span>
                       </div>
-                      <p className="mt-5 text-sm leading-relaxed text-cream/70">
-                        {pickLocalized(d.descriptions, locale)}
-                      </p>
-                    </button>
-                  ))}
+                    )}
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <p className="text-sm leading-relaxed text-cream/80 md:text-base">
+                      {t(`counter.${c.key}.description`)}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="mt-8">
                   <Link
                     to="/menu"
                     search={{ counter: c.key }}
-                    className="text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow/80 transition hover:text-cream"
+                    className="inline-flex w-full items-center justify-center rounded-full border border-amber-glow/70 px-6 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow transition hover:bg-amber-glow hover:text-background md:w-auto"
                   >
                     {t(`menu.view_${c.key}`)}
                   </Link>
@@ -466,60 +441,6 @@ function Menu() {
               </div>
             );
           })}
-
-          {/* IV — Drinks */}
-          <div>
-            <div className="mb-10 flex flex-col gap-4 md:mb-12">
-              <div className="flex items-baseline gap-5">
-                <span className="font-display text-sm uppercase tracking-[0.4em] text-amber-glow/70">
-                  iv
-                </span>
-                <h3 className="font-display text-3xl font-light text-cream md:text-5xl">
-                  {t("counter.drinks.name")}
-                </h3>
-              </div>
-              <p className="max-w-2xl text-sm leading-relaxed text-cream/65 md:text-base">
-                {t("counter.drinks.tagline")}
-              </p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-              {featuredDrinks.map((d) => (
-                <button
-                  key={d.id}
-                  type="button"
-                  onClick={() => openDetail({ kind: "drink", id: d.id })}
-                  className="group block w-full text-left border border-border/60 bg-card/40 p-6 transition duration-500 hover:border-amber-glow/50"
-                >
-                  <p className="text-[0.6rem] uppercase tracking-[0.35em] text-amber-glow/70">
-                    {t(`drinks.cat.${d.category}`)}
-                  </p>
-                  <div className="mt-3 flex items-start justify-between gap-4">
-                    <h4 className="flex-1 font-display text-lg font-light text-cream group-hover:text-amber-glow md:text-xl">
-                      {pickLocalized(d.names, locale)}
-                    </h4>
-                    <span className="font-display text-sm text-amber-glow md:text-base">
-                      {format(d.price_cad)}
-                    </span>
-                  </div>
-                  {locale !== "ja" && (
-                    <p className="mt-1 text-[11px] tracking-wide text-cream/45">{d.names.ja}</p>
-                  )}
-                  <p className="mt-3 text-xs leading-relaxed text-cream/65">{d.flavor}</p>
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-8">
-              <Link
-                to="/menu"
-                search={{ counter: "drinks" }}
-                className="text-[0.7rem] uppercase tracking-[0.3em] text-amber-glow/80 transition hover:text-cream"
-              >
-                {t("menu.view_drinks")}
-              </Link>
-            </div>
-          </div>
         </div>
 
         <div className="mt-16 md:mt-20">
