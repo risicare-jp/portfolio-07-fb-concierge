@@ -40,7 +40,7 @@ function reasonForDish(d: Dish): { key: string; vars?: Record<string, string> } 
   if (d.is_signature) return { key: "cr.reason.signature" };
   if (d.is_seasonal) return { key: "cr.reason.seasonal", vars: { s: d.is_seasonal } };
   if (d.is_dessert) return { key: "cr.reason.dessert" };
-  if (d.counter === "donabe_sake") return { key: "cr.reason.donabe" };
+  if (d.counter === "donabe") return { key: "cr.reason.donabe" };
   if (d.counter === "robata") return { key: "cr.reason.robata" };
   return { key: "cr.reason.sashimi" };
 }
