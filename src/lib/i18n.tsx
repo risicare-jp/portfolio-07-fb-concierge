@@ -206,6 +206,8 @@ const en: Dict = {
   "concierge.followup": "Anything else I can help with?",
 
   "oa.exit": "Exit",
+  "flow.back": "← Back",
+  "flow.exit": "EXIT",
   "oa.step_label": "Step {n} of 4 — {step_name}",
   "oa.step1.name": "Party size",
   "oa.step1.prompt": "How many people will be dining? (1–8)",
@@ -546,6 +548,8 @@ const ja: Dict = {
   "concierge.followup": "他にお手伝いできることはございますか?",
 
   "oa.exit": "終了",
+  "flow.back": "← 戻る",
+  "flow.exit": "終了",
   "oa.step_label": "ステップ {n} / 4 — {step_name}",
   "oa.step1.name": "ご人数",
   "oa.step1.prompt": "何名様でしょうか? (1–8 名)",
@@ -882,6 +886,8 @@ const cn: Dict = {
   "concierge.followup": "还有什么可以帮您的吗?",
 
   "oa.exit": "退出",
+  "flow.back": "← 返回",
+  "flow.exit": "退出",
   "oa.step_label": "步骤 {n} / 4 — {step_name}",
   "oa.step1.name": "用餐人数",
   "oa.step1.prompt": "请问几位用餐? (1–8 位)",

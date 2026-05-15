@@ -182,9 +182,33 @@ export function ReservationAssistant({ onClose }: Props) {
     }
   }, [state.partySize]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const goBack = () => {
+    if (state.step <= 1) onClose();
+    else goto(state.step - 1);
+  };
+
   return (
-    <div className="flex h-full flex-col">
-      <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
+    <div className="flex min-h-0 w-full flex-1 flex-col">
+      <div className="flex items-center justify-between border-b border-cream/10 bg-background/80 px-4 py-2 backdrop-blur">
+        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-cream/50">
+          {`STEP ${state.step} OF 8`}
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={goBack}
+            className="text-[0.65rem] uppercase tracking-[0.18em] text-amber-glow hover:text-amber-glow/80"
+          >
+            {t("flow.back")}
+          </button>
+          <button
+            onClick={onClose}
+            className="text-[0.65rem] uppercase tracking-[0.18em] text-amber-glow hover:text-amber-glow/80"
+          >
+            {t("flow.exit")}
+          </button>
+        </div>
+      </div>
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 pb-6 pt-4">
         {state.step === 1 && (
           <>
             <Prompt>{t("ra.step1_prompt")}</Prompt>
