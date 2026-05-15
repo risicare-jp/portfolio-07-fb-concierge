@@ -627,6 +627,7 @@ const cn: Dict = {
   "room.stats.seats": "座位",
   "room.stats.counter": "吧台",
   "room.stats.sake": "款清酒",
+  "room.stats.private": "私人榻榻米",
 
   "visit.section_label": "04 — 到访",
   "visit.heading_line1": "落户 King West，",
