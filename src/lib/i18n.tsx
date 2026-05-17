@@ -165,7 +165,7 @@ const en: Dict = {
   "reserve.guest_many": "{n} guests",
 
   "about.section_label": "05 — ABOUT THIS SITE",
-  "about.heading": "Built in 1 day with AI.",
+  "about.heading": "Built in 2 days with AI.",
   "about.stack_label": "STACK",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
@@ -509,7 +509,7 @@ const ja: Dict = {
   "reserve.guest_many": "{n} 名",
 
   "about.section_label": "05 — このサイトについて",
-  "about.heading": "AI で 1 日で制作。",
+  "about.heading": "AI と 2 日で制作。",
   "about.stack_label": "スタック",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
@@ -849,7 +849,7 @@ const cn: Dict = {
   "reserve.guest_many": "{n} 位",
 
   "about.section_label": "05 — 关于本站",
-  "about.heading": "由 AI 在 1 天内打造。",
+  "about.heading": "AI 2 天打造。",
   "about.stack_label": "技术栈",
   "about.stack_item1": "Lovable (TanStack Start TS)",
   "about.stack_item2": "Anthropic Claude Haiku 4.5",
