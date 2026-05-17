@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink, MessageCircle, Menu as MenuIcon, X as XIcon, Instagram, Facebook, ImageIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import roomCounterImg from "@/assets/room-counter.jpeg";
