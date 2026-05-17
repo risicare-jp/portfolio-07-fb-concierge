@@ -2,7 +2,7 @@
 
 **A guest-facing AI concierge for HINOKAMI Toronto — a pre-opening landing for a Japanese izakaya opening Spring 2027. Three languages auto-detected. Menu, allergens, sake pairings, reservations — all answered inside one chat panel, all grounded in what the venue actually knows. Built in two days end to end.**
 
-▶︎ **[Watch the 90-second demo on Loom](LOOM_URL_TBD)** — see a multilingual guest browse the menu, run an allergen check, and book a private room without ever leaving the chat panel.
+▶︎ **[Watch the 90-second demo on Loom](https://www.loom.com/share/904e3b32958441808d047092798896c4)** — see a multilingual guest browse the menu, run an allergen check, and book a private room without ever leaving the chat panel.
 
 ▶︎ **[Try the live site](https://hinokami-toronto-launch.lovable.app)** — pre-opening landing for HINOKAMI Toronto, fully interactive.
 
@@ -56,7 +56,15 @@ Mock confirmation number: `HNK-{YYMMDD}-{4-char hash}`, deterministic per `name+
 
 ## See it in action
 
-_(Screenshots TBD — recommend: (1) Hero with floating Concierge button visible, (2) Concierge chat mid-conversation showing JPY conversion, (3) Order Assistant Step 4 verdict report with red/amber/green badges, (4) Reservation Assistant confirmation card with HNK-{date}-{hash} number)._
+Hero — HINOKAMI wordmark with floating Concierge button　<img width="2846" height="1626" alt="01-hero-with-concierge png " src="https://github.com/user-attachments/assets/4569e08b-169c-4d1d-8ad2-b60e4d43a2aa" />
+
+Multilingual Concierge — Japanese reply with JPY conversion<img width="2844" height="1624" alt="02-concierge-multilingual" src="https://github.com/user-attachments/assets/f8100fc2-3aac-4f6a-b4b5-a451bf8039fb" />
+
+Order Assistant — Step 4 verdict report with allergen badges<img width="2858" height="1624" alt="03-order-assistant-verdict" src="https://github.com/user-attachments/assets/4ad75407-47a2-4341-a584-7f798c12a28e" />
+
+Reservation Assistant — confirmation card returned in chat<img width="2846" height="1624" alt="04-reservation-confirmation" src="https://github.com/user-attachments/assets/3de5c08a-70d7-41ac-a2b7-bc3dbba9c805" />
+
+
 
 The site:
 
@@ -285,8 +293,8 @@ If you run a Japanese restaurant in North America, or you are scoping guest-faci
 
 - **Upwork**: https://www.upwork.com/freelancers/~011e69140153120f93
 - **Email**: risicare929@gmail.com
-- **Notion case study**: TBD (URL on 2026-05-16)
+- **Notion case study**: https://leeward-yard-638.notion.site/Customer-facing-AI-Concierge-for-a-Japanese-Izakaya-Portfolio-Case-Study-363061344956801c99bdd05b924304d8
 - **Live site**: https://hinokami-toronto-launch.lovable.app
-- **Demo video**: TBD (Loom URL on 2026-05-16)
+- **Demo video**: https://www.loom.com/share/904e3b32958441808d047092798896c4
 
 The code is yours to read, fork, and adapt. If you want it tailored to your menu, your venue rules, and your language pairs, say hello.
