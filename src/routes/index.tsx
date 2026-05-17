@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink, MessageCircle, Menu as MenuIcon, X as XIcon, Instagram, Facebook, ImageIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-izakaya.jpg";
 import robataImg from "@/assets/robata.jpg";
 import roomCounterImg from "@/assets/room-counter.jpeg";
@@ -526,28 +526,44 @@ function Room() {
               {t("room.body")}
             </p>
 
-            <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-10">
-              {stats.map(({ n, label, key }) =>
+            <dl className="mt-12 grid grid-cols-3 grid-rows-[auto_auto] items-start gap-x-6 border-t border-border/60 pt-10">
+              {stats.map(({ n, label, key }, idx) =>
                 key ? (
                   <button
                     key={label}
                     type="button"
                     onClick={() => setOpenSpace(key)}
-                    className="group text-left transition"
+                    className="group contents text-left transition"
                   >
-                    <dt className="font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums">{n}</dt>
-                    <dd className="mt-2 flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50 transition group-hover:text-amber-glow">
+                    <dt
+                      style={{ gridColumnStart: idx + 1 }}
+                      className="row-start-1 font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums"
+                    >
+                      {n}
+                    </dt>
+                    <dd
+                      style={{ gridColumnStart: idx + 1 }}
+                      className="row-start-2 mt-3 flex items-center gap-1 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50 transition group-hover:text-amber-glow"
+                    >
                       <span>{label}</span>
                       <span aria-hidden className="opacity-0 transition group-hover:opacity-100">→</span>
                     </dd>
                   </button>
                 ) : (
-                  <div key={label}>
-                    <dt className="font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums">{n}</dt>
-                    <dd className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50">
+                  <Fragment key={label}>
+                    <dt
+                      style={{ gridColumnStart: idx + 1 }}
+                      className="row-start-1 font-display text-3xl leading-none text-amber-glow md:text-4xl lining-nums tabular-nums"
+                    >
+                      {n}
+                    </dt>
+                    <dd
+                      style={{ gridColumnStart: idx + 1 }}
+                      className="row-start-2 mt-3 text-[0.65rem] uppercase tracking-[0.3em] text-cream/50"
+                    >
                       {label}
                     </dd>
-                  </div>
+                  </Fragment>
                 ),
               )}
             </dl>
